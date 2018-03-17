@@ -102,7 +102,8 @@
 		// ver_arreglo($datos);
 		actualizar_contador_personal_completo($cedula);
 
-		$sql="SELECT 
+		$sql="";
+		$sql.="SELECT 
 				-- NOM.cedula as login_cedula,
 				-- RIGHT(TRIM(NOM.cod_dependencia),6) as login_coddep,
 				-- RIGHT(TRIM(NOM.cuenta_bancaria),6) as login_ctabanco,
@@ -175,8 +176,34 @@
 -- 
 				'---' as cierre 
 				FROM censo2017.plantelesbase AS PB 
-				INNER JOIN censo2017.nominaactual AS NOM ON (PB.dir_cedula = NOM.cedula)
-				WHERE NOM.cedula ='$cedula'
+				INNER JOIN censo2017.nominaactual AS NOM ON (PB.dir_cedula = NOM.cedula) ";
+
+		if ($nivel_usuario == 'DIRECTOR') {
+			$sql.="	WHERE NOM.cedula ='$cedula' ";
+		}
+		if ($nivel_usuario == 'ADMIN') {
+			$sql.="	WHERE ( PB.tipo_dependencia ='PLANTA' OR  PB.tipo_dependencia ='ENTE ADSCRITO' ) ";	
+		}
+		if ($nivel_usuario == 'ROOT') {
+			// $sql.="	WHERE NOM.cedula ='$cedula' ";
+		}
+
+		// // cod_estadistico	ZE-INTERNA2
+		// // cod_estadistico	ZE-INTERNA3
+		// // tipo_dependencia	PLANTA
+		// // tipo_dependencia":NACIONAL
+		// $sql.=" WHERE ( PB.tipo_dependencia <> 'PLANTA' AND PB.tipo_dependencia <> 'ENTE ADSCRITO' ";
+		// // if ($municipio!=null || $dependencia!=null) {
+		// // }
+		// if ($municipio!=null ) {
+		// 	$sql.="AND PB.municipio = '$municipio' ";
+		// }
+		// if ($dependencia!=null) {
+		// 	$sql.="AND PB.tipo_dependencia = '$dependencia' ";
+		// }
+		// $sql.=" ) ";
+
+		$sql.="	-- WHERE NOM.cedula ='$cedula'
 				-- AND RIGHT(TRIM(NOM.cod_dependencia),6) = '970354'
 				-- AND RIGHT(TRIM(NOM.cuenta_bancaria),6) = '278586'
 				-- GROUP BY NOM.id_nomina, NOM.cedula, PB.id_plantelesbase
