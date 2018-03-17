@@ -51,18 +51,6 @@ require_once('../apiv3.0/funciones/funciones3.0.php');
                                 <option value='VALDEZ' >VALDEZ</option>
                               </select>
                         </div>
-                        <div class="form-group">
-                            <!-- <span>Dependencia: </span> -->
-                            <select class="form-control" id="txt_dependencia" name="txt_dependencia">
-                                    <option value=''>Seleccione Dependencia</option>
-                                    <option value='NACIONAL' >NACIONAL</option>
-                                    <option value='ESTADAL' >ESTADAL</option>
-                                    <option value='MUNICIPAL' >MUNICIPAL</option>
-                                    <option value='AUTONOMA' >AUTONOMA</option>
-                                    <option value='PRIVADA' >PRIVADA</option>
-                                    <option value='PRIVADA SUBVENCIONADA POR MPPE' >PRIVADA SUBVENC. MPPE</option>
-                              </select>
-                        </div>
                         <button id="btn_filtrar" type="button" class="btn btn-default">Aplicar Filtro</button>
                         <span class="alert"></span>
                     </div>
