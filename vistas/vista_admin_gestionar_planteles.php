@@ -23,13 +23,50 @@ require_once('../apiv3.0/funciones/funciones3.0.php');
       <!--CONTENIDO AQUI-->
       <!--CONTENIDO AQUI-->
       <!--CONTENIDO AQUI-->
-  
+ 
+
           <div class="row"> 
             <div class="col-sm12 col-md-12">
-              <p class="toolbar" id="toolbar1">
-                <!-- <a class="create btn btn-default" id="btn_crear_registro"href="javascript:">Agregar Plantel</a> -->
-                <span class="alert"></span>
-              </p>
+              <div id="toolbar1" class="toolbar1">
+                <?php //if ($nivel_usuario == 'ROOT') { ?>
+                <div class="form-inline" role="form">
+                        <div class="form-group ">
+                            <!-- <span>Municipio: </span> -->
+                            <select class="form-control" id="txt_municipio" name="txt_municipio" withd="10">
+                                <option value=''>Seleccione Municipio</option> 
+                                <option value='ANDRES ELOY BLANCO' >ANDRES ELOY BLANCO</option>
+                                <option value='ANDRES MATA' >ANDRES MATA</option>
+                                <option value='ARISMENDI' >ARISMENDI</option>
+                                <option value='BENITEZ' >BENITEZ</option>
+                                <option value='BERMUDEZ' >BERMUDEZ</option>
+                                <option value='BOLIVAR' >BOLIVAR</option>
+                                <option value='CAJIGAL' >CAJIGAL</option>
+                                <option value='CRUZ SALMERON ACOSTA' >CRUZ SALMERON ACOSTA</option>
+                                <option value='LIBERTADOR' >LIBERTADOR</option>
+                                <option value='MARIÑO' >MARIÑO</option>
+                                <option value='MEJIA' >MEJIA</option>
+                                <option value='MONTES' >MONTES</option>
+                                <option value='RIBERO' >RIBERO</option>
+                                <option value='SUCRE' >SUCRE</option>
+                                <option value='VALDEZ' >VALDEZ</option>
+                              </select>
+                        </div>
+                        <div class="form-group">
+                            <!-- <span>Dependencia: </span> -->
+                            <select class="form-control" id="txt_dependencia" name="txt_dependencia">
+                                    <option value=''>Seleccione Dependencia</option>
+                                    <option value='NACIONAL' >NACIONAL</option>
+                                    <option value='ESTADAL' >ESTADAL</option>
+                                    <option value='MUNICIPAL' >MUNICIPAL</option>
+                                    <option value='AUTONOMA' >AUTONOMA</option>
+                                    <option value='PRIVADA' >PRIVADA</option>
+                                    <option value='PRIVADA SUBVENCIONADA POR MPPE' >PRIVADA SUBVENC. MPPE</option>
+                              </select>
+                        </div>
+                        <button id="btn_filtrar" type="button" class="btn btn-default">Aplicar Filtro</button>
+                        <span class="alert"></span>
+                    </div>
+                </div>
             </div>
           </div>
           
@@ -49,7 +86,7 @@ require_once('../apiv3.0/funciones/funciones3.0.php');
                data-page-size="5"
                data-page-list="[5, 10, 25, 50, 100]"
                data-query-params="queryParams"
-               data-toolbar=".toolbar"
+               data-toolbar=".toolbar1"
                data-filter-control="true">
                 <thead>
                 <tr>
