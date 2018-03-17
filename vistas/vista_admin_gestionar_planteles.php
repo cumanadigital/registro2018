@@ -1,12 +1,12 @@
 <?php 
 require_once('../conf/config.php');
 require_once('../apiv3.0/funciones/funciones3.0.php');
+// ver_arreglo($_POST);
+$nivel_usuario = $_POST['sesion_nivel_usuario'];
 ?>
 <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" /> -->
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script> -->
 <!-- <script type="text/javascript" src="apiv3.0/plugins/HTML5-Webcam-Plugin-with-jQuery-photobooth/photobooth_min.js"></script> -->
-
-
 <div class="row">
   <div class="col-sm-12 col-md-12">
     <div class="box box-solid box-primary ">
@@ -28,32 +28,33 @@ require_once('../apiv3.0/funciones/funciones3.0.php');
           <div class="row"> 
             <div class="col-sm12 col-md-12">
               <div id="toolbar1" class="toolbar1">
-                <?php //if ($nivel_usuario == 'ROOT') { ?>
+                <?php if ($nivel_usuario == 'ROOT') { ?>
                 <div class="form-inline" role="form">
-                        <div class="form-group ">
-                            <!-- <span>Municipio: </span> -->
-                            <select class="form-control" id="txt_municipio" name="txt_municipio" withd="10">
-                                <option value=''>Seleccione Municipio</option> 
-                                <option value='ANDRES ELOY BLANCO' >ANDRES ELOY BLANCO</option>
-                                <option value='ANDRES MATA' >ANDRES MATA</option>
-                                <option value='ARISMENDI' >ARISMENDI</option>
-                                <option value='BENITEZ' >BENITEZ</option>
-                                <option value='BERMUDEZ' >BERMUDEZ</option>
-                                <option value='BOLIVAR' >BOLIVAR</option>
-                                <option value='CAJIGAL' >CAJIGAL</option>
-                                <option value='CRUZ SALMERON ACOSTA' >CRUZ SALMERON ACOSTA</option>
-                                <option value='LIBERTADOR' >LIBERTADOR</option>
-                                <option value='MARIÑO' >MARIÑO</option>
-                                <option value='MEJIA' >MEJIA</option>
-                                <option value='MONTES' >MONTES</option>
-                                <option value='RIBERO' >RIBERO</option>
-                                <option value='SUCRE' >SUCRE</option>
-                                <option value='VALDEZ' >VALDEZ</option>
-                              </select>
-                        </div>
-                        <button id="btn_filtrar" type="button" class="btn btn-default">Aplicar Filtro</button>
-                        <span class="alert"></span>
-                    </div>
+                  <div class="form-group ">
+                    <!-- <span>Municipio: </span> -->
+                    <select class="form-control" id="txt_municipio" name="txt_municipio" withd="10">
+                      <option value=''>Seleccione Municipio</option> 
+                      <option value='ANDRES ELOY BLANCO' >ANDRES ELOY BLANCO</option>
+                      <option value='ANDRES MATA' >ANDRES MATA</option>
+                      <option value='ARISMENDI' >ARISMENDI</option>
+                      <option value='BENITEZ' >BENITEZ</option>
+                      <option value='BERMUDEZ' >BERMUDEZ</option>
+                      <option value='BOLIVAR' >BOLIVAR</option>
+                      <option value='CAJIGAL' >CAJIGAL</option>
+                      <option value='CRUZ SALMERON ACOSTA' >CRUZ SALMERON ACOSTA</option>
+                      <option value='LIBERTADOR' >LIBERTADOR</option>
+                      <option value='MARIÑO' >MARIÑO</option>
+                      <option value='MEJIA' >MEJIA</option>
+                      <option value='MONTES' >MONTES</option>
+                      <option value='RIBERO' >RIBERO</option>
+                      <option value='SUCRE' >SUCRE</option>
+                      <option value='VALDEZ' >VALDEZ</option>
+                      </select>
+                  </div>
+                  <button id="btn_filtrar" type="button" class="btn btn-default">Aplicar Filtro</button>
+                  <span class="alert"></span>
+                  </div>
+                <?php } ?>
                 </div>
             </div>
           </div>
