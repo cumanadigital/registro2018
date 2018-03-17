@@ -60,8 +60,6 @@ require_once('../apiv3.0/funciones/funciones3.0.php');
                                   <option value='PRIVADA SUBVENCIONADA POR MPPE' >PRIVADA SUBVENC. MPPE</option>
                             </select>
                       </div>
-                     <!--  <div class="form-group">
-                      </div> -->
                       <button id="btn_filtrar" type="button" class="btn btn-default">Aplicar Filtro</button>
                       <span class="alert"></span>
                   </div>
