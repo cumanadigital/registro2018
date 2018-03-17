@@ -1,0 +1,37 @@
+<?php
+sleep(10);
+?>
+<div class="login-box">
+    <div class="login-logo">
+        <a href="javascript:void(0);"><b>Sistemas</b>ZEES</a>
+    </div><!-- /.login-logo -->
+    <div class="login-box-body">
+        <p class="login-box-msg">Iniciar sesión</p>
+        <form action="" method="post" autocomplete="off">
+            <div class="form-group has-feedback">
+                <input id="login_username" name="login_username" type="text" class="form-control" value="" placeholder="Usuario" title="Ingrese su nombre de usuario" required>
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input id="login_userpass" name="login_userpass" type="password" class="form-control" value="" placeholder="Contraseña" title="Ingrese su contraseña" required>
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <!--RECAPTCHA DE GOOGLE-->
+            <!--<div class="g-recaptcha" data-sitekey="6Lf9xQsTAAAAAHKVMegat6xjHx5mvdCtviVKVKbG"></div>-->
+            <div class="row">
+                <div class="col-xs-4">
+                    <button type="reset" class="btn btn-default btn-block btn-flat">Cancelar</button>
+                </div><!-- /.col -->
+                <div class="col-xs-4">
+                  <!--<span class="timer" id="timer"></span>-->
+                </div><!-- /.col -->
+                <div class="col-xs-4">
+                    <button id="login_userbttn" type="submit" class="btn btn-primary btn-block btn-flat ">Ingresar</button>
+                </div><!-- /.col -->
+            </div>
+        </form>
+        <!--<a href="recuperar.php">Olvide mi contraseña</a><br>-->
+        <!--<a href="registro.php" class="text-center">Registrarse como nuevo usuario</a>-->        
+    </div><!-- /.login-box-body -->
+  <div id="alertBoxes"></div>    
+</div><!-- /.login-box -->

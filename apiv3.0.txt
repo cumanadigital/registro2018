@@ -1,0 +1,3 @@
+Se debe crear un enlace simbolico a la carpeta apiv3.0
+
+/home/desarrollador/Escritorio/localhost/demo/apiv3.0
