@@ -55,7 +55,7 @@
             console.info('$btn_filtrar');
             $table_planteles.bootstrapTable('destroy');
             $table_planteles.bootstrapTable({url: API_URL_personal});
-            $table_planteles.bootstrapTable('refresh');
+            // $table_planteles.bootstrapTable('refresh');
         });
     });
 

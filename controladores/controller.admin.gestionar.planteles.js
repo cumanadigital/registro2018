@@ -1,4 +1,4 @@
-    console.log("javascript - root registrar planteles");
+    console.log("javascript - admin gestionar planteles");
     // 
     var permite_eliminar = false;    
     var username = $('#user_name').attr('oculto');
@@ -17,13 +17,14 @@
     var sesion_cedula = parametroArray['sesion_cedula'];
     var sesion_nivel_usuario  = parametroArray['sesion_nivel_usuario'];
     var sesion_municipio = parametroArray['sesion_municipio'];
-    console.info(parametroArray);
+    // console.info(parametroArray);
     // 
     var API_URL_planteles =  "servicios/services.admin.planteles.php?accion=consultar_registros" + "&cedula=" + sesion_cedula + "&municipio=" + sesion_municipio + "&nivel_usuario=" + sesion_nivel_usuario ;
     // var API_URL_planteles =  "servicios/services.admin.planteles.php?accion=consultar_registros&parametro_user="+parametros_user;
     // 
     var API_URL =  "servicios/services.admin.planteles.php";
     var $table = $('#table').bootstrapTable({url: API_URL_planteles});
+    var $btn_filtrar = $('#btn_filtrar');
 
     var table_personal_asignado = $('#table')
 
@@ -126,9 +127,9 @@ $(function () {
             accion ='consultar_funcionarios';
             cedula = $modal_personal.find('input[name="txt_cedula_personal"]').val();
             id_plantelesbase_per = $modal_personal.find('input[name="txt_id_plantelesbase_per"]').val();
-            console.log(accion)
-            console.log(cedula);
-            console.log(id_plantelesbase_per);
+            // console.log(accion)
+            // console.log(cedula);
+            // console.log(id_plantelesbase_per);
             if (cedula!='') {
               parametros =  'cedula=' + cedula + '&accion='+accion +'&id_plantelesbase_per='+id_plantelesbase_per + '&'+sesionencode;
               $('#btn_buscar_personal').attr('disabled',true);
@@ -153,21 +154,21 @@ $(function () {
                         $("#txt_cedula_personal").focus();
                       }else{  
                         var data_func =  JSON.parse(response);
-                        console.info(data_func);
+                        // console.info(data_func);
                         $('#cuadro_datos_laborales').fadeIn();
                         var reg_id_registropersonal = data_func[0]['reg_id_registropersonal'];                        
                         var nom_cargo1 = data_func[0]['nom_cargo'];
                         var nom_cod_cargo1 = data_func[0]['nom_cod_cargo'];
                         var nom_nomina1 = data_func[0]['nom_nomina'];
-                        console.log(nom_cargo1);
-                        console.log(nom_cod_cargo1);
-                        console.log(nom_nomina1);
+                        // console.log(nom_cargo1);
+                        // console.log(nom_cod_cargo1);
+                        // console.log(nom_nomina1);
                         var nom_personal = data_func[0]['nom_personal']; 
                         $("#txt_tipo_personal").val(nom_personal);
                         $("#txt_apellido_funcionario").val(data_func[0]['nom_nombres_apellidos']);
                         $('#resumen_laboral').html('Datos Laborales: [' + nom_cod_cargo1 + ' - ' + nom_cargo1  + ' - ' + nom_nomina1 + ']' );
                         if (reg_id_registropersonal == null) {
-                          console.info("EXISTE PERO no tiene cargo funcional");
+                          // console.info("EXISTE PERO no tiene cargo funcional");
                           $('#btn_enviar_personal').attr('disabled',false);
                           $('#btn_enviar_personal').fadeIn();
                           activar_datos_personales();
@@ -181,7 +182,7 @@ $(function () {
                           $("#txt_nombre_funcionario").val('');
                           $("#txt_apellido_funcionario").focus();
                         }else{
-                          console.info("SI EXISTE + registro de personal");                          
+                          // console.info("SI EXISTE + registro de personal");                          
                           $('#btn_enviar_personal').attr('disabled',true);
                           $('#btn_enviar_personal').fadeOut();
                           //
@@ -246,7 +247,7 @@ $(function () {
         // |__) \__/  |  \__/ | \|    |___ | \|  \/  | /~~\ |  \    |    |___ /~~\ | \|  |  |___ |___
         //
         $modal_plantel.find('#btn_enviar_plantel').click(function () {
-            console.log($(this).attr('id') + " --> " +  $(this).text());    
+            // console.log($(this).attr('id') + " --> " +  $(this).text());    
             cod_nomina = $modal_plantel.find('input[name="txt_codigo_nomina"]').val();
             plan_nombre = $modal_plantel.find('input[name="txt_plan_nombre"]').val();
             direccion = $modal_plantel.find('input[name="txt_direccion"]').val();
@@ -279,7 +280,7 @@ $(function () {
         //   |__) \__/  |  \__/ | \|    |___ | \|  \/  | /~~\ |  \    |__/ | |  \ |___ \__,  |  \__/ |  \
         //
         $modal_director.find('#btn_enviar_director').click(function () {
-            console.log($(this).attr('id') + " --> " +  $(this).text());    
+            // console.log($(this).attr('id') + " --> " +  $(this).text());    
             // console.info($("#form_modal_director").serialize() + '&accion='+ accion);
             id_nomina = $modal_director.find('input[name="txt_id_nomina"]').val();
             id_plantelesbase = $modal_director.find('input[name="txt_id_plantelesbase"]').val();
@@ -322,7 +323,7 @@ $(function () {
         //   |__) \__/  |  \__/ | \|    |___ | \|  \/  | /~~\ |  \     |  | /~~\  |  |  \ | \__, \__/ |___ /~~\
         //
         $modal_cargar_matricula.find('#btn_enviar_matricula').click(function () {
-            console.log($(this).attr('id') + " --> " +  $(this).text());    
+            // console.log($(this).attr('id') + " --> " +  $(this).text());    
             // 
             var id_plantelesbase = $modal_cargar_matricula.find('input[name="txt_id_plantelesbase"]').val();
             var cod_plantel = $modal_cargar_matricula.find('input[name="txt_cod_plantel"]').val();
@@ -344,8 +345,8 @@ $(function () {
               parseInt(total_adulto) + 
               parseInt(total_especial);
             // 
-            console.log(total_inicio);
-            console.log(total_matricula);
+            // console.log(total_inicio);
+            // console.log(total_matricula);
 
             if (total_matricula>0) { 
               $("#btn_enviar_matricula").attr('disabled', true);
@@ -380,8 +381,8 @@ $(function () {
         $modal_personal.find('#btn_enviar_personal').click(function () {
             activar_datos_personales();
             accion = "agregar_personal";
-            console.info(accion);
-            console.log($(this).attr('id') + " --> " +  $(this).text());          
+            // console.info(accion);
+            // console.log($(this).attr('id') + " --> " +  $(this).text());          
  
             $('#form_modal_personal').bootstrapValidator('validate');
             var isValidForm = $('#form_modal_personal').data('bootstrapValidator').isValid();
@@ -445,27 +446,27 @@ $(function () {
 
             // if (cedula_personal!='' && nombre!='' && apellido!= '' && sexo!= '' && civil!= '' && fecnac!= '' && celular!= '' && telefon!= '' && direccion!= '' && grado!= '' && titulo!= '' && tipoper!= '' && tipofun!= '' && cargof!= '' && coordl!= '' && turno!= '' && horario!= '' && horasdoc!= '' && horadadm!= '' && fechaing!= '' && tiempo!= ''  ) {
             
-            $('#registrationForm').bootstrapValidator({
-                // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
-                feedbackIcons: {
-                    valid: 'glyphicon glyphicon-ok',
-                    invalid: 'glyphicon glyphicon-remove',
-                    validating: 'glyphicon glyphicon-refresh'
-                },
-                fields: {
-                    birthday: {
-                        validators: {
-                            notEmpty: {
-                                message: 'The date of birth is required'
-                            },
-                            date: {
-                                format: 'YYYY/MM/DD',
-                                message: 'The date of birth is not valid'
-                            }
-                        }
-                    }
-                }
-            });
+            // $('#registrationForm').bootstrapValidator({
+            //     // To use feedback icons, ensure that you use Bootstrap v3.1.0 or later
+            //     feedbackIcons: {
+            //         valid: 'glyphicon glyphicon-ok',
+            //         invalid: 'glyphicon glyphicon-remove',
+            //         validating: 'glyphicon glyphicon-refresh'
+            //     },
+            //     fields: {
+            //         birthday: {
+            //             validators: {
+            //                 notEmpty: {
+            //                     message: 'The date of birth is required'
+            //                 },
+            //                 date: {
+            //                     format: 'YYYY/MM/DD',
+            //                     message: 'The date of birth is not valid'
+            //                 }
+            //             }
+            //         }
+            //     }
+            // });
             // });
 
 
@@ -518,6 +519,17 @@ $(function () {
             }
         }); // ./ fin btn_enviar
 
+        //  __  ___           ___        ___  __        __
+        // |__)  |  |\ |     |__  | |     |  |__)  /\  |__)
+        // |__)  |  | \| ___ |    | |___  |  |  \ /~~\ |  \
+        // 
+        $btn_filtrar.click(function () {
+            console.info('$btn_filtrar');
+            $table.bootstrapTable('destroy');
+            $table.bootstrapTable({url: API_URL_planteles});
+            // $table_planteles.bootstrapTable('refresh');
+        });
+
 
       
 });
@@ -551,7 +563,7 @@ $(function () {
                   // $("#txt_cedula_personal").focus();
                 }else{  
                   var data_func =  JSON.parse(response);
-                  console.info(data_func);
+                  // console.info(data_func);
                   var reg_id_registropersonal = data_func[0]['reg_id_registropersonal'];
                   var nom_cargo1 = data_func[0]['nom_cargo'];
                   var nom_cod_cargo1 = data_func[0]['nom_cod_cargo'];
@@ -778,13 +790,23 @@ $(function () {
     };
 
 
-    function queryParams(params) {
-      return {};
+    function queryParams() {
+        var params = {};
+        $('#toolbar1').find('select[name]').each(function () {
+            params[$(this).attr('name')] = $(this).val();
+            // console.info($(this).val())
+        });
+        return params;
+    }
+
+    function responseHandler(res) {
+        // console.info(res.rows)
+        return res.rows;
     }
 
     function actionFormatter(value,row) {
         // console.info(row['nivel_estatus']);
-        console.info(row.nivel_estatus);
+        // console.info(row.nivel_estatus);
         var icon="";
         if (row.nivel_estatus == 'ABIERTO' ) {
           icon+='<div class="btn-group">';
@@ -1087,9 +1109,9 @@ $(function () {
         'click .update_planteles': function (e, value, row) {
             // accion='modificar_registro'
             // //console.log(row);
-            console.log($(this).attr('title'));
+            // console.log($(this).attr('title'));
             var titulo = $(this).attr('title') + "<br>[<font color='red'><b>" + row.cod_plantel + "</b></font>] -  <font color='blue'><b>" + row.nombre  + "</b></font>"; 
-            console.info(titulo);
+            // console.info(titulo);
 
             $modal_plantel.find('input[name="txt_id_plantelesbase"]').val(row.id_plantelesbase);
             $modal_plantel.find('input[name="txt_cod_plantel"]').val(row.cod_plantel);
@@ -1146,7 +1168,7 @@ $(function () {
             // console.log($(this).attr('title'));
             // showModal($(this).attr('title'), row); 
             var titulo = $(this).attr('title') + "<br>[<font color='red'><b>" + row.cod_plantel + "</b></font>] -  <font color='blue'><b>" + row.nombre  + "</b></font>"; 
-            console.info(titulo);
+            // console.info(titulo);
 
             total = row.total_etapa_maternal + 
             row.total_etapa_preescolar + 

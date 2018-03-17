@@ -1,4 +1,4 @@
-    console.log("javascript - root registrar planteles");
+    console.log("javascript - root apertura municipios");
     // 
     var permite_eliminar = false;    
     var username = $('#user_name').attr('oculto');

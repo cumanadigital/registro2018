@@ -74,9 +74,9 @@ $nivel_usuario = $_POST['sesion_nivel_usuario'];
                data-pagination="true"
                data-page-size="5"
                data-page-list="[5, 10, 25, 50, 100]"
-               data-query-params="queryParams"
                data-toolbar=".toolbar1"
-               data-filter-control="true">
+               data-filter-control="true"
+               data-query-params="queryParams">
                 <thead>
                 <tr>
                         <th data-field="id_plantelesbase"  data-filter-control="input"   data-sortable="true" data-halign="center" data-align="center" >Id</th>

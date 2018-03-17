@@ -95,11 +95,26 @@
 		// )
 		// 
 		//
+		// accion	consultar_registros
+		// cedula	11829328
+		// municipio	ALL
+		// nivel_usuario	ROOT
+		// txt_municipio
+
 		$cedula 			= test_input($datos['cedula']);
-		$municipio 			= test_input($datos['municipio']);
+		// $municipio 			= test_input($datos['municipio']);
+		$municipio 			= $datos['municipio'];
+		$txt_municipio		= $datos['txt_municipio'];
 		$nivel_usuario 		= test_input($datos['nivel_usuario']);
 		// $datos=test_input($datos);
 		// ver_arreglo($datos);
+		// Array
+		// (
+		//     [accion] => consultar_registros
+		//     [cedula] => 11829328
+		//     [municipio] => ALL
+		//     [nivel_usuario] => ROOT
+		// )
 		actualizar_contador_personal_completo($cedula);
 
 		$sql="";
@@ -186,17 +201,14 @@
 		}
 		if ($nivel_usuario == 'ROOT') {
 			// $sql.="	WHERE NOM.cedula ='$cedula' ";
+			if ($txt_municipio!=null ) {
+				$sql.=" WHERE PB.municipio = '$txt_municipio' ";
+			}else{
+				
+			}
 		}
-
-		// // cod_estadistico	ZE-INTERNA2
-		// // cod_estadistico	ZE-INTERNA3
-		// // tipo_dependencia	PLANTA
-		// // tipo_dependencia":NACIONAL
-		// $sql.=" WHERE ( PB.tipo_dependencia <> 'PLANTA' AND PB.tipo_dependencia <> 'ENTE ADSCRITO' ";
-		// // if ($municipio!=null || $dependencia!=null) {
-		// // }
-		// if ($municipio!=null ) {
-		// 	$sql.="AND PB.municipio = '$municipio' ";
+		// if ($nivel_usuario != 'ROOT' && $txt_municipio!=null ) {
+		// 	$sql.="AND PB.municipio = '$txt_municipio' ";
 		// }
 		// if ($dependencia!=null) {
 		// 	$sql.="AND PB.tipo_dependencia = '$dependencia' ";
