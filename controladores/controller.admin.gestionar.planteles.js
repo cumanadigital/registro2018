@@ -17,7 +17,7 @@
     var sesion_cedula = parametroArray['sesion_cedula'];
     var sesion_nivel_usuario  = parametroArray['sesion_nivel_usuario'];
     var sesion_municipio = parametroArray['sesion_municipio'];
-    // console.info(parametroArray);
+    console.info(parametroArray);
     // 
     var API_URL_planteles =  "servicios/services.admin.planteles.php?accion=consultar_registros" + "&cedula=" + sesion_cedula + "&municipio=" + sesion_municipio + "&nivel_usuario=" + sesion_nivel_usuario ;
     // var API_URL_planteles =  "servicios/services.admin.planteles.php?accion=consultar_registros&parametro_user="+parametros_user;
@@ -835,7 +835,9 @@ $(function () {
       var icono1="";
       icono1+='<a class="consultar_personal" href="javascript:" title="Ver Registro"><i class="glyphicon glyphicon-view glyphicon-eye-open"></i></a>  '
       // icono1+='<a class="modificar_personal" href="javascript:" title="Modificar Registro"><i class="glyphicon glyphicon-warning glyphicon-edit"></i></a>  '
-      icono1+='<a class="eliminar_personal" href="javascript:" title="Eliminar Registro"   ><i class="glyphicon glyphicon-red glyphicon-remove-circle"></i></a>';
+      if (sesion_nivel_usuario == 'ROOT' ) {
+        icono1+='<a class="eliminar_personal" href="javascript:" title="Eliminar Registro"   ><i class="glyphicon glyphicon-red glyphicon-remove-circle"></i></a>';
+      }
       return icono1;
     }
 
