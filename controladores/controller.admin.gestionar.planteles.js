@@ -530,6 +530,23 @@ $(function () {
             // $table_planteles.bootstrapTable('refresh');
         });
 
+        $('#txt_tipo_dependencia').on('change',function(){
+          console.info($(this).val());
+          var tipo_dependencia = $(this).val();
+          if (tipo_dependencia  =='ZONA EDUCATIVA') {
+            $("#txt_municipio").val('');
+            $("#txt_municipio").attr('disabled',true);
+          } else{
+            // $("#txt_municipio").val('');
+            $("#txt_municipio").attr('disabled',false);
+          }
+        });
+
+        $('#txt_municipio').change(function(){
+          console.info($(this).val());
+        });
+
+
 
       
 });
