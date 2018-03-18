@@ -106,6 +106,8 @@
 		$municipio 			= $datos['municipio'];
 		$txt_municipio		= $datos['txt_municipio'];
 		$nivel_usuario 		= test_input($datos['nivel_usuario']);
+
+		$txt_tipo_dependencia = $datos['txt_tipo_dependencia'];
 		// $datos=test_input($datos);
 		// ver_arreglo($datos);
 		// Array
@@ -192,42 +194,42 @@
 				'---' as cierre 
 				FROM censo2017.plantelesbase AS PB 
 				INNER JOIN censo2017.nominaactual AS NOM ON (PB.dir_cedula = NOM.cedula) ";
-
-		if ($nivel_usuario == 'DIRECTOR') {
+		//
+		if ($nivel_usuario == 'DIRECTOR') { // BUSCA SOLO POR CEDULA PLANTELES-DIRECTOR
 			$sql.="	WHERE NOM.cedula ='$cedula' ";
 		}
-		if ($nivel_usuario == 'ADMIN') {
+		//
+		if ($nivel_usuario == 'ADMIN') { // BUSCA TODOS LOS PLANTELES
 			$sql.="	WHERE ( PB.tipo_dependencia ='PLANTA' OR  PB.tipo_dependencia ='ENTE ADSCRITO' ) ";	
 		}
+		//
 		if ($nivel_usuario == 'ROOT') {
-			// $sql.="	WHERE NOM.cedula ='$cedula' ";
-			if ($txt_municipio!=null ) {
-				$sql.=" WHERE PB.municipio = '$txt_municipio' ";
-			}else{
-				
+			//
+			if ($txt_tipo_dependencia == 'PLANTELES') {
+				$sql.=" WHERE  ( PB.tipo_dependencia !='PLANTA' AND  PB.tipo_dependencia !='ENTE ADSCRITO' ) ";
+				if ($txt_municipio!=null ) {	
+					$sql.=" and PB.municipio = '$txt_municipio' ";
+				}
+			}
+			//
+			if ($txt_tipo_dependencia == 'ZONA EDUCATIVA') {
+				$sql.=" WHERE  ( PB.tipo_dependencia ='PLANTA' OR  PB.tipo_dependencia ='ENTE ADSCRITO' ) ";
+			}
+			//
+			if ($txt_tipo_dependencia == 'CIRCUITOS EDUCATIVOS') {
+				$sql.=" WHERE  ( PB.tipo_dependencia ='CIRCUITOS EDUCATIVOS' ) ";
+				if ($txt_municipio!=null ) {	
+					$sql.=" and PB.municipio = '$txt_municipio' ";
+				}
 			}
 		}
-		// if ($nivel_usuario != 'ROOT' && $txt_municipio!=null ) {
-		// 	$sql.="AND PB.municipio = '$txt_municipio' ";
-		// }
-		// if ($dependencia!=null) {
-		// 	$sql.="AND PB.tipo_dependencia = '$dependencia' ";
-		// }
-		// $sql.=" ) ";
-
-		$sql.="	-- WHERE NOM.cedula ='$cedula'
-				-- AND RIGHT(TRIM(NOM.cod_dependencia),6) = '970354'
-				-- AND RIGHT(TRIM(NOM.cuenta_bancaria),6) = '278586'
-				-- GROUP BY NOM.id_nomina, NOM.cedula, PB.id_plantelesbase
-				ORDER BY 
-					PB.municipio, NOM.cedula, PB.id_plantelesbase  
-					-- PB.nombre";
-// 
+		$sql.="		ORDER BY 
+					PB.municipio, NOM.cedula, PB.id_plantelesbase ";
 		$dato=consultar($sql,$Postgres);
  		// ver_arreglo($dato);
 // 		Array
 // (
-//     [0] => Array
+//     [0]S => Array
 //         (
 //             [id_nomina] => 215
 //             [cedula] => 10217598
