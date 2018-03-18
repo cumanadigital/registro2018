@@ -12,3 +12,4 @@ test.html
 *.csv
 /media/fotos
 /apiv3.0
+*.csv#
