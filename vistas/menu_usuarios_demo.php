@@ -53,7 +53,7 @@ $municipiousu = $_SESSION['sesion_municipio'];
 
 <?php if ($nivelusuario=='DIRECTOR' || $nivelusuario=='ADMIN' || $nivelusuario=='ROOT' ) {?>
 <li class="treeview">
-    <a href="javascript:void(0);"><i class="fa fa-file"></i> <span>Planteles</span><i class="fa fa-angle-left pull-right"></i></a>
+    <a href="javascript:void(0);"><i class="fa fa-file"></i> <span>Dependencias</span><i class="fa fa-angle-left pull-right"></i></a>
     <ul class="treeview-menu">    
         <li id="menu_admin_gestionar_planteles"><a href="javascript:void(0);"></i><i class="fa  fa-file-o"></i> <span>Gestionar</span></a></li>
     </ul>
