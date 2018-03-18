@@ -32,7 +32,13 @@ $nivel_usuario = $_POST['sesion_nivel_usuario'];
                 <div class="form-inline" role="form">
                   <div class="form-group ">
                     <!-- <span>Municipio: </span> -->
-                    <select class="form-control" id="txt_municipio" name="txt_municipio" withd="10">
+                    <select class="form-control" id="txt_tipo_dependencia" name="txt_tipo_dependencia" withd="6">
+                      <!-- <option value=''>Seleccione Estructura</option>  -->
+                      <option value='PLANTELES' >PLANTELES</option>
+                      <option value='ZONA EDUCATIVA' >ZONA EDUCATIVA</option>
+                      <option value='CIRCUITOS EDUCATIVOS' >CIRCUITOS EDUCATIVOS</option>
+                    </select>
+                    <select class="form-control" id="txt_municipio" name="txt_municipio" withd="6">
                       <option value=''>Seleccione Municipio</option> 
                       <option value='ANDRES ELOY BLANCO' >ANDRES ELOY BLANCO</option>
                       <option value='ANDRES MATA' >ANDRES MATA</option>
@@ -49,7 +55,7 @@ $nivel_usuario = $_POST['sesion_nivel_usuario'];
                       <option value='RIBERO' >RIBERO</option>
                       <option value='SUCRE' >SUCRE</option>
                       <option value='VALDEZ' >VALDEZ</option>
-                      </select>
+                    </select>
                   </div>
                   <button id="btn_filtrar" type="button" class="btn btn-default">Aplicar Filtro</button>
                   <span class="alert"></span>
@@ -82,7 +88,7 @@ $nivel_usuario = $_POST['sesion_nivel_usuario'];
                         <th data-field="id_plantelesbase"  data-filter-control="input"   data-sortable="true" data-halign="center" data-align="center" >Id</th>
                         <th data-field="municipio"         data-filter-control="select"  data-sortable="true" data-halign="center" data-align="center" >Municipio</th>
                         <th data-field="cod_plantel"       data-filter-control="input"   data-sortable="true" data-halign="center" data-align="center" >Código DEA</th>
-                        <th data-field="nombre"            data-filter-control="input"   data-sortable="true" data-halign="center" data-align="left"   >Plantel</th>
+                        <th data-field="nombre"            data-filter-control="input"   data-sortable="true" data-halign="center" data-align="left"   >Nombre de la Dependencia</th>
                         <!-- <th data-field="cod_estadistico"   data-filter-control="input"   data-sortable="true" data-halign="center" data-align="center" >C. Estadistico</th> -->
                         <th data-field="cod_nomina"   data-filter-control="input"   data-sortable="true" data-halign="center" data-align="center" >C. Nómina</th>                   
                         <!-- <th data-field="parroquia"  data-filter-control="input"   data-sortable="true" data-halign="center" data-align="center" >Parroquia</th> -->
