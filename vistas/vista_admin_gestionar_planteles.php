@@ -12,7 +12,7 @@ $nivel_usuario = $_POST['sesion_nivel_usuario'];
     <div class="box box-solid box-primary ">
       <!--  BOX HEADER      -->
       <div class="box-header with-border">
-        <h3 class="box-title">Planteles</h3>
+        <h3 class="box-title">Dependencias</h3>
         <div class="box-tools pull-right">
           <!--<button id="boton_minus_busqueda" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>-->
         </div><!-- /.box-tools -->

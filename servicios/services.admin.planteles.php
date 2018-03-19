@@ -85,54 +85,164 @@
 <?php
 	function consultar_registros($datos) {
 		$Postgres=new Postgres(DB_SERVER,DB_NAME,DB_USER,DB_PASSWORD);
-		//
-		// Array
-		// (
-		//     [accion] => consultar_registros
-		//     [cedula] => 10217598
-		//     [municipio] => ANDRES MATA
-		//     [nivel_usuario] => DIRECTOR
-		// )
-		// 
-		//
-		// accion	consultar_registros
-		// cedula	11829328
-		// municipio	ALL
-		// nivel_usuario	ROOT
-		// txt_municipio
-
 		$cedula 			= test_input($datos['cedula']);
-		// $municipio 			= test_input($datos['municipio']);
 		$municipio 			= $datos['municipio'];
 		$txt_municipio		= $datos['txt_municipio'];
 		$nivel_usuario 		= test_input($datos['nivel_usuario']);
-
 		$txt_tipo_dependencia = $datos['txt_tipo_dependencia'];
-		// $datos=test_input($datos);
-		// ver_arreglo($datos);
-		// Array
-		// (
-		//     [accion] => consultar_registros
-		//     [cedula] => 11829328
-		//     [municipio] => ALL
-		//     [nivel_usuario] => ROOT
-		// )
 		actualizar_contador_personal_completo($cedula);
+		
+// 		$sql="";
+// 		$sql.="SELECT 
+// 				-- NOM.cedula as login_cedula,
+// 				-- RIGHT(TRIM(NOM.cod_dependencia),6) as login_coddep,
+// 				-- RIGHT(TRIM(NOM.cuenta_bancaria),6) as login_ctabanco,
+// 				NOM.id_nomina,
+// 				NOM.cedula, 
+// 				TRIM(NOM.nombres_apellidos) AS nombres_apellidos, 
+// 				TRIM(NOM.cod_cargo) AS cod_cargo,
+// 				TRIM(NOM.cargo) AS cargo,
+// 				 -- 
+// 				NOM.cod_dependencia, 
+// 				NOM.cuenta_bancaria, 
+// 				'---' AS SEP1,
+// 				PB.id_plantelesbase, 
+// 				TRIM(PB.cod_plantel) AS cod_plantel, 
+// 				TRIM(PB.cod_estadistico) AS cod_estadistico,				
+// 				TRIM(PB.cod_nomina) AS cod_nomina, 
+// 				-- 
+// 				TRIM(PB.estado) AS estado ,
+// 				TRIM(PB.municipio) AS municipio, 
+// 				TRIM(PB.parroquia) as parroquia,
+// 				-- 
+// 				UPPER(TRIM(PB.nombre)) AS nombre, 
+// 				TRIM(PB.denominacion) AS denominacion,
+// 				-- 
+// 				UPPER(TRIM(PB.zona_educativa)) AS zona_educativa ,
+// 				UPPER(TRIM(PB.tipo_dependencia)) AS tipo_dependencia ,
+// 				UPPER(TRIM(PB.estatus)) AS estatus ,
+// 				TRIM(PB.fundacion) AS fundacion ,
+// 				-- 
+// 				UPPER(TRIM(PB.direccion)) AS direccion ,
+// 				UPPER(TRIM(PB.correo)) AS correo ,
+// 				TRIM(PB.telefono_fijo) AS telefono_fijo ,
+// 				TRIM(PB.telefono_otro) AS telefono_otro ,
+// 				UPPER(TRIM(PB.zona_ubicacion)) AS zona_ubicacion ,
+// 				UPPER(TRIM(PB.clase_plantel)) AS clase_plantel ,
+// 				UPPER(TRIM(PB.categoria)) AS categoria ,
+// 				UPPER(TRIM(PB.condicion_estudio)) AS condicion_estudio ,
+// 				UPPER(TRIM(PB.tipo_matricula)) AS tipo_matricula ,
+// 				UPPER(TRIM(PB.turno)) AS turno ,
+// 				UPPER(TRIM(PB.modalidad)) AS modalidad ,
+// 				-- 
+// 				UPPER(TRIM(PB.dir_nombre)) AS dir_nombre,
+//   				UPPER(TRIM(PB.dir_apellido)) AS dir_apellido,
+// 				UPPER(TRIM(PB.dir_direccion)) AS dir_direccion,
+// 				UPPER(TRIM(PB.dir_fechanac)) AS dir_fechanac,
+// 				-- 
+// 				TRIM(PB.dir_telefono) as dir_telefono,
+// 				TRIM(PB.dir_celular) as dir_celular,
+// 				TRIM(PB.dir_email) as dir_email,
+// 				TRIM(PB.dir_twitter) as dir_twitter,
+// -- 
+// 				TRIM(PB.total_etapa_maternal) as total_etapa_maternal,
+// 				TRIM(PB.total_etapa_preescolar) as total_etapa_preescolar,
+// 				TRIM(PB.total_primaria) as total_primaria,
+// 				TRIM(PB.total_media_general) as total_media_general,
+// 				TRIM(PB.total_media_tecnica) as total_media_tecnica,
+// 				TRIM(PB.total_adulto) as total_adulto,
+// 				TRIM(PB.total_especial) as total_especial,
+// 				TRIM(PB.total) as total,
+// -- 
+// 				TRIM(PB.total_docente) as total_docente,
+// 				TRIM(PB.total_administrativo) as total_administrativo,
+// 				TRIM(PB.total_obrero) as total_obrero,
+// -- 
+// 				fecha_registro_matricula,
+// 				fecha_registro_datos,
+// 				fecha_registro_personal,
+// 				fecha_registro_director,
+// 				nivel_estatus,
+// -- 
+// 				'---' as cierre 
+// 				FROM censo2017.plantelesbase AS PB 
+// 				INNER JOIN censo2017.nominaactual AS NOM ON (PB.dir_cedula = NOM.cedula) ";
+// 		//
+// 		if ($nivel_usuario == 'DIRECTOR') { // BUSCA SOLO POR CEDULA PLANTELES-DIRECTOR
+// 			$sql.="	WHERE NOM.cedula ='$cedula' ";
+// 		}
+// 		//
+// 		if ($nivel_usuario == 'ADMIN') { // BUSCA TODOS LOS PLANTELES
+// 			$sql.="	WHERE ( PB.tipo_dependencia ='PLANTA' OR  PB.tipo_dependencia ='ENTE ADSCRITO' ) ";	
+// 		}
+// 		//
+// 		if ($nivel_usuario == 'ROOT') {
+// 			//
+// 			if ($txt_tipo_dependencia == 'PLANTELES') {
+// 				$sql.=" WHERE  ( PB.tipo_dependencia !='PLANTA' AND  PB.tipo_dependencia !='ENTE ADSCRITO' ) ";
+// 				if ($txt_municipio!=null ) {	
+// 					$sql.=" and PB.municipio = '$txt_municipio' ";
+// 				}
+// 			}
+// 			//
+// 			if ($txt_tipo_dependencia == 'ZONA EDUCATIVA') {
+// 				$sql.=" WHERE  ( PB.tipo_dependencia ='PLANTA' OR  PB.tipo_dependencia ='ENTE ADSCRITO' ) ";
+// 			}
+// 			//
+// 			if ($txt_tipo_dependencia == 'CIRCUITOS EDUCATIVOS') {
+// 				$sql.=" WHERE  ( PB.tipo_dependencia ='CIRCUITOS EDUCATIVOS' ) ";
+// 				if ($txt_municipio!=null ) {	
+// 					$sql.=" and PB.municipio = '$txt_municipio' ";
+// 				}
+// 			}
+// 		}
+// 		$sql.="		ORDER BY 
+// 					PB.municipio, NOM.cedula, PB.id_plantelesbase ";
+// 		$dato=consultar($sql,$Postgres);
+//  		// ver_arreglo($dato);
+// // 		Array
+// // (
+// //     [0]S => Array
+// //         (
+// //             [id_nomina] => 215
+// //             [cedula] => 10217598
+// //             [nombres_apellidos] => ZENAYDA P RODRIGUEZ G
+// //             [cod_cargo] => 1124DI
+// //             [cargo] => DOC. IV /AULA
+// //             [cod_dependencia] => 006970354
+// //             [cuenta_bancaria] => 01020513110000278586
+// //             [sep1] => ---
+// //             [id_plantelesbase] => 43
+// //             [cod_plantel] => OD04551902
+// //             [cod_estadistico] => 190045
+// //             [nombre] => E B RIO COLORADO
+// //             [municipio] => ANDRES MATA
+// //             [parroquia] => SAN JOSE DE AEROCUAR
+// //             [cierre] => ---
+// //         )
+// 		$NumeroDeFilas = $Postgres->NumeroDeFilas();
+// 		if ($NumeroDeFilas>0) {
+// 			echo json_encode($dato);
+
+// 		}else{
+// 			echo 'false';
+// 		}
+
 
 		$sql="";
 		$sql.="SELECT 
 				-- NOM.cedula as login_cedula,
 				-- RIGHT(TRIM(NOM.cod_dependencia),6) as login_coddep,
 				-- RIGHT(TRIM(NOM.cuenta_bancaria),6) as login_ctabanco,
-				NOM.id_nomina,
-				NOM.cedula, 
-				TRIM(NOM.nombres_apellidos) AS nombres_apellidos, 
-				TRIM(NOM.cod_cargo) AS cod_cargo,
-				TRIM(NOM.cargo) AS cargo,
+				-- NOM.id_nomina,
+				--NOM.cedula, 
+				-- TRIM(NOM.nombres_apellidos) AS nombres_apellidos, 
+				-- TRIM(NOM.cod_cargo) AS cod_cargo,
+				-- TRIM(NOM.cargo) AS cargo,
 				 -- 
-				NOM.cod_dependencia, 
-				NOM.cuenta_bancaria, 
-				'---' AS SEP1,
+				-- NOM.cod_dependencia, 
+				--NOM.cuenta_bancaria, 
+				-- '---' AS SEP1,
 				PB.id_plantelesbase, 
 				TRIM(PB.cod_plantel) AS cod_plantel, 
 				TRIM(PB.cod_estadistico) AS cod_estadistico,				
@@ -162,6 +272,8 @@
 				UPPER(TRIM(PB.turno)) AS turno ,
 				UPPER(TRIM(PB.modalidad)) AS modalidad ,
 				-- 
+				
+				TRIM(PB.dir_cedula) AS dir_cedula,
 				UPPER(TRIM(PB.dir_nombre)) AS dir_nombre,
   				UPPER(TRIM(PB.dir_apellido)) AS dir_apellido,
 				UPPER(TRIM(PB.dir_direccion)) AS dir_direccion,
@@ -192,11 +304,11 @@
 				nivel_estatus,
 -- 
 				'---' as cierre 
-				FROM censo2017.plantelesbase AS PB 
-				INNER JOIN censo2017.nominaactual AS NOM ON (PB.dir_cedula = NOM.cedula) ";
+				FROM censo2017.plantelesbase AS PB  \n";
+		$sql.="	 -- INNER JOIN censo2017.nominaactual AS NOM ON (PB.dir_cedula = NOM.cedula) \n ";
 		//
 		if ($nivel_usuario == 'DIRECTOR') { // BUSCA SOLO POR CEDULA PLANTELES-DIRECTOR
-			$sql.="	WHERE NOM.cedula ='$cedula' ";
+			$sql.="	WHERE PB.dir_celular ='$cedula' ";
 		}
 		//
 		if ($nivel_usuario == 'ADMIN') { // BUSCA TODOS LOS PLANTELES
@@ -224,36 +336,46 @@
 			}
 		}
 		$sql.="		ORDER BY 
-					PB.municipio, NOM.cedula, PB.id_plantelesbase ";
-		$dato=consultar($sql,$Postgres);
- 		// ver_arreglo($dato);
-// 		Array
-// (
-//     [0]S => Array
-//         (
-//             [id_nomina] => 215
-//             [cedula] => 10217598
-//             [nombres_apellidos] => ZENAYDA P RODRIGUEZ G
-//             [cod_cargo] => 1124DI
-//             [cargo] => DOC. IV /AULA
-//             [cod_dependencia] => 006970354
-//             [cuenta_bancaria] => 01020513110000278586
-//             [sep1] => ---
-//             [id_plantelesbase] => 43
-//             [cod_plantel] => OD04551902
-//             [cod_estadistico] => 190045
-//             [nombre] => E B RIO COLORADO
-//             [municipio] => ANDRES MATA
-//             [parroquia] => SAN JOSE DE AEROCUAR
-//             [cierre] => ---
-//         )
+					PB.municipio, PB.cod_plantel, PB.dir_celular, PB.id_plantelesbase ";
+		//
+		$dato_plantel=consultar($sql,$Postgres);
 		$NumeroDeFilas = $Postgres->NumeroDeFilas();
 		if ($NumeroDeFilas>0) {
-			echo json_encode($dato);
+			foreach ($dato_plantel as $key => $value) {
+				$dir_ced = $value['dir_cedula'];
+				// echo $key ."  ----> " . $dir_ced . " ---> ";
+				$sql_nom= "SELECT id_nomina,cedula,nombres_apellidos,cod_cargo,cargo,personal  FROM censo2017.nominaactual WHERE cedula = '$dir_ced' LIMIT 1 ";
+				// ver_arreglo($sql_nom);
+				$dato_nom=consultar($sql_nom,$Postgres);
+				$NumeroDeFilas_nom = $Postgres->NumeroDeFilas();  
+				if ($NumeroDeFilas_nom>0) {
+					// echo "si";
+					// $dato_salida[0] = array_merge($dato_nomina[0],$dato_registro[$key]);
+					$dato_salida[$key] = array_merge($value,$dato_nom[0]);
+				}else{
+					// echo "no";
+		            $dato_nom[0]['id_nomina'] = null ; //=> 14358
+		            $dato_nom[0]['cedula'] = null ; // => 12664967
+		            $dato_nom[0]['nombres_apellidos'] = null ; // => SALAZAR ELIZABETH        
+		            $dato_nom[0]['cod_cargo'] = null ; // => 1123DI
+		            $dato_nom[0]['cargo'] = null ; // => DOC. III /AULA           
+		            $dato_nom[0]['personal'] = null ; // => DOCENTE
+					$dato_salida[$key] = array_merge($value,$dato_nom[0]);
+				}
+				// ver_arreglo($value);
+				// ver_arreglo($dato_nom[0]);
+				// ver_arreglo("ARREGLO MERGE ---------------------------------------------------------------------------");
+				// ver_arreglo($dato_salida[$key]);
+				// echo json_encode($dato_salida[$key]) . "<br><br>";
 
+			}
+			// ver_arreglo($dato_salida);		
+			echo json_encode($dato_salida);
+			// echo json_encode($dato);
 		}else{
 			echo 'false';
 		}
+
 	}
 ?>
 <?php
@@ -371,51 +493,6 @@
 			// ver_arreglo($sql);	 	
 			$dato_registro=consultar($sql_registro,$Postgres);
 			// ver_arreglo($dato_registro);
-			// 
-			// Array
-			// (
-			//     [0] => Array
-			//         (
-			//             [reg_id_plantelesbase] => 43
-			//             [reg_id_registropersonal] => 1
-			//             [reg_cedula] => 11829328
-			//             [reg_nombre_completo] => OSWALDO Enriques
-			//             [reg_apellido_completo] => HERNANDEZ Campos
-			//             [reg_fecha_nac] => 30/11/2017
-			//             [reg_sexo] => MASCULINO
-			//             [reg_estado_civil] => CASADO
-			//             [reg_telefono_celular] => 04165936395
-			//             [reg_telefono_residencia] => 02934335041
-			//             [reg_direccion_habitacion] => calle rendon
-			//             [reg_red_twitter] => cumanadigital
-			//             [reg_red_email] => oswaldoehc@gmail.com
-			//             [reg_tipo_personal] => ADMINISTRATIVO
-			//             [reg_grado_instruccion] => TECNICO
-			//             [reg_titulo_obtenido] => TSU INFORMATICA
-			//             [reg_institucion_educativa] => IUTIRLA
-			//             [reg_horas_doc] => 0
-			//             [reg_horas_adm] => 37.5
-			//             [reg_horas_obr] => 0
-			//             [reg_horas_doc_obr] => 37.5
-			//             [reg_horarios_funcional] => 08:00am - 03:00pm
-			//             [reg_cargo_funcional] => coordinador de sistemas
-			//             [reg_dependencia_funcional] => INFORMATICA
-			//             [reg_turno_trabajo] => COMPLETO
-			//             [reg_niveles_funcional] => 
-			//             [reg_matricula_atendida] => 
-			//             [reg_fecha_ingreso] => 
-			//             [reg_tiempo_servicio_plantel] => 
-			//             [matricula_atendida_total_maternal] => 
-			//             [matricula_atendida_total_preescolar] => 
-			//             [matricula_atendida_total_primaria] => 
-			//             [matricula_atendida_total_media_general] => 
-			//             [matricula_atendida_total_media_tecnica] => 
-			//             [matricula_atendida_total_adulto] => 
-			//             [matricula_atendida_total_especial] => 
-			//             [matricula_atendida_total] => 
-			//         )
-			// )
-
 			$NumeroDeFilas_registro = $Postgres->NumeroDeFilas();
 			if ($NumeroDeFilas_registro>0) {
 				// $dato_salida = array_merge($dato_nomina[0],$dato_registro[0]);
@@ -423,48 +500,6 @@
 				//
 				foreach ($dato_registro as $key => $value) {
 					// ver_arreglo($value);
-					// Array
-					// (
-					//     [reg_id_plantelesbase] => 1150
-					//     [reg_id_registropersonal] => 197
-					//     [reg_cedula] => 12269509
-					//     [reg_nombre_completo] => YSABEL CRISTINA
-					//     [reg_apellido_completo] => FIGUEROA VALLENILLA
-					//     [reg_fecha_nac] => 1974-02-19
-					//     [reg_sexo] => FEMENINO
-					//     [reg_estado_civil] => SOLTERO
-					//     [reg_telefono_celular] => 04267904287
-					//     [reg_telefono_residencia] => 02934335041
-					//     [reg_direccion_habitacion] => CALLE RENDÓN, CASA N° 5
-					//     [reg_red_twitter] => 
-					//     [reg_red_email] => 
-					//     [reg_tipo_personal] => OBRERO
-					//     [reg_tipo_personal_funcional] => ADMINISTRATIVO
-					//     [reg_grado_instruccion] => BACHILLER
-					//     [reg_titulo_obtenido] => CIENCIAS
-					//     [reg_institucion_educativa] => INSTITUTO NUEVA ANDALUCÍA
-					//     [reg_horas_doc] => 0
-					//     [reg_horas_adm] => 0
-					//     [reg_horas_obr] => 37.5
-					//     [reg_horas_doc_obr] => 0
-					//     [reg_horarios_funcional] => 08-03
-					//     [reg_cargo_funcional] => ASISTENTE
-					//     [reg_dependencia_funcional] => GESTIÓN INTERNA
-					//     [reg_turno_trabajo] => COMPLETO
-					//     [reg_niveles_funcional] => 
-					//     [reg_matricula_atendida] => 
-					//     [reg_fecha_ingreso] => 2012-09-16
-					//     [reg_tiempo_servicio_plantel] => 2017-08-16
-					//     [matricula_atendida_total_maternal] => 
-					//     [matricula_atendida_total_preescolar] => 
-					//     [matricula_atendida_total_primaria] => 
-					//     [matricula_atendida_total_media_general] => 
-					//     [matricula_atendida_total_media_tecnica] => 
-					//     [matricula_atendida_total_adulto] => 
-					//     [matricula_atendida_total_especial] => 
-					//     [matricula_atendida_total] => 
-					// )
-
 					// print_r("condicional = ". $value['reg_id_plantelesbase'] . " = " . $id_plantelesbase . "<BR>");
 					$valoridpb = $value['reg_id_plantelesbase']; 
 					if 	($valoridpb==$id_plantelesbase){
