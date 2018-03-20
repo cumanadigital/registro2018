@@ -301,7 +301,7 @@
 				fecha_registro_datos,
 				fecha_registro_personal,
 				fecha_registro_director,
-				nivel_estatus,
+				nivel_estatus, \n
 -- 
 				'---' as cierre 
 				FROM censo2017.plantelesbase AS PB  \n";

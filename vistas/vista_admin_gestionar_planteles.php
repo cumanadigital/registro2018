@@ -23,8 +23,7 @@ $nivel_usuario = $_POST['sesion_nivel_usuario'];
       <!--CONTENIDO AQUI-->
       <!--CONTENIDO AQUI-->
       <!--CONTENIDO AQUI-->
- 
-
+  
           <div class="row"> 
             <div class="col-sm12 col-md-12">
               <div id="toolbar1" class="toolbar1">
@@ -97,10 +96,12 @@ $nivel_usuario = $_POST['sesion_nivel_usuario'];
 
                         <th data-field="personal"          data-filter-control="select"  data-sortable="false" data-halign="center" data-align="left"   data-formatter="PersonalFormatter"  >Personal</th>
                         <th data-field="actualizado"       data-filter-control="input"   data-sortable="true"  data-halign="center" data-align="center" data-formatter="EstadoFormatter"  >Estatus</th>
+                <?php if ($nivelusuario=='DIRECTOR' || $nivelusuario=='ADMIN' || $nivelusuario=='ROOT'  ) {?>        
                         <th data-field="action"
                             data-align="center"
                             data-formatter="actionFormatter"
                             data-events="actionEvents">Acción</th>
+                <?php } ?>
                 </tr>
               </thead>
             </table>

@@ -51,7 +51,7 @@ $municipiousu = $_SESSION['sesion_municipio'];
 
 -->
 
-<?php if ($nivelusuario=='DIRECTOR' || $nivelusuario=='ADMIN' || $nivelusuario=='ROOT' ) {?>
+<?php if ($nivelusuario=='DIRECTOR' || $nivelusuario=='ADMIN' || $nivelusuario=='ROOT'  || $nivelusuario=='USUARIO') {?>
 <li class="treeview">
     <a href="javascript:void(0);"><i class="fa fa-file"></i> <span>Dependencias</span><i class="fa fa-angle-left pull-right"></i></a>
     <ul class="treeview-menu">    
@@ -72,7 +72,7 @@ $municipiousu = $_SESSION['sesion_municipio'];
 </li>
 <?php }?>
 
-<?php if ($nivelusuario=='ROOT' || $nivelusuario=='ADMIN' ) {?>     <!--0:Admin,-->
+<?php if ($nivelusuario=='ROOT' || $nivelusuario=='ADMIN' || $nivelusuario=='USUARIO' ) {?>     <!--0:Admin,-->
 <!--USUARIOS DE INFORMATICA-->
 <li class="treeview">
     <a href="javascript:void(0);"><i class="fa fa-file"></i> <span>Reportes</span><i class="fa fa-angle-left pull-right"></i></a>
