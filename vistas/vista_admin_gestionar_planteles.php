@@ -32,7 +32,6 @@ $nivel_usuario = $_POST['sesion_nivel_usuario'];
                   <div class="form-group ">
                     <!-- <span>Municipio: </span> -->
                     <select class="form-control" id="txt_tipo_dependencia" name="txt_tipo_dependencia" withd="6">
-                      <!-- <option value=''>Seleccione Estructura</option>  -->
                       <option value='PLANTELES' >PLANTELES</option>
                       <option value='ZONA EDUCATIVA' >ZONA EDUCATIVA</option>
                       <option value='CIRCUITOS EDUCATIVOS' >CIRCUITOS EDUCATIVOS</option>
