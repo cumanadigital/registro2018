@@ -18,15 +18,18 @@
     var sesion_nivel_usuario  = parametroArray['sesion_nivel_usuario'];
     var sesion_municipio = parametroArray['sesion_municipio'];
     // console.info(parametroArray);
-    // 
     var API_URL_planteles =  "servicios/services.admin.planteles.php?accion=consultar_registros" + "&cedula=" + sesion_cedula + "&municipio=" + sesion_municipio + "&nivel_usuario=" + sesion_nivel_usuario ;
-    // var API_URL_planteles =  "servicios/services.admin.planteles.php?accion=consultar_registros&parametro_user="+parametros_user;
-    // 
+    // var API_URL_planteles =  "servicios/services.admin.planteles.php?accion=consultar_registros&parametro_user="+parametros_user; 
     var API_URL =  "servicios/services.admin.planteles.php";
-    var $table = $('#table').bootstrapTable({url: API_URL_planteles});
+    
+    var $table = $('#table')
+    // var $table = $('#table').bootstrapTable({url: API_URL_planteles});
+    // $table.bootstrapTable('destroy');
+    $table.hide();
+    // var $table = $('#table').bootstrapTable(destroy);
     var $btn_filtrar = $('#btn_filtrar');
 
-    var table_personal_asignado = $('#table')
+    var table_personal_asignado = $('#table_personal_asignado');
 
     // $('#form_modal_personal').bootstrapValidator('validate');
 
@@ -39,6 +42,10 @@
     $modal_cargar_matricula     = $('#modal_matricula').modal(  {show: false, backdrop:'static'});
 
     $modal_personal             = $('#modal_personal').modal(   {show: false, backdrop:'static'});
+
+    $modal_comision_servicio    = $('#modal_personal_comision_servicio').modal(   {show: false, backdrop:'static'});
+
+    form_modal_personal_comision_servicio
 
     $modal_asignar_autoridades  = $('#ventana_modal_asignar_autoridades').modal({show: false, backdrop:'static'});
 
@@ -525,9 +532,23 @@ $(function () {
         // 
         $btn_filtrar.click(function () {
             console.info('$btn_filtrar');
-            $table.bootstrapTable('destroy');
-            $table.bootstrapTable({url: API_URL_planteles});
-            // $table_planteles.bootstrapTable('refresh');
+            var txt_tipo_dependencia = $('#txt_tipo_dependencia').val();
+            var txt_municipio = $("#txt_municipio").val();
+            if ( txt_tipo_dependencia == 'PLANTELES' || txt_tipo_dependencia == 'CIRCUITOS EDUCATIVOS' ) {
+              if  (txt_municipio != ''){
+                $table.fadeIn();
+                $table.bootstrapTable('destroy');
+                $table.bootstrapTable({url: API_URL_planteles});
+                // $table_planteles.bootstrapTable('refresh');
+              }else{
+                alert('DEBE SELECCIONAR MUNICIPIO');
+              }
+            }
+            if ( txt_tipo_dependencia == 'ZONA EDUCATIVA'  ) {
+              $table.fadeIn();
+              $table.bootstrapTable('destroy');
+              $table.bootstrapTable({url: API_URL_planteles});
+            } 
         });
 
         $('#txt_tipo_dependencia').on('change',function(){
@@ -537,9 +558,11 @@ $(function () {
             $("#txt_municipio").val('');
             $("#txt_municipio").attr('disabled',true);
           } else{
-            // $("#txt_municipio").val('');
+            $("#txt_municipio").val('');
             $("#txt_municipio").attr('disabled',false);
           }
+          $table.fadeOut();
+          $table.bootstrapTable('destroy');
         });
 
         $('#txt_municipio').change(function(){
@@ -834,7 +857,8 @@ $(function () {
           icon+='    <li><a class="update_director" href="javascript:" title="Actualizar Datos del Director(a)"><i class="glyphicon glyphicon-blue glyphicon-user"></i>Actualizar Directivo</a></li>';
           icon+='    <li><a class="update_planteles" href="javascript:" title="Actualizar Datos del Plantel"><i class="glyphicon glyphicon-warning glyphicon glyphicon-home"></i>Actualizar Plantel</a></li>';
           icon+='    <li><a class="update_matricula" href="javascript:" title="Registrar Matricula Estudiantil"><i class="glyphicon glyphicon-red glyphicon-education "></i>Registrar Matricula</a></li>';
-          icon+='    <li><a class="insert_personal" href="javascript:" title="Registrar Personal"><i class="glyphicon-blue2 fa fa-users "></i>Registrar Personal</a></li>';           
+          icon+='    <li><a class="insert_personal" href="javascript:" title="Registrar Personal"><i class="glyphicon-blue2 fa fa-users "></i>Registrar Personal</a></li>';
+          icon+='    <li><a class="comision_servicio" href="javascript:" title="Comisión de Servicio"><i class="glyphicon-red fa fa-male "></i>Comisión de Servicio</a></li>';           
           icon+='  </ul>';
           icon+='</div>';
         }
@@ -1260,6 +1284,50 @@ $(function () {
             $('#table_personal_asignado').bootstrapTable({url: API_URL_personal});
 
             showModalName($modal_personal,titulo,row);
+        },
+        'click .comision_servicio': function (e, value, row) {
+            accion = "comision_servicio";
+            // console.log(row);
+            // console.log($(this).attr('title'));
+            var titulo = $(this).attr('title') + "<br>[<font color='red'><b>" + row.cod_plantel + "</b></font>] -  <font color='blue'><b>" + row.nombre  + "</b></font>"; 
+            // alert(titulo);
+            // // console.info(titulo);
+            // // console.info(accion);
+            // // console.info(row.id_plantelesbase);
+            // // console.info(titulo);
+            // // console.info(row);
+            
+            // $('#form_modal_personal').bootstrapValidator('validate');
+            // $('#form_modal_personal').bootstrapValidator('resetForm', true); 
+
+            // $modal_personal.find('input[name="txt_id_plantelesbase_per"]').val(row.id_plantelesbase);
+            // $modal_personal.find('input[name="txt_cod_plantel_per"]').val(row.cod_plantel);
+            // $modal_personal.find('button[name="btn_enviar_personal"]').text("Agregar Personal");
+            // $("#btn_enviar_personal").attr('disabled', true);
+            
+            // limpiar_datos_personal();
+
+            // $('#cuadro_datos_laborales').hide();
+            // $('#cuadro_datos_personal').hide();
+            // $('#cuadro_listado_personal').show();
+
+            // $('#btn_volver_listado').attr('disabled',true);
+            // $('#btn_enviar_personal').attr('disabled',true);
+            // $('#btn_continuar_datos_laboral').attr('disabled',true);
+
+            // $('#btn_volver_listado').hide();
+            // $('#btn_continuar_datos_laboral').hide();
+            // $('#btn_enviar_personal').hide();
+
+            
+
+            var API_URL_personal =  "servicios/services.admin.planteles.php?accion=consultar_personal_asignado_comision_servicio&id_plantelesbase=" + row.id_plantelesbase;
+            $('#table_personal_asignado_comision_servicio').bootstrapTable('destroy' ); 
+            $('#table_personal_asignado_comision_servicio').bootstrapTable({url: API_URL_personal});
+
+            // form_modal_personal_comision_servicio
+
+            showModalName($modal_comision_servicio,titulo,row);
         },
         'click .add_autoridades': function (e, value, row) {
             accion='add_autoridades'

@@ -71,6 +71,11 @@
 		case 'consultar_personal_asignado':
 			consultar_personal_asignado($datos);
 		break;
+		
+		case 'consultar_personal_asignado_comision_servicio':
+			consultar_personal_asignado_comision_servicio($datos);
+		break;
+
 		case 'consultar_personal_general':
 			consultar_personal_general($datos);
 		break;
@@ -676,6 +681,117 @@
 			}
 			// ver_arreglo($dato_registro);
 			actualizar_contador_personal($id_plantelesbase);
+			echo json_encode($dato_registro);
+		}else{
+			print_r('false');
+		}
+	}
+?>
+<?php
+	function consultar_personal_asignado_comision_servicio($datos) {
+		// 	 __        __                  __  ___       __   __      __   ___     __   __   __  ___  __  ___  __        __
+		// 	|__)  /\  |__)  /\     |    | /__`  |   /\  |  \ /  \    |  \ |__     |__) /  \ /  \  |  /__`  |  |__)  /\  |__)
+		// 	|    /~~\ |  \ /~~\    |___ | .__/  |  /~~\ |__/ \__/    |__/ |___    |__) \__/ \__/  |  .__/  |  |  \ /~~\ |
+		// 	
+		//  __   __        __            ___       __      __   ___  __   __   __                          __     __             __   __
+		// /  ` /  \ |\ | /__` |  | |     |   /\  |__)    |__) |__  |__) /__` /  \ |\ |  /\  |        /\  /__` | / _` |\ |  /\  |  \ /  \
+		// \__, \__/ | \| .__/ \__/ |___  |  /~~\ |  \    |    |___ |  \ .__/ \__/ | \| /~~\ |___    /~~\ .__/ | \__> | \| /~~\ |__/ \__/
+		// 
+		//  __   __           __     __            __   ___  __          __     __
+		// /  ` /  \  |\/| | /__` | /  \ |\ |     /__` |__  |__) \  / | /  ` | /  \
+		// \__, \__/  |  | | .__/ | \__/ | \| ___ .__/ |___ |  \  \/  | \__, | \__/
+		// 
+		$Postgres=new Postgres(DB_SERVER,DB_NAME,DB_USER,DB_PASSWORD);
+		$id_plantelesbase = $datos['id_plantelesbase'];
+		$sql=  "SELECT	
+						REG.id_plantelesbase as REG_id_plantelesbase,
+						REG.id_registropersonal AS REG_id_registropersonal, 
+						REG.cedula AS REG_cedula, 
+						UPPER(TRIM(REG.nombre_completo)) AS REG_nombre_completo, 
+						UPPER(TRIM(REG.apellido_completo)) AS REG_apellido_completo, 
+						REG.fecha_nac AS REG_fecha_nac, 
+						UPPER(TRIM(REG.sexo)) AS REG_sexo, 
+						UPPER(TRIM(REG.estado_civil)) AS REG_estado_civil, 
+						REG.telefono_celular AS REG_telefono_celular, 
+						REG.telefono_residencia AS REG_telefono_residencia, 
+						UPPER(TRIM(REG.direccion_habitacion)) AS REG_direccion_habitacion, 
+						UPPER(TRIM(REG.red_twitter)) AS REG_red_twitter, 
+						UPPER(TRIM(REG.red_email)) AS REG_red_email, 
+						REG.tipo_personal AS REG_tipo_personal,
+						REG.tipo_personal_funcional AS REG_tipo_personal_funcional,
+						--
+						REG.grado_instruccion AS reg_grado_instruccion, 
+	            		UPPER(TRIM(REG.titulo_obtenido)) AS reg_titulo_obtenido, 
+            			UPPER(TRIM(REG.institucion_educativa)) AS reg_institucion_educativa, 
+
+            			REG.discapacidad AS reg_discapacidad,
+	            		TRIM(REG.discapacidad_otra) AS reg_discapacidad_otra,
+						--
+						COALESCE(REG.horas_doc, '0') AS REG_horas_doc,
+						COALESCE(REG.horas_adm, '0') AS REG_horas_adm,
+						COALESCE(REG.horas_obr, '0') AS REG_horas_obr,
+						COALESCE(REG.horas_adm, REG.horas_obr) AS reg_horas_doc_obr,
+						--COALESCE (COALESCE(REG.horas_adm, REG.horas_obr), '0' ) AS reg_horas_doc_obr,
+						-- CAST(REG.horas_adm AS numeric)  + CAST(REG.horas_obr AS numeric) AS reg_horas_doc_obr,
+				--
+						UPPER(TRIM(REG.horarios_funcional)) AS REG_horarios_funcional, 
+						UPPER(TRIM(REG.cargo_funcional)) AS REG_cargo_funcional, 
+						UPPER(TRIM(REG.dependencia_funcional)) AS reg_dependencia_funcional,
+--
+						UPPER(TRIM(REG.turno_trabajo)) AS REG_turno_trabajo,
+--
+						REG.niveles_funcional AS REG_niveles_funcional, 
+						REG.matricula_atendida AS REG_matricula_atendida, 
+						REG.fecha_ingreso AS REG_fecha_ingreso, 
+						REG.tiempo_servicio_plantel AS REG_tiempo_servicio_plantel, 
+						REG.matricula_atendida_total_maternal, 
+						REG.matricula_atendida_total_preescolar, 
+						REG.matricula_atendida_total_primaria, 
+						REG.matricula_atendida_total_media_general, 
+						REG.matricula_atendida_total_media_tecnica, 
+						REG.matricula_atendida_total_adulto, 
+						REG.matricula_atendida_total_especial, 
+						REG.matricula_atendida_total
+				FROM censo2017.registropersonal AS REG 
+				WHERE (REG.id_plantelesbase = $id_plantelesbase AND REG.tipo_personal = 'COMISION DE SERVICIO' )
+				ORDER BY  REG.id_registropersonal DESC";
+		// ver_arreglo($sql);		
+		$dato_registro=consultar($sql,$Postgres);
+		// ver_arreglo($dato);
+		$NumeroDeFilas = $Postgres->NumeroDeFilas();
+		if ($NumeroDeFilas>0) {
+			// foreach ($dato_registro as $key => $value) {
+			// 	$cedula = $value['reg_cedula'];
+			// 	$sql_nomina =  "SELECT	
+			// 					NOM.id_nomina AS NOM_id_nomina, 
+			// 					NOM.cedula AS NOM_cedula, 
+			// 					NOM.nomina AS NOM_nomina,
+			// 					NOM.nombres_apellidos AS NOM_nombres_apellidos, 
+			// 					NOM.fecha_ingreso AS NOM_fecha_ingreso, 
+			// 					NOM.cod_cargo AS NOM_cod_cargo, 
+			// 					NOM.cargo AS NOM_cargo, 
+			// 					NOM.cod_dependencia AS NOM_cod_dependencia, 
+			// 					NOM.dependencia AS NOM_dependencia, 
+			// 					NOM.personal AS NOM_personal, 
+			// 					NOM.horas_adm AS NOM_horas_adm, 
+			// 					NOM.horas_doc AS NOM_horas_doc, 
+			// 					-- NOM.cuenta_bancaria AS NOM_cuenta_bancaria, 
+			// 					NOM.fecha_ultimo_acceso AS NOM_fecha_ultimo_acceso
+			// 				FROM censo2017.nominaactual AS NOM
+			// 				WHERE NOM.cedula = '$cedula' ";		
+			// 	$dato_nomina=consultar($sql_nomina,$Postgres);
+			// 	// ver_arreglo($value);
+			// 	// ver_arreglo($dato_nomina[0]);
+			// 	$dato_registro[$key] = array_merge($dato_nomina[0],$dato_registro[$key]);
+			// 	// $NumeroDeFilas_nomina = $Postgres->NumeroDeFilas();
+			// 	// if ($NumeroDeFilas_nomina>0) {
+			// 	//   	$dato[$key]; = array_merge($dato_nomina[0],$dato[$key]);
+			// 	// ver_arreglo($dato_registro[$key]);
+			// 	// echo json_encode($dato_registro[$key]);
+			// 	//  }
+			// }
+			// ver_arreglo($dato_registro);
+			// actualizar_contador_personal($id_plantelesbase);
 			echo json_encode($dato_registro);
 		}else{
 			print_r('false');
@@ -1504,7 +1620,8 @@ function contador_planteles_municipio() {
 			$sql.="AND PB.tipo_dependencia = '$dependencia' ";
 		}
 		$sql.=" ) "; 
-		$sql.="ORDER BY PB.municipio, PB.id_plantelesbase ";
+		// $sql.="ORDER BY PB.municipio, PB.id_plantelesbase ";
+		$sql.="ORDER BY PB.municipio, PB.cod_plantel, PB.dir_celular, PB.id_plantelesbase  ";
 		// ver_arreglo($sql);
 		$dato=consultar($sql,$Postgres);
  		// ver_arreglo($dato);
@@ -1548,8 +1665,8 @@ function activar_plantel($datos) {
 	//VARIABLE UNICA BASADA EN TIMESTAMP PARA GENERAR UN ID UNICO PARA LA SOLICITUD
 	$numero_solicitud 			= uniqid();
 	$sql =	"UPDATE censo2017.plantelesbase
-	   		SET 	nivel_estatus = '$nivel_estatus', 
-	       			fecha_registro_datos	='$fecha_registro'
+	   		SET 	nivel_estatus = '$nivel_estatus' 
+	       			--  ,fecha_registro_datos	='$fecha_registro'
 	 		WHERE id_plantelesbase = $txt_id_plantelesbase;";
 		// ver_arreglo($sql);
 		// die(); 				     

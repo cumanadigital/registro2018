@@ -55,7 +55,7 @@ $nivel_usuario = $_POST['sesion_nivel_usuario'];
                       <option value='VALDEZ' >VALDEZ</option>
                     </select>
                   </div>
-                  <button id="btn_filtrar" type="button" class="btn btn-default">Aplicar Filtro</button>
+                  <button id="btn_filtrar" type="button" class="btn btn-default">Consultar</button>
                   <span class="alert"></span>
                   </div>
                 <?php } ?>
@@ -95,7 +95,7 @@ $nivel_usuario = $_POST['sesion_nivel_usuario'];
 
                         <th data-field="personal"          data-filter-control="select"  data-sortable="false" data-halign="center" data-align="left"   data-formatter="PersonalFormatter"  >Personal</th>
                         <th data-field="actualizado"       data-filter-control="input"   data-sortable="true"  data-halign="center" data-align="center" data-formatter="EstadoFormatter"  >Estatus</th>
-                <?php if ($nivelusuario=='DIRECTOR' || $nivelusuario=='ADMIN' || $nivelusuario=='ROOT'  ) {?>        
+                <?php if ($nivelusuario='DIRECTOR' || $nivelusuario='ADMIN' || $nivelusuario='ROOT'  ) {?>        
                         <th data-field="action"
                             data-align="center"
                             data-formatter="actionFormatter"
@@ -591,9 +591,6 @@ $nivel_usuario = $_POST['sesion_nivel_usuario'];
             </div><!-- /.modal -->
           </form> 
 
-
-
-
           <!-- 
           ######  ####### ######   #####  ####### #     #    #    #
           #     # #       #     # #     # #     # ##    #   # #   #
@@ -603,7 +600,6 @@ $nivel_usuario = $_POST['sesion_nivel_usuario'];
           #       #       #    #  #     # #     # #    ## #     # #
           #       ####### #     #  #####  ####### #     # #     # #######
           -->
-           <!-- data-toggle="validator"          -->
            <form class="form-horizontal" id="form_modal_personal" role="form" data-toggle="validator" > 
             <div id="modal_personal" class="modal fade">
               <div class="modal-dialog" id="modal-dialog-xl">
@@ -649,7 +645,7 @@ $nivel_usuario = $_POST['sesion_nivel_usuario'];
                               >
                                 <thead>
                                   <tr>
-                                   <th data-field="nom_cedula" data-filter-control="select" data-sortable="false" data-halign="center" data-align="center"    >Cédula</th>
+                                   <th data-field="reg_cedula" data-filter-control="select" data-sortable="false" data-halign="center" data-align="center"    >Cédula</th>
                                    <th data-field="nombre_completo" data-filter-control="select" data-sortable="false" data-halign="center" data-formatter="actionFormatterNombre" >Nombre y Apellido</th>                   
                                    <th data-field="nom_personal" data-filter-control="select" data-sortable="false" data-halign="center" data-align="center" data-formatter="actionFormatterPersonal" >Nómina</th>
                                    <th data-field="nom_cargo" data-filter-control="select" data-sortable="false" data-halign="center" data-align="center"  >Cargo Nómina</th>
@@ -712,8 +708,7 @@ $nivel_usuario = $_POST['sesion_nivel_usuario'];
                             </div>
                           </div>  <!-- -/ fin row -->
 
-                          <div id ="cuadro_datos_personal_2">  
-                          
+
                           <div class="row">
                             <div class="col-sm-4">
                               <div class="form-group">
@@ -806,91 +801,84 @@ $nivel_usuario = $_POST['sesion_nivel_usuario'];
                           </div>  <!-- -/ fin row -->
 
                           <div class="row">
-                              <div class="col-sm-4">
-                                <div class="form-group">
-                                  <label for="txt_grado_instruccion" class="col-sm-4 control-label">Grado de Instrucción*</label>
-                                  <div class="col-sm-8">
-                                    <select class="form-control" id="txt_grado_instruccion" name="txt_grado_instruccion" required>
-                                      <option value=''>Seleccione</option>  
-                                      <option value='PRIMARIA INCOMPLETA'>PRIMARIA INCOMPLETA</option>
-                                      <option value='PRIMARIA'>PRIMARIA</option>
-                                      <option value='SECUNDARIA'>SECUNDARIA</option>
-                                      <option value='BACHILLER'>BACHILLER</option>
-                                      <option value='TECNICO MEDIO'>TECNICO MEDIO</option>
-                                      <option value='TECNICO SUPERIOR'>TECNICO SUPERIOR</option>
-                                      <option value='LICENCIATURA'>LICENCIATURA</option>
-                                      <option value='INGENIERIA'>INGENIERIA</option>
-                                      <option value='MAESTRIA'>MAESTRIA</option>
-                                      <option value='ESPECIALIDAD'>ESPECIALIDAD</option>
-                                      <option value='DOCTORADO'>DOCTORADO</option>
-                                    </select>
-                                  </div>
+                            <div class="col-sm-4">
+                              <div class="form-group">
+                                <label for="txt_grado_instruccion" class="col-sm-4 control-label">Grado de Instrucción*</label>
+                                <div class="col-sm-8">
+                                  <select class="form-control" id="txt_grado_instruccion" name="txt_grado_instruccion" required>
+                                    <option value=''>Seleccione</option>  
+                                    <option value='PRIMARIA INCOMPLETA'>PRIMARIA INCOMPLETA</option>
+                                    <option value='PRIMARIA'>PRIMARIA</option>
+                                    <option value='SECUNDARIA'>SECUNDARIA</option>
+                                    <option value='BACHILLER'>BACHILLER</option>
+                                    <option value='TECNICO MEDIO'>TECNICO MEDIO</option>
+                                    <option value='TECNICO SUPERIOR'>TECNICO SUPERIOR</option>
+                                    <option value='LICENCIATURA'>LICENCIATURA</option>
+                                    <option value='INGENIERIA'>INGENIERIA</option>
+                                    <option value='MAESTRIA'>MAESTRIA</option>
+                                    <option value='ESPECIALIDAD'>ESPECIALIDAD</option>
+                                    <option value='DOCTORADO'>DOCTORADO</option>
+                                  </select>
                                 </div>
                               </div>
+                            </div>
 
-                              <div class="col-sm-4">
-                                <div class="form-group">
-                                  <label for="txt_titulo" class="col-sm-4 control-label">Título Obtenido*</label>
-                                  <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="txt_titulo" name="txt_titulo"  placeholder="Título Obtenido" pattern="[A-Za-z ]+" required>
-                                  </div>
+                            <div class="col-sm-4">
+                              <div class="form-group">
+                                <label for="txt_titulo" class="col-sm-4 control-label">Título Obtenido*</label>
+                                <div class="col-sm-8">
+                                  <input type="text" class="form-control" id="txt_titulo" name="txt_titulo"  placeholder="Título Obtenido" pattern="[A-Za-z ]+" required>
                                 </div>
                               </div>
+                            </div>
 
-                              <div class="col-sm-4">
-                                <div class="form-group">
-                                  <label for="txt_institucion" class="col-sm-4 control-label">Institución</label>
-                                  <div class="col-sm-8">
-                                    <input type="text" class="form-control" id="txt_institucion" name="txt_institucion"  placeholder="Institución Educativa" pattern="[A-Za-z ]+">
-                                  </div>
+                            <div class="col-sm-4">
+                              <div class="form-group">
+                                <label for="txt_institucion" class="col-sm-4 control-label">Institución</label>
+                                <div class="col-sm-8">
+                                  <input type="text" class="form-control" id="txt_institucion" name="txt_institucion"  placeholder="Institución Educativa" pattern="[A-Za-z ]+">
                                 </div>
                               </div>
+                            </div>
 
-                            </div>  <!-- -/ fin row -->
+                          </div>  <!-- -/ fin row -->
 
-                            <div class="row">
-                              <div class="col-sm-4">
-                                <div class="form-group">
-                                  <label for="txt_discapacidad" class="col-sm-4 control-label">Posee alguna discapacidad*<br><br>Permite selección múltiple, presionado la tecla Ctrl</label>
-                                  <div class="col-sm-8">
-                                    <select class="form-control" id="txt_discapacidad" name="txt_discapacidad[]" multiple="" size="10" required>
-                                      <!-- <option value=''>Seleccione</option>   -->
-                                      <option value='NINGUNA' selected='selected'>NINGUNA</option>
-                                      <option value='VISUAL'>VISUAL</option>
-                                      <option value='AUDITIVA'>AUDITIVA</option>
-                                      <option value='TACTIL'>TACTIL</option>
-                                      <option value='GUSTATIVA'>GUSTATIVA</option>
-                                      <option value='OLFATIVA'>OLFATIVA</option>
-                                      <option value='MOTORAS O MOTRICES'>MOTORAS O MOTRICES</option>
-                                      <option value='AUSENCIA DE EXTREMIDAD'>AUSENCIA DE EXTREMIDAD</option>
-                                      <option value='INTELECTUAL-COGNITIVO-PSICOSOCIAL'>INTELECTUAL-COGNITIVO-PSICOSOCIAL</option>
-                                      <option value='OTRA'>OTRA</option>
-                                    </select>
-                                  </div>
+                          <div class="row">
+                            <div class="col-sm-4">
+                              <div class="form-group">
+                                <label for="txt_discapacidad" class="col-sm-4 control-label">Posee alguna discapacidad*<br><br>Permite selección múltiple, presionado la tecla Ctrl</label>
+                                <div class="col-sm-8">
+                                  <select class="form-control" id="txt_discapacidad" name="txt_discapacidad[]" multiple="" size="10" required>
+                                    <!-- <option value=''>Seleccione</option>   -->
+                                    <option value='NINGUNA' selected='selected'>NINGUNA</option>
+                                    <option value='VISUAL'>VISUAL</option>
+                                    <option value='AUDITIVA'>AUDITIVA</option>
+                                    <option value='TACTIL'>TACTIL</option>
+                                    <option value='GUSTATIVA'>GUSTATIVA</option>
+                                    <option value='OLFATIVA'>OLFATIVA</option>
+                                    <option value='MOTORAS O MOTRICES'>MOTORAS O MOTRICES</option>
+                                    <option value='AUSENCIA DE EXTREMIDAD'>AUSENCIA DE EXTREMIDAD</option>
+                                    <option value='INTELECTUAL-COGNITIVO-PSICOSOCIAL'>INTELECTUAL-COGNITIVO-PSICOSOCIAL</option>
+                                    <option value='OTRA'>OTRA</option>
+                                  </select>
                                 </div>
                               </div>
+                            </div>
 
-                              <div class="col-sm-8">
-                                <div class="form-group">
-                                  <label for="txt_discapacidad_otra" class="col-sm-2 control-label">Otra</label>
-                                  <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="txt_discapacidad_otra" name="txt_discapacidad_otra"  placeholder="En caso de poseer otra discapacidad" pattern="[A-Za-z 0-9]+">
-                                    <p>Para selección múltiple debe mantener presionada la tecla 'Control'</p>
-                                  </div>
+                            <div class="col-sm-8">
+                              <div class="form-group">
+                                <label for="txt_discapacidad_otra" class="col-sm-2 control-label">Otra</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" id="txt_discapacidad_otra" name="txt_discapacidad_otra"  placeholder="En caso de poseer otra discapacidad" pattern="[A-Za-z 0-9]+">
+                                  <p>Para selección múltiple debe mantener presionada la tecla 'Control'</p>
                                 </div>
-                              </div> 
-                            </div>  <!-- -/ fin row -->
-
-                      
-                        </div> <!-- fin cuadro_datos_personal_2 -->
-
+                              </div>
+                            </div> 
+                          </div>  <!-- -/ fin row -->
 
                         </div> <!-- fin cuadro_datos_personal -->
 
-
                         <div id ="cuadro_datos_laborales">
-
-
 
                             <div class="callout callout-info callout-min">
                               <h4><span id='resumen_laboral'>Datos Laborales (Lugar de trabajo)</span></h4>
@@ -1011,7 +999,8 @@ $nivel_usuario = $_POST['sesion_nivel_usuario'];
 
                         
                         </div> <!-- fin cuadro_datos_laborales -->
-                     
+
+
                     </div><!-- /.box-body -->
                   
                   </div> <!--/.modal-body-->
@@ -1029,6 +1018,107 @@ $nivel_usuario = $_POST['sesion_nivel_usuario'];
               </div><!-- /.modal-dialog -->
             </div><!-- /.modal -->
           </form> 
+
+
+
+          <!-- 
+           __   __           __     __           __   ___     __   ___  __          __     __
+          /  ` /  \  |\/| | /__` | /  \ |\ |    |  \ |__     /__` |__  |__) \  / | /  ` | /  \
+          \__, \__/  |  | | .__/ | \__/ | \|    |__/ |___    .__/ |___ |  \  \/  | \__, | \__/
+          
+          -->
+            
+            <form class="form-horizontal" id="form_modal_personal_comision_servicio" role="form"> 
+              <div id="modal_personal_comision_servicio" class="modal fade">
+                <div class="modal-dialog" id="modal-dialog-xl">
+                  <div class="modal-content">
+                    
+                    <!-- formulario -->
+                    
+                        <div class="modal-header"> <!-- modal-header --> 
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <h4 class="modal-title">Carga de Personal Comisión de Servicio que Labora en la Institución</h4>
+                        </div> <!-- ./ modal-header -->
+
+                        <div class="modal-body">
+                            
+                          <div class="box-body">
+
+
+                              <div class="row" id="cuadro_listado_personal_comision_servicio">
+
+                                  <div class="col-sm-12">
+                                    
+                                    <div class="row"> 
+                                      <div class="col-sm12 col-md-12">
+                                        <p class="toolbar2_comision" id="toolbar2_comision">
+                                          <a class="create btn btn-default" id="btn_mostrar_agregar_personal_comision_servicio" href="javascript:">Agregar Personal</a>
+                                          <span class="alert" id="alert_pesronal"></span>
+                                        </p>
+                                      </div>
+                                    </div>
+                                    <!-- 
+                                    ___       __        ___      __   ___  __   __   __                           __     __             __   __
+                                     |   /\  |__) |    |__      |__) |__  |__) /__` /  \ |\ |  /\  |         /\  /__` | / _` |\ |  /\  |  \ /  \
+                                     |  /~~\ |__) |___ |___ ___ |    |___ |  \ .__/ \__/ | \| /~~\ |___ ___ /~~\ .__/ | \__> | \| /~~\ |__/ \__/
+
+                                      __   __           __     __           __   ___     __   ___  __          __     __
+                                     /  ` /  \  |\/| | /__` | /  \ |\ |    |  \ |__     /__` |__  |__) \  / | /  ` | /  \
+                                     \__, \__/  |  | | .__/ | \__/ | \|    |__/ |___    .__/ |___ |  \  \/  | \__, | \__/
+                 
+                                      -->
+                                      <table id="table_personal_asignado_comision_servicio"
+                                          data-show-refresh="true"
+                                          data-show-columns="true"
+                                          data-search="true"
+                                          data-pagination="true"
+                                          data-page-size="5"
+                                          data-query-params="queryParams"
+                                          data-toolbar=".toolbar2_comision"
+                                          data-filter-control="true"
+                                    >
+                                      <thead>
+                                        <tr>
+                                         <th data-field="reg_cedula" data-filter-control="select" data-sortable="false" data-halign="center" data-align="center"    >Cédula</th>
+                                         <th data-field="nombre_completo" data-filter-control="select" data-sortable="false" data-halign="center" data-formatter="actionFormatterNombre" >Nombre y Apellido</th>                   
+                                         <!-- <th data-field="nom_personal" data-filter-control="select" data-sortable="false" data-halign="center" data-align="center" data-formatter="actionFormatterPersonal" >Nómina</th> -->
+                                         <!-- <th data-field="nom_cargo" data-filter-control="select" data-sortable="false" data-halign="center" data-align="center"  >Cargo Nómina</th> -->
+                                         <th data-field="reg_tipo_personal_funcional" data-filter-control="select" data-sortable="false" data-halign="center" data-align="center" data-formatter="actionFormatterPersonalFuncional" >Personal</th>
+                                         <th data-field="reg_cargo_funcional" data-filter-control="select" data-sortable="false" data-halign="center" data-align="center"        >Cargo Funcional</th>
+                                         <th data-field="reg_dependencia_funcional" data-filter-control="select" data-sortable="false" data-halign="center" data-align="center">Coordinación Laboral</th>
+                                         <th data-field="reg_horas_doc" data-filter-control="select" data-sortable="false" data-halign="center" data-align="center" data-formatter="actionFormatterHoras" >Horas</th>
+                                         <!-- <th data-field="reg_horas_adm" data-filter-control="select" data-sortable="false" data-halign="center" data-align="center"  >Horas Adm/Obr</th> -->
+                                         <th data-field="action" data-align="center" data-formatter="actionFormatter2" data-events="actionEvents2"                        >Acción</th>
+                                       </tr>
+                                      </thead>
+                                    </table>
+
+                                  </div>
+                              
+                              </div> <!-- fin ./ cuadro_listado_personal_comision_servicio -->
+
+                              
+
+                              <div id="cuadro_comosion_de_servicio">
+
+                              </div>
+
+                                        
+                          </div><!-- /.box-body -->
+                        
+                        </div> <!--/.modal-body-->
+
+                        <div class="modal-footer">
+                          <button type="button" name="btn_volver_listado"           id="btn_volver_listado"           class="btn btn-warning pull-left"   >Volver al Listado</button>
+                          <!-- <button type="button" name="btn_continuar_datos_laboral"  id="btn_continuar_datos_laboral"  class="btn btn-success pull-left"   >Continuar con Datos Laborales</button> -->
+                          <button type="button" name="btn_enviar_personal"          id="btn_enviar_personal"          class="btn btn-primary submit"      >Registrar</button>
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                        </div> 
+
+                  </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+              </div><!-- /.modal -->
+            </form> 
 
 
 
