@@ -813,6 +813,7 @@ $nivel_usuario = $_POST['sesion_nivel_usuario'];
                                     <option value='BACHILLER'>BACHILLER</option>
                                     <option value='TECNICO MEDIO'>TECNICO MEDIO</option>
                                     <option value='TECNICO SUPERIOR'>TECNICO SUPERIOR</option>
+                                    <option value='PROFESOR'>PROFESOR</option>
                                     <option value='LICENCIATURA'>LICENCIATURA</option>
                                     <option value='INGENIERIA'>INGENIERIA</option>
                                     <option value='MAESTRIA'>MAESTRIA</option>
