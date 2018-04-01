@@ -1035,31 +1035,31 @@ $nivel_usuario = $_POST['sesion_nivel_usuario'];
           
           -->
             
-            <form class="form-horizontal" id="form_modal_personal_comision_servicio" role="form"> 
               <div id="modal_personal_comision_servicio" class="modal fade">
                 <div class="modal-dialog" id="modal-dialog-xl">
                   <div class="modal-content">
-                    
-                    <!-- formulario -->
-                    
+
                         <div class="modal-header"> <!-- modal-header --> 
                           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                           <h4 class="modal-title">Carga de Personal Comisión de Servicio que Labora en la Institución</h4>
+                          <span class="alert" id="alert_pesronal"></span>
                         </div> <!-- ./ modal-header -->
 
                         <div class="modal-body">
                             
                           <div class="box-body">
 
-
-                              <div class="row" id="cuadro_listado_personal_comision_servicio">
+                              <div class="row" id="cuadro_listado_personal_comision_servicio" >
 
                                   <div class="col-sm-12">
                                     
                                     <div class="row"> 
                                       <div class="col-sm12 col-md-12">
                                         <p class="toolbar2_comision" id="toolbar2_comision">
-                                          <a class="create btn btn-default" id="btn_mostrar_agregar_personal_comision_servicio" href="javascript:">Agregar Personal</a>
+                                          <input class="form-control" id="txt_id_plantelesbase_per_comision_servicio" type="hidden" name="txt_id_plantelesbase_per_comision_servicio">
+                                          <input class="form-control" id="txt_cod_plantel_per_comision_servicio" type="hidden"    name="txt_cod_plantel_per_comision_servicio">
+                                          <input class="form-control" id="txt_id_personal_per_comision_servicio" type="hidden"    name="txt_id_personal_per_comision_servicio">
+                                          <a class="create btn btn-default" id="btn_mostrar_agregar_personal_comision_servicio" href="javascript:">Nuevo Personal en Comisión de Servicio</a>
                                           <span class="alert" id="alert_pesronal"></span>
                                         </p>
                                       </div>
@@ -1067,7 +1067,7 @@ $nivel_usuario = $_POST['sesion_nivel_usuario'];
                                     <!-- 
                                     ___       __        ___      __   ___  __   __   __                           __     __             __   __
                                      |   /\  |__) |    |__      |__) |__  |__) /__` /  \ |\ |  /\  |         /\  /__` | / _` |\ |  /\  |  \ /  \
-                                     |  /~~\ |__) |___ |___ ___ |    |___ |  \ .__/ \__/ | \| /~~\ |___ ___ /~~\ .__/ | \__> | \| /~~\ |__/ \__/
+                                     |  /~~\ |__) |___ |___     |    |___ |  \ .__/ \__/ | \| /~~\ |___     /~~\ .__/ | \__> | \| /~~\ |__/ \__/
 
                                       __   __           __     __           __   ___     __   ___  __          __     __
                                      /  ` /  \  |\/| | /__` | /  \ |\ |    |  \ |__     /__` |__  |__) \  / | /  ` | /  \
@@ -1106,8 +1106,10 @@ $nivel_usuario = $_POST['sesion_nivel_usuario'];
 
                               
 
-                              <div id="cuadro_comosion_de_servicio">
-
+                              <div id="cuadro_comision_de_servicio" >
+                                  <!-- <form class="form-horizontal" id="form_modal_personal_comision_servicio" role="form">
+                                    
+                                  </form>  -->
                               </div>
 
                                         
@@ -1116,16 +1118,14 @@ $nivel_usuario = $_POST['sesion_nivel_usuario'];
                         </div> <!--/.modal-body-->
 
                         <div class="modal-footer">
-                          <button type="button" name="btn_volver_listado"           id="btn_volver_listado"           class="btn btn-warning pull-left"   >Volver al Listado</button>
-                          <!-- <button type="button" name="btn_continuar_datos_laboral"  id="btn_continuar_datos_laboral"  class="btn btn-success pull-left"   >Continuar con Datos Laborales</button> -->
-                          <button type="button" name="btn_enviar_personal"          id="btn_enviar_personal"          class="btn btn-primary submit"      >Registrar</button>
+                          <button type="button" name="btn_volver_listado_comision_servicio"           id="btn_volver_listado_comision_servicio"           class="btn btn-warning pull-left"   >Volver al Listado</button>
+                          <button type="button" name="btn_enviar_personal_comision_servicio"          id="btn_enviar_personal_comision_servicio"          class="btn btn-primary submit"      >Registrar</button>
                           <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
                         </div> 
 
                   </div><!-- /.modal-content -->
                 </div><!-- /.modal-dialog -->
               </div><!-- /.modal -->
-            </form> 
 
 
 

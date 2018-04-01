@@ -26,7 +26,13 @@
     // var $table = $('#table').bootstrapTable({url: API_URL_planteles});
     // $table.bootstrapTable('destroy');
     $table.hide();
-    // var $table = $('#table').bootstrapTable(destroy);
+    
+    var cuadro_listado_personal_comision_servicio = $('#cuadro_listado_personal_comision_servicio')
+    cuadro_listado_personal_comision_servicio.hide();
+
+    var table_personal_asignado_comision_servicio = $('#table_personal_asignado_comision_servicio')
+    table_personal_asignado_comision_servicio.hide();
+
     var $btn_filtrar = $('#btn_filtrar');
 
     var table_personal_asignado = $('#table_personal_asignado');
@@ -45,7 +51,7 @@
 
     $modal_comision_servicio    = $('#modal_personal_comision_servicio').modal(   {show: false, backdrop:'static'});
 
-    form_modal_personal_comision_servicio
+    // form_modal_personal_comision_servicio
 
     $modal_asignar_autoridades  = $('#ventana_modal_asignar_autoridades').modal({show: false, backdrop:'static'});
 
@@ -121,6 +127,7 @@ $(function () {
           // $table.bootstrapTable('refresh');
 
         });
+
 //         $('#btn_continuar_datos_laboral').click(function(){
 //           $('#cuadro_datos_laborales').fadeIn();
 
@@ -577,6 +584,121 @@ $(function () {
     // |__  |  | |\ | /  ` | /  \ |\ | |__  /__`    |__  \_/  |  |__  |__) |\ |  /\  /__`     /\     |__  |  | |\ | /  `  |  | /  \ |\ |    |__) |__   /\  |  \ \ /
     // |    \__/ | \| \__, | \__/ | \| |___ .__/    |___ / \  |  |___ |  \ | \| /~~\ .__/    /~~\    |    \__/ | \| \__,  |  | \__/ | \|    |  \ |___ /~~\ |__/  |
 
+
+
+    //  __  ___                __   __  ___  __        __           __   __   ___  __        __      __   ___  __   __   __
+    // |__)  |  |\ |     |\/| /  \ /__`  |  |__)  /\  |__)     /\  / _` |__) |__  / _`  /\  |__)    |__) |__  |__) /__` /  \ |\ |  /\  |
+    // |__)  |  | \|     |  | \__/ .__/  |  |  \ /~~\ |  \    /~~\ \__> |  \ |___ \__> /~~\ |  \    |    |___ |  \ .__/ \__/ | \| /~~\ |___
+    //  __   __           __     __            __   ___  __          __     __
+    // /  ` /  \  |\/| | /__` | /  \ |\ |     /__` |__  |__) \  / | /  ` | /  \
+    // \__, \__/  |  | | .__/ | \__/ | \| ___ .__/ |___ |  \  \/  | \__, | \__/
+    // 
+    $('#btn_mostrar_agregar_personal_comision_servicio').click(function () {
+      
+      cuadro_listado_personal_comision_servicio.hide();
+      // cuadro_listado_personal_comision_servicio.fadeOut();
+      // table_personal_asignado_comision_servicio.fadeOut();
+      $('#btn_volver_listado_comision_servicio').attr('disabled',false);
+      $('#btn_enviar_personal_comision_servicio').attr('disabled',true);
+
+      $('#btn_volver_listado_comision_servicio').fadeIn();
+      $('#btn_enviar_personal_comision_servicio').hide();
+
+      var vista = 'vistas/vista_admin_gestionar_planteles_personal_comision_servicio.php';
+      var controlador = 'controladores/controller.admin.gestionar.planteles.personal.comision.servicio.js';
+      var contenedor = $('#cuadro_comision_de_servicio');
+
+      var parametros = 'dptouser='+dptouser + '&cargouser='+cargouser + '&userestatus='+userestatus +  '&userced='+userced + '&id_plantelesbase_per='+id_plantelesbase_per + '&sesionencode=' + sesionencode + '&';
+      CargarHtmlSencillaDiv2(vista,controlador,contenedor,parametros);     
+      
+    });
+    // 
+    //  __  ___                __             ___  __              __  ___       __   __
+    // |__)  |  |\ |     \  / /  \ |    \  / |__  |__)     |    | /__`  |   /\  |  \ /  \
+    // |__)  |  | \| ___  \/  \__/ |___  \/  |___ |  \ ___ |___ | .__/  |  /~~\ |__/ \__/
+    // 
+    $('#btn_volver_listado').click(function () {
+      limpiar_datos_personal();
+
+      $('#cuadro_listado_personal').fadeIn();
+      $('#cuadro_datos_personal').hide();
+      $('#cuadro_datos_laborales').hide();
+
+      $('#btn_volver_listado').attr('disabled',true);;
+      $('#btn_enviar_personal').attr('disabled',false);;
+
+      $('#btn_volver_listado').hide();
+      $('#btn_enviar_personal').hide();
+
+      $('#table_personal_asignado').bootstrapTable('refresh');
+      // $table.bootstrapTable('refresh');
+
+    });
+
+
+
+    // }
+
+    // $("#boton").click(function(event) {
+    //   $("#capa").load("/demos/2013/03-jquery-load03.php",
+    //     {valor1:'primer valor', valor2:'segundo valor'}, 
+    //     function(response, status, xhr) {
+    //       if (status == "error") {
+    //         var msg = "Error!, algo ha sucedido: ";
+    //         $("#capa").html(msg + xhr.status + " " + xhr.statusText);
+    //       }
+    //     }
+    //   );
+    // });
+
+
+
+/* @description Permite cargar una Vista HTML con su archivo JS
+   * @param {String} vista URL de la vista html
+   * @param {String} controlador URL del controlador JS
+   * @param {String} contenedor Nombre del Contenedor
+   * @param {String} parametro Parametros adicionales
+   */
+  function CargarHtmlSencilla(vista,controlador,contenedor,parametros) {
+    controlador || ( controlador = null ) ;
+    contenedor || ( contenedor = '#content') ;
+    parametros || ( parametros = '') ;
+    $(contenedor).html('<span class="timer" id="timer"></span>Cargando por favor espere');
+    // * * * * * * * * * * * * * * * * * * * * * * *
+    //Cargamos el Archivo HTML/PHP
+    $.ajax({
+      type: 'POST',
+      url: vista,
+      data: parametros + 'token1='+rand_code(),
+      success:function(response){
+        $(contenedor).html(response);
+        if (controlador!=null) {
+          CargarJS(controlador)
+        }
+      },
+      error:function(){
+        $(contenedor).html('<span class="timer" id="timer"></span>' + msj('res_err'));
+        MostrarNotificacion(msj('res_err'));
+        // redireccion(1,5000);
+      }
+    });
+  }
+    /* @description Permite cargar un archivo JS
+   * @param {String} controlador URL del controlador JS
+   */
+  function CargarJS(controlador) {
+    //code
+    // * * * * * * * * * * * * * * * * * * * * * * *
+    //Cargamos el Archivo JS
+    $.getScript( controlador)
+    .done(function( script, textStatus ) {
+      //console.log( textStatus );
+    })
+    .fail(function( jqxhr, settings, exception ) {
+      //$( "#div.log" ).text( "Triggered ajaxError handler." );
+      MostrarNotificacion('Triggered ajax Error handler.');
+    });
+  }
     // 
     //  ___            __     __
     // |__  |  | |\ | /  ` | /  \ |\ |
@@ -1290,37 +1412,24 @@ $(function () {
             // console.log(row);
             // console.log($(this).attr('title'));
             var titulo = $(this).attr('title') + "<br>[<font color='red'><b>" + row.cod_plantel + "</b></font>] -  <font color='blue'><b>" + row.nombre  + "</b></font>"; 
-            // alert(titulo);
-            // // console.info(titulo);
-            // // console.info(accion);
-            // // console.info(row.id_plantelesbase);
-            // // console.info(titulo);
-            // // console.info(row);
             
-            // $('#form_modal_personal').bootstrapValidator('validate');
-            // $('#form_modal_personal').bootstrapValidator('resetForm', true); 
+            var id_plantelesbase = row.id_plantelesbase;
+            var txt_cod_plantel_per = row.cod_plantel;
 
-            // $modal_personal.find('input[name="txt_id_plantelesbase_per"]').val(row.id_plantelesbase);
-            // $modal_personal.find('input[name="txt_cod_plantel_per"]').val(row.cod_plantel);
-            // $modal_personal.find('button[name="btn_enviar_personal"]').text("Agregar Personal");
-            // $("#btn_enviar_personal").attr('disabled', true);
-            
-            // limpiar_datos_personal();
+            $('#txt_id_plantelesbase_per_comision_servicio').val(id_plantelesbase);
+            $('#txt_cod_plantel_per_comision_servicio').val(txt_cod_plantel_per);
 
-            // $('#cuadro_datos_laborales').hide();
-            // $('#cuadro_datos_personal').hide();
-            // $('#cuadro_listado_personal').show();
+            cuadro_listado_personal_comision_servicio.show();
+            table_personal_asignado_comision_servicio.show();
 
-            // $('#btn_volver_listado').attr('disabled',true);
-            // $('#btn_enviar_personal').attr('disabled',true);
-            // $('#btn_continuar_datos_laboral').attr('disabled',true);
+            $('#btn_volver_listado_comision_servicio').attr('disabled',true);
+            $('#btn_enviar_personal_comision_servicio').attr('disabled',true);
 
-            // $('#btn_volver_listado').hide();
-            // $('#btn_continuar_datos_laboral').hide();
-            // $('#btn_enviar_personal').hide();
+            $('#btn_volver_listado_comision_servicio').hide();
+            $('#btn_enviar_personal_comision_servicio').hide();
 
-            
-
+            var contenedor = $('#cuadro_comision_de_servicio');
+            contenedor.html('');
             var API_URL_personal =  "servicios/services.admin.planteles.php?accion=consultar_personal_asignado_comision_servicio&id_plantelesbase=" + row.id_plantelesbase;
             $('#table_personal_asignado_comision_servicio').bootstrapTable('destroy' ); 
             $('#table_personal_asignado_comision_servicio').bootstrapTable({url: API_URL_personal});

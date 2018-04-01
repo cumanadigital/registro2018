@@ -65,6 +65,9 @@
 		case 'consultar_funcionarios':
 			consultar_funcionarios($datos);
 		break;
+		case 'consultar_comision':
+			consultar_comision($datos);
+		break;
 		case 'consultar_centros_trabajo':
 			consultar_registros_filtro($datos);
 		break;
@@ -572,6 +575,181 @@
 		}else{
 			// no existe en nomina
 			print_r('false');
+		}
+	}
+?>
+<?php
+	function consultar_comision($datos) {
+		//  __        __           __   __  ___  __           __        __   __        __      __   ___  __
+		// |__)  /\  |__)  /\     |__) /  \  |  /  \ |\ |    |__) |  | /__` /  `  /\  |__)    /  ` |__  |  \ |  | |     /\
+		// |    /~~\ |  \ /~~\    |__) \__/  |  \__/ | \|    |__) \__/ .__/ \__, /~~\ |  \    \__, |___ |__/ \__/ |___ /~~\
+		// 
+		//  __   __         __   __     __           __   ___     __   ___  __          __     __
+		// /  ` /  \  |\/| /  \ /__` | /  \ |\ |    |  \ |__     /__` |__  |__) \  / | /  ` | /  \
+		// \__, \__/  |  | \__/ .__/ | \__/ | \|    |__/ |___    .__/ |___ |  \  \/  | \__, | \__/
+		// 
+		// ver_arreglo($datos);
+		// die();
+		$Postgres=new Postgres(DB_SERVER,DB_NAME,DB_USER,DB_PASSWORD);
+		$cedula 			= $datos['cedula'];
+		$id_plantelesbase 	= $datos['id_plantelesbase_per'];
+		// ver_arreglo($id_plantelesbase);
+		// buscamos en nomina
+		$sql_nomina=  "SELECT	
+						NOM.id_nomina AS NOM_id_nomina, 
+						NOM.cedula AS NOM_cedula, 
+						NOM.nomina AS NOM_nomina,
+						TRIM(NOM.nombres_apellidos) AS NOM_nombres_apellidos, 
+						NOM.fecha_ingreso AS NOM_fecha_ingreso, 
+						NOM.cod_cargo AS NOM_cod_cargo, 
+						NOM.cargo AS NOM_cargo, 
+						NOM.cod_dependencia AS NOM_cod_dependencia, 
+						NOM.dependencia AS NOM_dependencia, 
+						NOM.personal AS NOM_personal, 
+						NOM.horas_adm AS NOM_horas_adm, 
+						NOM.horas_doc AS NOM_horas_doc, 
+						-- NOM.cuenta_bancaria AS NOM_cuenta_bancaria, 
+						NOM.fecha_ultimo_acceso AS NOM_fecha_ultimo_acceso
+				FROM censo2017.nominaactual AS NOM
+				WHERE NOM.cedula = '$cedula' ";		
+		$dato_nomina=consultar($sql_nomina,$Postgres);
+		$NumeroDeFilas_nomina = $Postgres->NumeroDeFilas();
+		if ($NumeroDeFilas_nomina>0) {
+			// SI existe en nomina
+			// echo "ALTO ES NOMINA<br>";
+			print_r('NOMINA');
+			// ver_arreglo($dato_nomina);
+		}else{
+			// no existe en nomina
+			echo "bien NO existe en nomina<br>";
+			$sql_registro =  "SELECT	
+							REG.id_plantelesbase as REG_id_plantelesbase,
+							REG.id_registropersonal AS REG_id_registropersonal, 
+							REG.cedula AS REG_cedula, 
+							REG.nombre_completo AS REG_nombre_completo, 
+							REG.apellido_completo AS REG_apellido_completo, 
+							REG.fecha_nac AS REG_fecha_nac, 
+							REG.sexo AS REG_sexo, 
+							REG.estado_civil AS REG_estado_civil, 
+							REG.telefono_celular AS REG_telefono_celular, 
+							REG.telefono_residencia AS REG_telefono_residencia, 
+							REG.direccion_habitacion AS REG_direccion_habitacion, 
+							REG.red_twitter AS REG_red_twitter, 
+							REG.red_email AS REG_red_email, 
+							REG.tipo_personal AS REG_tipo_personal,
+							REG.tipo_personal_funcional AS REG_tipo_personal_funcional,
+							--
+							REG.grado_instruccion AS reg_grado_instruccion, 
+		            		REG.titulo_obtenido AS reg_titulo_obtenido, 
+	            			REG.institucion_educativa AS reg_institucion_educativa, 
+
+	            			REG.discapacidad AS reg_discapacidad,
+	            			REG.discapacidad_otra AS reg_discapacidad_otra, 
+	            			--
+							--REG.horas_doc AS REG_horas_doc, 
+							COALESCE(REG.horas_doc, '0') AS REG_horas_doc,
+							COALESCE(REG.horas_adm, '0') AS REG_horas_adm,
+							COALESCE(REG.horas_obr, '0') AS REG_horas_obr,
+							COALESCE (COALESCE(REG.horas_adm, REG.horas_obr), '0' ) AS reg_horas_doc_obr,
+							--CAST(REG.horas_adm AS numeric)  + CAST(REG.horas_obr AS numeric) AS reg_horas_doc_obr,
+							--
+							REG.horarios_funcional AS REG_horarios_funcional, 
+							REG.cargo_funcional AS REG_cargo_funcional, 
+							REG.dependencia_funcional AS reg_dependencia_funcional,
+							--
+							REG.turno_trabajo AS REG_turno_trabajo,
+							--
+							REG.niveles_funcional AS REG_niveles_funcional, 
+							REG.matricula_atendida AS REG_matricula_atendida, 
+							REG.fecha_ingreso AS REG_fecha_ingreso, 
+							REG.tiempo_servicio_plantel AS REG_tiempo_servicio_plantel, 
+							REG.matricula_atendida_total_maternal, 
+							REG.matricula_atendida_total_preescolar, 
+							REG.matricula_atendida_total_primaria, 
+							REG.matricula_atendida_total_media_general, 
+							REG.matricula_atendida_total_media_tecnica, 
+							REG.matricula_atendida_total_adulto, 
+							REG.matricula_atendida_total_especial, 
+							REG.matricula_atendida_total
+					FROM censo2017.registropersonal AS REG
+					-- LEFT JOIN censo2017.registropersonal AS REG ON (REG.cedula = NOM.cedula)
+					WHERE REG.cedula = '$cedula' ";
+					// -- AND REG.id_plantelesbase = $id_plantelesbase;
+			// // ver_arreglo($sql);	 	
+			$dato_registro=consultar($sql_registro,$Postgres);
+			// // ver_arreglo($dato_registro);
+			$NumeroDeFilas_registro = $Postgres->NumeroDeFilas();
+			if ($NumeroDeFilas_registro>0) {
+				echo "YA ESTA REGISTRADO EN ALGUNA COORDINACION"; 
+			// 	// $dato_salida = array_merge($dato_nomina[0],$dato_registro[0]);
+			// 	$existe_personal = false;
+			// 	//
+			// 	foreach ($dato_registro as $key => $value) {
+			// 		// ver_arreglo($value);
+			// 		// print_r("condicional = ". $value['reg_id_plantelesbase'] . " = " . $id_plantelesbase . "<BR>");
+			// 		$valoridpb = $value['reg_id_plantelesbase']; 
+			// 		if 	($valoridpb==$id_plantelesbase){
+			// 			$existe_personal=true;
+			// 			// print_r("eeeeyyyyy esta registrado como personal de la esta institución<br>");
+			// 			// ver_arreglo($dato_nomina[0]);
+			// 			// ver_arreglo($dato_registro[$key]);
+			// 			$dato_salida[0] = array_merge($dato_nomina[0],$dato_registro[$key]);
+			// 			// ver_arreglo($dato_salida);
+			// 			break;
+			// 		}
+			// 	}
+			// 	if ($existe_personal==true) {
+			// 		// print_r("esta registrado como personal de la esta institución<br>");
+
+			// 	}else{
+			// 		// print_r("EXITE PERO NO esta registrado como personal de la esta institución<br>");
+			// 		$dato_registro[0]['reg_id_plantelesbase'] = null;
+			// 		$dato_registro[0]['reg_id_registropersonal'] = null;
+			// 		$dato_registro[0]['reg_horas_doc'] = null;
+			// 		$dato_registro[0]['reg_horas_adm'] = null;
+			// 		$dato_registro[0]['reg_horas_obr'] = null;
+			// 		// 
+			// 		$dato_registro[0]['reg_horas_doc_obr'] = null;
+			// 		$dato_registro[0]['reg_horarios_funcional'] = null;
+			// 		$dato_registro[0]['reg_cargo_funcional'] = null;
+			// 		$dato_registro[0]['reg_dependencia_funcional'] = null;
+			// 		$dato_registro[0]['reg_turno_trabajo'] = null;
+			// 		$dato_registro[0]['reg_niveles_funcional'] = null; 
+			// 		$dato_registro[0]['reg_matricula_atendida'] = null;
+			// 		$dato_registro[0]['reg_fecha_ingreso'] = null;
+			// 		$dato_registro[0]['reg_tiempo_servicio_plantel'] = null; 
+			// 		$dato_registro[0]['matricula_atendida_total_maternal'] = null; 
+			// 		$dato_registro[0]['matricula_atendida_total_preescolar'] = null; 
+			// 		$dato_registro[0]['matricula_atendida_total_primaria'] = null;
+			// 		$dato_registro[0]['matricula_atendida_total_media_general'] = null;
+			// 		$dato_registro[0]['matricula_atendida_total_media_tecnica'] = null;
+			// 		$dato_registro[0]['matricula_atendida_total_adulto'] = null;
+			// 		$dato_registro[0]['matricula_atendida_total_especial'] = null;
+			// 		$dato_registro[0]['matricula_atendida_total'] = null;
+			// 		$dato_salida[0] = array_merge($dato_nomina[0],$dato_registro[0]);
+			// 	}
+				
+			// 	// ver_arreglo($dato_nomina);
+			// 	// ver_arreglo($dato_registro);
+			// 	// $dato_registro[0] = 
+			// 	// ver_arreglo($dato_registro);
+			// 	// echo json_encode($dato_registro);
+			}else{
+				print_r("NO esta REGISTRADO como personal de comision de servicios de la esta institución<br>");
+			// 	// 
+			// 	// $dato_registro = array(array('reg_id_plantelesbase' => ''));
+			// 	// ver_arreglo($dato_registro);
+			// 	// $dato_salida = array_merge($dato_nomina[0],$dato_registro[0]);
+			// 	// ver_arreglo($dato_salida);
+			// 	$dato_nomina[0]['reg_id_registropersonal']=null;
+			// 	$dato_nomina[0]['reg_id_plantelesbase'] = null;
+			// 	// ver_arreglo($dato_nomina);
+			// 	// print_r('new');
+			// 	$dato_salida = $dato_nomina;
+
+			}
+			// // ver_arreglo($dato_salida);
+			// echo json_encode($dato_salida);
 		}
 	}
 ?>

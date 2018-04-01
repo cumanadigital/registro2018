@@ -473,7 +473,36 @@ $(document).ready(function(){
 			}
 		});
 	}
-	
+	/* @description Permite cargar una Vista HTML con su archivo JS
+	 * @param {String} vista URL de la vista html
+	 * @param {String} controlador URL del controlador JS
+	 * @param {String} contenedor Nombre del Contenedor
+	 * @param {String} parametro Parametros adicionales
+	 */
+	function CargarHtmlSencilla(vista,controlador,contenedor,parametros) {
+		controlador || ( controlador = null ) ;
+		contenedor || ( contenedor = '#content') ;
+		parametros || ( parametros = '') ;
+		$(contenedor).html('<span class="timer" id="timer"></span>Cargando por favor espere');
+		// * * * * * * * * * * * * * * * * * * * * * * *
+		//Cargamos el Archivo HTML/PHP
+		$.ajax({
+			type: 'POST',
+			url: vista,
+			data: parametros + 'token1='+rand_code(),
+			success:function(response){
+				$(contenedor).html(response);
+				if (controlador!=null) {
+					CargarJS(controlador)
+				}
+			},
+			error:function(){
+				$(contenedor).html('<span class="timer" id="timer"></span>' + msj('res_err'));
+				MostrarNotificacion(msj('res_err'));
+				// redireccion(1,5000);
+			}
+		});
+	}
 	/* @description Permite cargar una Vista HTML con su archivo JS
 	 * @param {String} vista URL de la vista html
 	 * @param {String} controlador URL del controlador JS
@@ -548,15 +577,19 @@ $(document).ready(function(){
 		})
 		.fail(function( jqxhr, settings, exception ) {
 			//$( "#div.log" ).text( "Triggered ajaxError handler." );
-			MostrarNotificacion('Triggered ajax Error handler.');
+			MostrarNotificacion('CargarJS Triggered ajax Error handler.');
 		});
 	}
-	
+	/*
+		pruebafuncion
+	 */
 	function pruebafuncion() {
 		//code
 		console.log("pruebafuncion");
 	}
-	
+	/*
+		redireccion
+	 */
 	function redireccion(link,tiempo){
 		//console.log('redireccionando ' + hora() );
 		link || ( link = 0) ;
@@ -583,9 +616,73 @@ $(document).ready(function(){
 	}
 });
 
+// *****************************************************************************************
+// *****************************************************************************************
+// *****************************************************************************************
+//  ___            __     __        ___  __      ___     ___  ___  __             __
+// |__  |  | |\ | /  ` | /  \ |\ | |__  /__`    |__  \_/  |  |__  |__) |\ |  /\  /__`     /\
+// |    \__/ | \| \__, | \__/ | \| |___ .__/    |___ / \  |  |___ |  \ | \| /~~\ .__/    /~~\
+
+//  __   __   __              ___      ___      __   ___       __
+// |  \ /  \ /  ` |  |  |\/| |__  |\ |  |      |__) |__   /\  |  \ \ /
+// |__/ \__/ \__, \__/  |  | |___ | \|  |  .   |  \ |___ /~~\ |__/  |
+// 
+// *****************************************************************************************
+// *****************************************************************************************
+// *****************************************************************************************
+
+
+/* @description Permite cargar un archivo JS
+ * @param {String} controlador URL del controlador JS
+ */
+function CargarJS2(controlador) {
+	//code
+	// * * * * * * * * * * * * * * * * * * * * * * *
+	//Cargamos el Archivo JS
+	$.getScript( controlador)
+	.done(function( script, textStatus ) {
+		//console.log( textStatus );
+	})
+	.fail(function( jqxhr, settings, exception ) {
+		//$( "#div.log" ).text( "Triggered ajaxError handler." );
+		MostrarNotificacion('CargarJS Triggered ajax Error handler.');
+	});
+}
+
 function pruebafuncion2() {
 	//code
 	console.log("pruebafuncion2");
+}
+/* @description Permite cargar una Vista HTML con su archivo JS
+ * @param {String} vista URL de la vista html
+ * @param {String} controlador URL del controlador JS
+ * @param {String} contenedor Nombre del Contenedor
+ * @param {String} parametro Parametros adicionales
+ */
+function CargarHtmlSencillaDiv2(vista,controlador,contenedor,parametros) {
+	// console.info(vista,controlador,contenedor,parametros);
+	$(contenedor).html('<span class="timer" id="timer"></span>Cargando por favor espere');
+	$.ajax({
+		type: 'POST',
+		url: vista,
+		data: parametros + 'token1='+rand_code(),
+		success:function(response){
+			$(contenedor).hide()
+			$(contenedor).html(response);
+			$(contenedor).fadeIn()
+			if (controlador!=null) {
+				CargarJS2(controlador)
+			}
+		},
+		error:function(){
+			// $(contenedor).html('<span class="timer" id="timer"></span>' + msj('res_err'));
+			// MostrarNotificacion(msj('res_err'));
+			// // redireccion(1,5000);
+		}
+	});
+}
+function CargarHtmldiv() {
+	console.info('CargarHtmldiv');
 }
 /* @description Consulta Ajax retorna arreglo en json
  * @param {accion} valor del accion
