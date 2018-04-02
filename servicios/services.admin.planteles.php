@@ -319,7 +319,7 @@
 			$sql.="	WHERE PB.dir_celular ='$cedula' ";
 		}
 		//
-		if ($nivel_usuario == 'ADMIN') { // BUSCA TODOS LOS PLANTELES
+		if ($nivel_usuario == 'ADMIN' || $nivel_usuario == 'USUARIO' ) { // BUSCA TODOS LOS PLANTELES
 			$sql.="	WHERE ( PB.tipo_dependencia ='PLANTA' OR  PB.tipo_dependencia ='ENTE ADSCRITO' ) ";	
 		}
 		//
@@ -615,13 +615,12 @@
 		$dato_nomina=consultar($sql_nomina,$Postgres);
 		$NumeroDeFilas_nomina = $Postgres->NumeroDeFilas();
 		if ($NumeroDeFilas_nomina>0) {
-			// SI existe en nomina
-			// echo "ALTO ES NOMINA<br>";
+			// existe en nomina mppe
 			print_r('NOMINA');
-			// ver_arreglo($dato_nomina);
 		}else{
 			// no existe en nomina
-			echo "bien NO existe en nomina<br>";
+			// echo "NO existe en nomina<br>";
+			// print_r('NO-NOMINA');
 			$sql_registro =  "SELECT	
 							REG.id_plantelesbase as REG_id_plantelesbase,
 							REG.id_registropersonal AS REG_id_registropersonal, 
@@ -680,73 +679,64 @@
 			// // ver_arreglo($dato_registro);
 			$NumeroDeFilas_registro = $Postgres->NumeroDeFilas();
 			if ($NumeroDeFilas_registro>0) {
-				echo "YA ESTA REGISTRADO EN ALGUNA COORDINACION"; 
-			// 	// $dato_salida = array_merge($dato_nomina[0],$dato_registro[0]);
-			// 	$existe_personal = false;
-			// 	//
-			// 	foreach ($dato_registro as $key => $value) {
-			// 		// ver_arreglo($value);
-			// 		// print_r("condicional = ". $value['reg_id_plantelesbase'] . " = " . $id_plantelesbase . "<BR>");
-			// 		$valoridpb = $value['reg_id_plantelesbase']; 
-			// 		if 	($valoridpb==$id_plantelesbase){
-			// 			$existe_personal=true;
-			// 			// print_r("eeeeyyyyy esta registrado como personal de la esta institución<br>");
-			// 			// ver_arreglo($dato_nomina[0]);
-			// 			// ver_arreglo($dato_registro[$key]);
-			// 			$dato_salida[0] = array_merge($dato_nomina[0],$dato_registro[$key]);
-			// 			// ver_arreglo($dato_salida);
-			// 			break;
-			// 		}
-			// 	}
-			// 	if ($existe_personal==true) {
-			// 		// print_r("esta registrado como personal de la esta institución<br>");
+				print_r('COMISION');
+				// echo "YA ESTA REGISTRADO como personal de comision de servicios en ALGUNA institución<br>"; 
+				// 	// $dato_salida = array_merge($dato_nomina[0],$dato_registro[0]);
+				// 	$existe_personal = false;
+				// 	//
+				// 	foreach ($dato_registro as $key => $value) {
+				// 		// ver_arreglo($value);
+				// 		// print_r("condicional = ". $value['reg_id_plantelesbase'] . " = " . $id_plantelesbase . "<BR>");
+				// 		$valoridpb = $value['reg_id_plantelesbase']; 
+				// 		if 	($valoridpb==$id_plantelesbase){
+				// 			$existe_personal=true;
+				// 			// print_r("eeeeyyyyy esta registrado como personal de la esta institución<br>");
+				// 			// ver_arreglo($dato_nomina[0]);
+				// 			// ver_arreglo($dato_registro[$key]);
+				// 			$dato_salida[0] = array_merge($dato_nomina[0],$dato_registro[$key]);
+				// 			// ver_arreglo($dato_salida);
+				// 			break;
+				// 		}
+				// 	}
+				// 	if ($existe_personal==true) {
+				// 		// print_r("esta registrado como personal de la esta institución<br>");
 
-			// 	}else{
-			// 		// print_r("EXITE PERO NO esta registrado como personal de la esta institución<br>");
-			// 		$dato_registro[0]['reg_id_plantelesbase'] = null;
-			// 		$dato_registro[0]['reg_id_registropersonal'] = null;
-			// 		$dato_registro[0]['reg_horas_doc'] = null;
-			// 		$dato_registro[0]['reg_horas_adm'] = null;
-			// 		$dato_registro[0]['reg_horas_obr'] = null;
-			// 		// 
-			// 		$dato_registro[0]['reg_horas_doc_obr'] = null;
-			// 		$dato_registro[0]['reg_horarios_funcional'] = null;
-			// 		$dato_registro[0]['reg_cargo_funcional'] = null;
-			// 		$dato_registro[0]['reg_dependencia_funcional'] = null;
-			// 		$dato_registro[0]['reg_turno_trabajo'] = null;
-			// 		$dato_registro[0]['reg_niveles_funcional'] = null; 
-			// 		$dato_registro[0]['reg_matricula_atendida'] = null;
-			// 		$dato_registro[0]['reg_fecha_ingreso'] = null;
-			// 		$dato_registro[0]['reg_tiempo_servicio_plantel'] = null; 
-			// 		$dato_registro[0]['matricula_atendida_total_maternal'] = null; 
-			// 		$dato_registro[0]['matricula_atendida_total_preescolar'] = null; 
-			// 		$dato_registro[0]['matricula_atendida_total_primaria'] = null;
-			// 		$dato_registro[0]['matricula_atendida_total_media_general'] = null;
-			// 		$dato_registro[0]['matricula_atendida_total_media_tecnica'] = null;
-			// 		$dato_registro[0]['matricula_atendida_total_adulto'] = null;
-			// 		$dato_registro[0]['matricula_atendida_total_especial'] = null;
-			// 		$dato_registro[0]['matricula_atendida_total'] = null;
-			// 		$dato_salida[0] = array_merge($dato_nomina[0],$dato_registro[0]);
-			// 	}
-				
-			// 	// ver_arreglo($dato_nomina);
-			// 	// ver_arreglo($dato_registro);
-			// 	// $dato_registro[0] = 
-			// 	// ver_arreglo($dato_registro);
-			// 	// echo json_encode($dato_registro);
+				// 	}else{
+				// 		// print_r("EXITE PERO NO esta registrado como personal de la esta institución<br>");
+				// 		$dato_registro[0]['reg_id_plantelesbase'] = null;
+				// 		$dato_registro[0]['reg_id_registropersonal'] = null;
+				// 		$dato_registro[0]['reg_horas_doc'] = null;
+				// 		$dato_registro[0]['reg_horas_adm'] = null;
+				// 		$dato_registro[0]['reg_horas_obr'] = null;
+				// 		// 
+				// 		$dato_registro[0]['reg_horas_doc_obr'] = null;
+				// 		$dato_registro[0]['reg_horarios_funcional'] = null;
+				// 		$dato_registro[0]['reg_cargo_funcional'] = null;
+				// 		$dato_registro[0]['reg_dependencia_funcional'] = null;
+				// 		$dato_registro[0]['reg_turno_trabajo'] = null;
+				// 		$dato_registro[0]['reg_niveles_funcional'] = null; 
+				// 		$dato_registro[0]['reg_matricula_atendida'] = null;
+				// 		$dato_registro[0]['reg_fecha_ingreso'] = null;
+				// 		$dato_registro[0]['reg_tiempo_servicio_plantel'] = null; 
+				// 		$dato_registro[0]['matricula_atendida_total_maternal'] = null; 
+				// 		$dato_registro[0]['matricula_atendida_total_preescolar'] = null; 
+				// 		$dato_registro[0]['matricula_atendida_total_primaria'] = null;
+				// 		$dato_registro[0]['matricula_atendida_total_media_general'] = null;
+				// 		$dato_registro[0]['matricula_atendida_total_media_tecnica'] = null;
+				// 		$dato_registro[0]['matricula_atendida_total_adulto'] = null;
+				// 		$dato_registro[0]['matricula_atendida_total_especial'] = null;
+				// 		$dato_registro[0]['matricula_atendida_total'] = null;
+				// 		$dato_salida[0] = array_merge($dato_nomina[0],$dato_registro[0]);
+				// 	}
+					
+				// 	// ver_arreglo($dato_nomina);
+				// 	// ver_arreglo($dato_registro);
+				// 	// $dato_registro[0] = 
+				// 	// ver_arreglo($dato_registro);
+				// 	// echo json_encode($dato_registro);
 			}else{
-				print_r("NO esta REGISTRADO como personal de comision de servicios de la esta institución<br>");
-			// 	// 
-			// 	// $dato_registro = array(array('reg_id_plantelesbase' => ''));
-			// 	// ver_arreglo($dato_registro);
-			// 	// $dato_salida = array_merge($dato_nomina[0],$dato_registro[0]);
-			// 	// ver_arreglo($dato_salida);
-			// 	$dato_nomina[0]['reg_id_registropersonal']=null;
-			// 	$dato_nomina[0]['reg_id_plantelesbase'] = null;
-			// 	// ver_arreglo($dato_nomina);
-			// 	// print_r('new');
-			// 	$dato_salida = $dato_nomina;
-
+				// print_r("NO esta REGISTRADO como personal de comision de servicios en ninguna esta institución<br>");
+				print_r('NO REGISTRADO');
 			}
 			// // ver_arreglo($dato_salida);
 			// echo json_encode($dato_salida);

@@ -27,7 +27,7 @@ $nivel_usuario = $_POST['sesion_nivel_usuario'];
           <div class="row"> 
             <div class="col-sm12 col-md-12">
               <div id="toolbar1" class="toolbar1">
-                <?php if ($nivel_usuario == 'ROOT') { ?>
+                <?php if ($nivel_usuario == 'ROOT' ) { ?>
                 <div class="form-inline" role="form">
                   <div class="form-group ">
                     <!-- <span>Municipio: </span> -->
@@ -59,6 +59,40 @@ $nivel_usuario = $_POST['sesion_nivel_usuario'];
                   <span class="alert"></span>
                   </div>
                 <?php } ?>
+
+                <?php if ($nivel_usuario == 'USUARIO' ) { ?>
+                <div class="form-inline" role="form">
+                  <div class="form-group ">
+                    <!-- <span>Municipio: </span> -->
+                    <select class="form-control" id="txt_tipo_dependencia" name="txt_tipo_dependencia" withd="6">
+                      <!-- <option value='PLANTELES' >PLANTELES</option> -->
+                      <option value='ZONA EDUCATIVA' >ZONA EDUCATIVA</option>
+                      <!-- <option value='CIRCUITOS EDUCATIVOS' >CIRCUITOS EDUCATIVOS</option> -->
+                    </select>
+                    <select class="form-control" id="txt_municipio" name="txt_municipio" withd="6"  disabled="disabled">
+                      <option value=''>Seleccione Municipio</option> 
+                      <option value='ANDRES ELOY BLANCO' >ANDRES ELOY BLANCO</option>
+                      <option value='ANDRES MATA' >ANDRES MATA</option>
+                      <option value='ARISMENDI' >ARISMENDI</option>
+                      <option value='BENITEZ' >BENITEZ</option>
+                      <option value='BERMUDEZ' >BERMUDEZ</option>
+                      <option value='BOLIVAR' >BOLIVAR</option>
+                      <option value='CAJIGAL' >CAJIGAL</option>
+                      <option value='CRUZ SALMERON ACOSTA' >CRUZ SALMERON ACOSTA</option>
+                      <option value='LIBERTADOR' >LIBERTADOR</option>
+                      <option value='MARIÑO' >MARIÑO</option>
+                      <option value='MEJIA' >MEJIA</option>
+                      <option value='MONTES' >MONTES</option>
+                      <option value='RIBERO' >RIBERO</option>
+                      <option value='SUCRE' >SUCRE</option>
+                      <option value='VALDEZ' >VALDEZ</option>
+                    </select>
+                  </div>
+                  <button id="btn_filtrar" type="button" class="btn btn-default">Consultar</button>
+                  <span class="alert"></span>
+                  </div>
+                <?php } ?>
+
                 </div>
             </div>
           </div>
