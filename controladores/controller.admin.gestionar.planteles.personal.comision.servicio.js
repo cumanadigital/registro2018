@@ -140,13 +140,6 @@ $(function () {
 	    }
 	}); // fin boton Buscar personal
 
-
-
-
-
-
-
-	 //
 	//    __   __  ___  __           ___                   __      __   ___  __   __   __
 	//   |__) /  \  |  /  \ |\ |    |__  |\ | \  / |  /\  |__)    |__) |__  |__) /__` /  \ |\ |  /\  |
 	//   |__) \__/  |  \__/ | \|    |___ | \|  \/  | /~~\ |  \    |    |___ |  \ .__/ \__/ | \| /~~\ |___
@@ -352,6 +345,8 @@ function limpiar_datos_personal_comision_servicio(){
     $("#txt_nombre_funcionario_comision_servicio").val('');
 
     $("#txt_cedula_personal_comision_servicio").focus();
+
+	$("#btn_mostrar_agregar_personal_comision_servicio").click();
 
 };
 //  __        __                  ___  __  ___
