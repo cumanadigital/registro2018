@@ -8,8 +8,8 @@ TODO
 *.zip
 test.html
 *.log
-test.html
 *.csv
 /media/fotos
 /apiv3.0
 *.csv#
+*.tar.gz
