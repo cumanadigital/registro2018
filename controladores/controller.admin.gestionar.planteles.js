@@ -575,16 +575,14 @@ $(function () {
         $('#txt_municipio').change(function(){
           console.info($(this).val());
         });
-
-
-
       
 });
     //  ___            __     __        ___  __      ___     ___  ___  __             __              ___            __  ___    __           __   ___       __
     // |__  |  | |\ | /  ` | /  \ |\ | |__  /__`    |__  \_/  |  |__  |__) |\ |  /\  /__`     /\     |__  |  | |\ | /  `  |  | /  \ |\ |    |__) |__   /\  |  \ \ /
     // |    \__/ | \| \__, | \__/ | \| |___ .__/    |___ / \  |  |___ |  \ | \| /~~\ .__/    /~~\    |    \__/ | \| \__,  |  | \__/ | \|    |  \ |___ /~~\ |__/  |
 
-
+    // pruebafuncion();
+    // pruebafuncion2();
 
     //  __  ___                __   __  ___  __        __           __   __   ___  __        __      __   ___  __   __   __
     // |__)  |  |\ |     |\/| /  \ /__`  |  |__)  /\  |__)     /\  / _` |__) |__  / _`  /\  |__)    |__) |__  |__) /__` /  \ |\ |  /\  |
@@ -593,8 +591,9 @@ $(function () {
     // /  ` /  \  |\/| | /__` | /  \ |\ |     /__` |__  |__) \  / | /  ` | /  \
     // \__, \__/  |  | | .__/ | \__/ | \| ___ .__/ |___ |  \  \/  | \__, | \__/
     // 
-    $('#btn_mostrar_agregar_personal_comision_servicio').click(function () {
-      
+    // $('#btn_mostrar_agregar_personal_comision_servicio').click(function (e) {
+    $("#btn_mostrar_agregar_personal_comision_servicio").unbind('click').bind('click', function(e){
+      e.stopPropagation();
       cuadro_listado_personal_comision_servicio.hide();
       // cuadro_listado_personal_comision_servicio.fadeOut();
       // table_personal_asignado_comision_servicio.fadeOut();
@@ -607,9 +606,10 @@ $(function () {
       var vista = 'vistas/vista_admin_gestionar_planteles_personal_comision_servicio.php';
       var controlador = 'controladores/controller.admin.gestionar.planteles.personal.comision.servicio.js';
       var contenedor = $('#cuadro_comision_de_servicio');
-
+      id_plantelesbase_per = 1138;
       var parametros = 'dptouser='+dptouser + '&cargouser='+cargouser + '&userestatus='+userestatus +  '&userced='+userced + '&id_plantelesbase_per='+id_plantelesbase_per + '&sesionencode=' + sesionencode + '&';
-      CargarHtmlSencillaDiv2(vista,controlador,contenedor,parametros);     
+      CargarHtmlSencillaDiv2(vista,controlador,contenedor,parametros);   
+      // CargarHtmlSencillaDiv1(vista,controlador,contenedor,parametros); 
       
     });
     // 
