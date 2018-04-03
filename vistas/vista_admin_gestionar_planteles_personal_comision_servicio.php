@@ -1,11 +1,20 @@
 <form class="form-horizontal" id="form_modal_personal_comision_servicio" role="form" data-toggle="validator" > 
 
     <div id ="cuadro_datos_personal">
-
+      <!-- <div class="row"  >
+        <div class="col-sm-8">
         <div class="callout callout-success callout-min">
-          <h4>Datos Personales (Funcionario en Comisión de Servicio})</h4>
+          <h4>Datos Personales (Funcionario en Comisión de Servicio)</h4>
         </div>
-
+        </div>
+        <div class="col-sm-4">
+        <button type="button" name="btn_volver_listado_comision_servicio"           id="btn_volver_listado_comision_servicio"           class="btn btn-warning pull-left"   >Volver al Listado</button>
+        </div>
+      </div> -->
+        <div class="callout callout-success callout-min">
+          <h4>Datos Personales (Funcionario en Comisión de Servicio)</h4>
+        </div>
+        
         <div class="row"  >
           <div class="col-sm-4">
             <div class="form-group">
