@@ -59,6 +59,9 @@
 		case 'agregar_personal':
 			agregar_personal  ($datos);
 		break;
+		case 'agregar_personal_comision_servicio':
+			agregar_personal_comision_servicio  ($datos);
+		break;
 		case 'eliminar_personal':
 			eliminar_personal  ($datos);
 		break;
@@ -1188,6 +1191,266 @@ function agregar_personal($datos) {
 	$txt_coordinacion_laboral 			=	$datos['txt_coordinacion_laboral']; // => INFORMATICA
 	$txt_turno_trabajo 					=	$datos['txt_turno_trabajo']; // => COMPLETO
 	$txt_horario_laboral 				=	$datos['txt_horario_laboral']; // => 08:00 AM - 03:00PM
+	$txt_horas_doc_funcionario 			=	$datos['txt_horas_doc_funcionario']; // => HORAS DOCENTES
+	$txt_horas_adm_obr_funcionario 		=	$datos['txt_horas_adm_obr_funcionario']; // => HORAS ADMINISTRATIVAS
+
+	$txt_fecha_ingreso 					=	$datos['txt_fecha_ingreso'];
+	$txt_tiempo_servicio 				=	$datos['txt_tiempo_servicio'];
+	// 
+	// 
+	
+	if ($txt_tipo_personal == "ADMINISTRATIVO") {
+		$txt_horas_adm_funcionario = $txt_horas_adm_obr_funcionario;	
+		$txt_horas_obr_funcionario = 0;
+	}
+	if ($txt_tipo_personal == "OBRERO") {
+		$txt_horas_adm_funcionario = 0;	
+		$txt_horas_obr_funcionario = $txt_horas_adm_obr_funcionario;
+	}
+// 
+	$accion =	$datos['accion']; // => agregar_personal
+	$token1 =	$datos['token1']; // => :D!EB28ef00;8eef¿eEd
+// 
+	$fecha_registro = date("Y/m/d h:i:s A");
+
+	// VARIABLE UNICA BASADA EN TIMESTAMP PARA GENERAR UN ID UNICO PARA LA SOLICITUD
+	$numero_solicitud = uniqid();
+
+	$sql =	"INSERT INTO censo2017.registropersonal(
+            	id_plantelesbase,
+            	cedula, 
+            	nombre_completo, 
+            	apellido_completo, 
+            	fecha_nac, 
+            	sexo, 
+            	estado_civil, 
+            	telefono_celular, 
+            	telefono_residencia, 
+            	direccion_habitacion, 
+            	red_twitter, 
+            	red_email, 
+            	
+            	tipo_personal,
+            	tipo_personal_funcional, 
+            	grado_instruccion, 
+            	titulo_obtenido, 
+            	institucion_educativa, 
+
+            	discapacidad,
+	            discapacidad_otra,
+
+            	horas_doc, 
+            	horas_adm, 
+            	horas_obr, 
+            	horarios_funcional, 
+            	cargo_funcional, 
+            	dependencia_funcional,
+            	turno_trabajo,
+            	-- niveles_funcional, 
+            	-- matricula_atendida, 
+            	fecha_ingreso, 
+            	tiempo_servicio_plantel, 
+            	-- matricula_atendida_total_maternal, 
+            	-- matricula_atendida_total_preescolar, 
+            	-- matricula_atendida_total_primaria, 
+            	-- matricula_atendida_total_media_general, 
+            	-- matricula_atendida_total_media_tecnica, 
+            	-- matricula_atendida_total_adulto, 
+            	-- matricula_atendida_total_especial, 
+            	-- matricula_atendida_total
+            	fecha_registro
+            	)
+    VALUES ( 	
+				$txt_id_plantelesbase,
+    			'$txt_cedula_personal', 
+            	'$txt_nombre_funcionario', 
+            	'$txt_apellido_funcionario', 
+            	'$txt_fechanac_funcionario', 
+            	'$txt_sexo_funcionario', 
+            	'$txt_edocivil_funcionario', 
+            	'$txt_celular_funcionario', 
+            	'$txt_telefono_funcionario', 
+            	'$txt_direccion_funcionario', 
+            	'$txt_twitter_funcionario', 
+            	'$txt_correo_funcionario', 
+            	
+            	'$txt_tipo_personal',
+            	'$tipo_personal_funcional', 
+            	'$txt_grado_instruccion', 
+            	'$txt_titulo', 
+            	'$txt_institucion',
+
+            	'$txt_discapacidad',
+            	'$txt_discapacidad_otra',
+
+            	'$txt_horas_doc_funcionario', 
+            	'$txt_horas_adm_funcionario', 
+            	'$txt_horas_obr_funcionario', 
+            	'$txt_horario_laboral', 
+            	'$txt_cargo_funcion', 
+            	'$txt_coordinacion_laboral',
+            	'$txt_turno_trabajo',
+            	-- niveles_funcional, 
+            	-- matricula_atendida, 
+            	'$txt_fecha_ingreso', 
+            	'$txt_tiempo_servicio', 
+            	-- matricula_atendida_total_maternal, 
+            	-- matricula_atendida_total_preescolar, 
+            	-- matricula_atendida_total_primaria, 
+            	-- matricula_atendida_total_media_general, 
+            	-- matricula_atendida_total_media_tecnica, 
+            	-- matricula_atendida_total_adulto, 
+            	-- matricula_atendida_total_especial, 
+            	-- matricula_atendida_total
+            	'$fecha_registro');";
+// 
+// 	$sql =	"UPDATE censo2017.plantelesbase
+// 	   		SET 	total_etapa_maternal		='$txt_total_etapa_maternal', 
+// 	       			total_etapa_preescolar		='$txt_total_etapa_preescolar', 
+// 	       			total_primaria				='$txt_total_primaria', 
+// 	       			total_media_general			='$txt_total_media_general', 
+// 	       			total_media_tecnica			='$txt_total_media_tecnica', 
+// 	       			total_adulto				='$txt_total_adulto', 
+// 	       			total_especial				='$txt_total_especial', 
+// 	       			total						='$txt_total',
+// 	       			fecha_registro_matricula	='$fecha_registro'
+// 	 		WHERE id_plantelesbase = $txt_id_plantelesbase;";
+		// ver_arreglo(test_input($sql));
+		// die(); 				     
+		$dato=consultar($sql,$Postgres);
+		$NumeroDeFilasAfectadas = $Postgres->NumeroDeFilasAfectadas();
+		if ($NumeroDeFilasAfectadas>0) {
+			// echo json_encode($dato);
+			$cadena = "insert@";
+
+			
+			$sql_UPDATE =	"UPDATE censo2017.plantelesbase
+		   		SET 	fecha_registro_personal	='$fecha_registro'
+		 		WHERE id_plantelesbase = $txt_id_plantelesbase;";
+			// ver_arreglo($sql_UPDATE);
+			// die(); 				     
+			$dato_UPDATE=consultar($sql_UPDATE,$Postgres);
+			$NumeroDeFilas_UPDATE = $Postgres->NumeroDeFilas();
+			if ($NumeroDeFilas_UPDATE>0) {
+				// echo json_encode($dato);
+				$cadena = "insert@";
+			}else{
+				$cadena = "false@";
+			}
+			// print_r($cadena);
+			
+
+
+		}else{
+			$cadena = "false@";
+		}
+		actualizar_contador_personal($txt_id_plantelesbase);
+		print_r($cadena);
+}
+?>
+<?php
+function agregar_personal_comision_servicio($datos) {
+		// INICIA LA CONEXION CON EL SERVIDOR 
+	$Postgres=new Postgres(DB_SERVER,DB_NAME,DB_USER,DB_PASSWORD);
+	ver_arreglo($datos);
+	die();
+	// 
+    // $txt_id_plantelesbase 		=	$datos['txt_id_plantelesbase_per']; // 51
+	// Array
+	// (
+	//     [txt_id_plantelesbase_per_comision_servicio] => 
+	//     [txt_cod_plantel_per_comision_servicio] => 
+	//     [txt_id_personal_per_comision_servicio] => 
+	//     [txt_apellido_funcionario_comision_servicio] => HERNANDEZ
+	//     [txt_nombre_funcionario_comision_servicio] => OSWALDO
+	//     [txt_sexo_funcionario] => MASCULINO
+	//     [txt_edocivil_funcionario_comision_servicio] => SOLTERO
+	//     [txt_fechanac_funcionario_comision_servicio] => 01/08/1980
+	//     [txt_celular_funcionario_comision_servicio] => 0426-1234567
+	//     [txt_telefono_funcionario_comision_servicio] => 0293-1234567
+	//     [txt_correo_funcionario_comision_servicio] => oswaldoehc@gmail.com
+	//     [txt_twitter_funcionario_comision_servicio] => cumana
+	//     [txt_direccion_funcionario_comision_servicio] => calel redon
+	//     [txt_grado_instruccion_comision_servicio] => TECNICO SUPERIOR
+	//     [txt_titulo_comision_servicio] => tsus informatica
+	//     [txt_institucion_comision_servicio] => iutrla
+	//     [txt_discapacidad_comision_servicio] => Array
+	//         (
+	//             [0] => VISUAL
+	//             [1] => TACTIL
+	//         )
+
+	//     [txt_discapacidad_otra_comision_servicio] => otra
+	
+	//     [txt_comision_institución] => iutirla
+	//     [txt_comision_municipio] => ANDRES ELOY BLANCO
+	//     [txt_comision_ciudad] => andres
+	//     [txt_comision_tipo_personal] => admin
+	//     [txt_comision_cargo_funcional] => cargo
+	//     [txt_comision_departamento_laboral] => dpto
+	//     [txt_comison_jefe] => jefe
+	//     [txt_comision_celular_jefe] => 0426-1112223
+	//     [txt_comision_telefono_jefe] => 0293-1234567
+	
+	//     [txt_tipo_personal_comision_servicio] => 
+	//     [txt_tipo_personal_funcional_comision_servicio] => ADMINISTRATIVO
+	//     [txt_cargo_funcion_comision_servicio] => programdor
+	//     [txt_coordinacion_laboral_comision_servicio] => sistemas
+	//     [txt_turno_trabajo_comision_servicio] => COMPLETO
+	//     [txt_horario_laboral_comision_servicio] => 08-03
+	//     [txt_tiempo_servicio_comision_servicio] => 01/04/2011
+	//     [accion] => agregar_personal_comision_servicio
+	//     [token1] => D2b¿3FB;1b5A¿eeA342;
+	// )
+
+	$txt_id_plantelesbase 				=	$datos['txt_id_plantelesbase_per_comision_servicio']; // => 43
+	$txt_cod_plantel_per 				=	$datos['txt_cod_plantel_per_comision_servicio']; // => OD04551902
+	$txt_id_personal_per 				=	$datos['txt_id_personal_per_comision_servicio']; // => 
+	$txt_cedula_personal 				=	$datos['txt_cedula_personal']; // => => 11829328
+
+	// ver_arreglo(test_input($txt_cedula_personal));
+
+	$txt_nombre_funcionario 			=	$datos['txt_nombre_funcionario_comision_servicio']; // => OSWALDO ENRIQUES
+	$txt_apellido_funcionario 			=	$datos['txt_apellido_funcionario_comision_servicio']; // => HERNANDEZ CAMPOS 
+	$txt_sexo_funcionario 				=	$datos['txt_sexo_funcionario']; // => MASCULINO
+	$txt_edocivil_funcionario 			=	$datos['txt_edocivil_funcionario_comision_servicio']; // => CASADO
+	$txt_fechanac_funcionario 			=	$datos['txt_fechanac_funcionario_comision_servicio']; // => 30/11/2017
+	$txt_celular_funcionario 			=	$datos['txt_celular_funcionario_comision_servicio']; // => CELULAR
+	$txt_telefono_funcionario 			=	$datos['txt_telefono_funcionario_comision_servicio']; // => RESIDENCIAL
+	$txt_correo_funcionario 			=	$datos['txt_correo_funcionario_comision_servicio']; // => CORREO
+	$txt_twitter_funcionario 			=	$datos['txt_twitter_funcionario_comision_servicio']; // => TWITTER
+	$txt_direccion_funcionario 			=	$datos['txt_direccion_funcionario_comision_servicio']; // => DIRECCION
+	// 
+	$txt_grado_instruccion 				=	$datos['txt_grado_instruccion_comision_servicio']; // => TECNICO
+	$txt_titulo 						=	$datos['txt_titulo_comision_servicio']; // => TSU INFORMATICA
+	$txt_institucion 					=	$datos['txt_institucion_comision_servicio']; // => IUTIRLA 
+
+	ver_arreglo($datos['txt_discapacidad_comision_servicio']);
+	$txt_discapacidad 					=   implode(", ", $datos['txt_discapacidad_comision_servicio']);
+	ver_arreglo(count($txt_discapacidad));
+	// ver_arreglo(count($txt_discapacidad));
+	// ver_arreglo(implode(", ", $txt_discapacidad));
+	$txt_discapacidad_otra 				=   $datos['txt_discapacidad_otra_comision_servicio']; 
+	// 
+	
+	    [txt_comision_institución] => iutirla
+	    [txt_comision_municipio] => ANDRES ELOY BLANCO
+	    [txt_comision_ciudad] => andres
+	    [txt_comision_tipo_personal] => admin
+	    [txt_comision_cargo_funcional] => cargo
+	    [txt_comision_departamento_laboral] => dpto
+	    [txt_comison_jefe] => jefe
+	    [txt_comision_celular_jefe] => 0426-1112223
+	    [txt_comision_telefono_jefe] => 0293-1234567
+	    
+
+	// $tipo_personal = "ADMINISTRATIVO";
+	$txt_tipo_personal 					=	$datos['txt_tipo_personal_comision_servicio']; // => COORDINADOR DE PROGRAMACION
+	$tipo_personal_funcional 			=	$datos['txt_tipo_personal_funcional_comision_servicio']; // => COORDINADOR DE PROGRAMACION
+	$txt_cargo_funcion 					=	$datos['txt_cargo_funcion_comision_servicio']; // => COORDINADOR DE PROGRAMACION
+	$txt_coordinacion_laboral 			=	$datos['txt_coordinacion_laboral_comision_servicio']; // => INFORMATICA
+	$txt_turno_trabajo 					=	$datos['txt_turno_trabajo_comision_servicio']; // => COMPLETO
+	$txt_horario_laboral 				=	$datos['txt_horario_laboral_comision_servicio']; // => 08:00 AM - 03:00PM
 	$txt_horas_doc_funcionario 			=	$datos['txt_horas_doc_funcionario']; // => HORAS DOCENTES
 	$txt_horas_adm_obr_funcionario 		=	$datos['txt_horas_adm_obr_funcionario']; // => HORAS ADMINISTRATIVAS
 
