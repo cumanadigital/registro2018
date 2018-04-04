@@ -117,7 +117,6 @@
               <label for="txt_correo_funcionario_comision_servicio" class="col-sm-4 control-label">Correo Electrónico</label>
               <div class="col-sm-8">
                 <input type="email" class="form-control" id="txt_correo_funcionario_comision_servicio" name="txt_correo_funcionario_comision_servicio"  placeholder="Ingrese Correo Electrónico"  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" data-error="Correo Electrónico Inválido (micorreo@gmail.com)" >
-                <!-- <div class="help-block with-errors"></div> -->
               </div>
             </div>
           </div>                          
@@ -231,15 +230,15 @@
     <div id ="cuadro_datos_comision_servicio">
 
         <div class="callout callout-danger callout-min">
-          <h4><span id='resumen_laboral'>Datos Comisión de Servicio (Institución de Procedencia)</span></h4>
+          <h4><span id='resumen_laboral'>Datos Comisión de Servicio (Datos de la Institución de Procedencia)</span></h4>
         </div>
 
         <div class="row">
           <div class="col-sm-4">
             <div class="form-group">
-              <label for="txt_comision_institución" class="col-sm-4 control-label">Institución de Procedencia</label>
+              <label for="txt_comision_institucion" class="col-sm-4 control-label">Institución de Procedencia</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" id="txt_comision_institución" name="txt_comision_institución"  placeholder="Institución de Procedencia" pattern="[A-Za-z]+" required>
+                <input type="text" class="form-control" id="txt_comision_institucion" name="txt_comision_institucion"  placeholder="Institución de Procedencia" pattern="[A-Za-z]+" required>
               </div>
             </div>
           </div>                              
