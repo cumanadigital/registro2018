@@ -815,7 +815,7 @@
 				FROM censo2017.registropersonal AS REG 
 				WHERE REG.id_plantelesbase = $id_plantelesbase
 				ORDER BY  REG.id_registropersonal DESC";
-		// ver_arreglo($sql);		
+		ver_arreglo($sql);		
 		$dato_registro=consultar($sql,$Postgres);
 		// ver_arreglo($dato);
 		$NumeroDeFilas = $Postgres->NumeroDeFilas();
@@ -924,7 +924,7 @@
 						REG.matricula_atendida_total_especial, 
 						REG.matricula_atendida_total
 				FROM censo2017.registropersonal AS REG 
-				WHERE (REG.id_plantelesbase = $id_plantelesbase AND REG.tipo_personal = 'COMISION DE SERVICIO' )
+				WHERE (REG.id_plantelesbase = $id_plantelesbase AND REG.tipo_personal = 'COMISION SERVICIO' )
 				ORDER BY  REG.id_registropersonal DESC";
 		// ver_arreglo($sql);		
 		$dato_registro=consultar($sql,$Postgres);
@@ -1353,55 +1353,50 @@ function agregar_personal_comision_servicio($datos) {
 		// INICIA LA CONEXION CON EL SERVIDOR 
 	$Postgres=new Postgres(DB_SERVER,DB_NAME,DB_USER,DB_PASSWORD);
 	ver_arreglo($datos);
-	die();
+	// die();
 	// 
-    // $txt_id_plantelesbase 		=	$datos['txt_id_plantelesbase_per']; // 51
 	// Array
 	// (
-	//     [txt_id_plantelesbase_per_comision_servicio] => 
-	//     [txt_cod_plantel_per_comision_servicio] => 
-	//     [txt_id_personal_per_comision_servicio] => 
+	//     [txt_id_plantelesbase_per_comision_servicio] => 1138
 	//     [txt_cedula_personal_comision_servicio] => 1234
-	//     [txt_apellido_funcionario_comision_servicio] => HERNANDEZ
-	//     [txt_nombre_funcionario_comision_servicio] => OSWALDO
+	//     [txt_apellido_funcionario_comision_servicio] => mm
+	//     [txt_nombre_funcionario_comision_servicio] => nn
 	//     [txt_sexo_funcionario] => MASCULINO
 	//     [txt_edocivil_funcionario_comision_servicio] => SOLTERO
-	//     [txt_fechanac_funcionario_comision_servicio] => 01/08/1980
-	//     [txt_celular_funcionario_comision_servicio] => 0426-1234567
-	//     [txt_telefono_funcionario_comision_servicio] => 0293-1234567
-	//     [txt_correo_funcionario_comision_servicio] => oswaldoehc@gmail.com
+	//     [txt_fechanac_funcionario_comision_servicio] => 01/01/1980
+	//     [txt_celular_funcionario_comision_servicio] => 0416-1234455
+	//     [txt_telefono_funcionario_comision_servicio] => 0293-1112233
+	//     [txt_correo_funcionario_comision_servicio] => corre@gmail.com
 	//     [txt_twitter_funcionario_comision_servicio] => cumana
-	//     [txt_direccion_funcionario_comision_servicio] => calel redon
+	//     [txt_direccion_funcionario_comision_servicio] => direccion
 	//     [txt_grado_instruccion_comision_servicio] => TECNICO SUPERIOR
-	//     [txt_titulo_comision_servicio] => tsus informatica
-	//     [txt_institucion_comision_servicio] => iutrla
+	//     [txt_titulo_comision_servicio] => TSU INFORMATICA
+	//     [txt_institucion_comision_servicio] => IUTIRLA
 	//     [txt_discapacidad_comision_servicio] => Array
 	//         (
-	//             [0] => VISUAL
-	//             [1] => TACTIL
+	//             [0] => AUDITIVA
+	//             [1] => GUSTATIVA
 	//         )
 
-	//     [txt_discapacidad_otra_comision_servicio] => otra
-	
-	//     [txt_comision_institución] => iutirla
-	//     [txt_comision_municipio] => ANDRES ELOY BLANCO
-	//     [txt_comision_ciudad] => andres
-	//     [txt_comision_tipo_personal] => admin
-	//     [txt_comision_cargo_funcional] => cargo
-	//     [txt_comision_departamento_laboral] => dpto
-	//     [txt_comison_jefe] => jefe
-	//     [txt_comision_celular_jefe] => 0426-1112223
-	//     [txt_comision_telefono_jefe] => 0293-1234567
-	
+	//     [txt_discapacidad_otra_comision_servicio] => OTRA
+	//     [txt_comision_institucion] => GOBERNACION
+	//     [txt_comision_municipio] => ARISMENDI
+	//     [txt_comision_ciudad] => ARIS
+	//     [txt_comision_tipo_personal] => ADMIN
+	//     [txt_comision_cargo_funcional] => CARGO
+	//     [txt_comision_departamento_laboral] => DPTO
+	//     [txt_comison_jefe] => JEFE
+	//     [txt_comision_celular_jefe] => 0424-0001122
+	//     [txt_comision_telefono_jefe] => 0293-1122334
 	//     [txt_tipo_personal_comision_servicio] => 
 	//     [txt_tipo_personal_funcional_comision_servicio] => ADMINISTRATIVO
-	//     [txt_cargo_funcion_comision_servicio] => programdor
-	//     [txt_coordinacion_laboral_comision_servicio] => sistemas
+	//     [txt_cargo_funcion_comision_servicio] => COORDINADOR
+	//     [txt_coordinacion_laboral_comision_servicio] => SISTEMAS
 	//     [txt_turno_trabajo_comision_servicio] => COMPLETO
 	//     [txt_horario_laboral_comision_servicio] => 08-03
 	//     [txt_tiempo_servicio_comision_servicio] => 01/04/2011
 	//     [accion] => agregar_personal_comision_servicio
-	//     [token1] => D2b¿3FB;1b5A¿eeA342;
+	//     [token1] => e6e7F¿3a9A12bE9C!acC
 	// )
 
 	$txt_id_plantelesbase 				=	$datos['txt_id_plantelesbase_per_comision_servicio']; // => 43
@@ -1434,16 +1429,16 @@ function agregar_personal_comision_servicio($datos) {
 	$txt_discapacidad_otra 				=   $datos['txt_discapacidad_otra_comision_servicio']; 
 	// // 
 	
-	//     [txt_comision_institución] => iutirla
-	//     [txt_comision_municipio] => ANDRES ELOY BLANCO
-	//     [txt_comision_ciudad] => andres
-	//     [txt_comision_tipo_personal] => admin
-	//     [txt_comision_cargo_funcional] => cargo
-	//     [txt_comision_departamento_laboral] => dpto
-	//     [txt_comison_jefe] => jefe
-	//     [txt_comision_celular_jefe] => 0426-1112223
-	//     [txt_comision_telefono_jefe] => 0293-1234567
-	    
+	$txt_comision_institucion			=	$datos['txt_comision_institucion']; //GOBERNACION
+	$txt_comision_municipio				=	$datos['txt_comision_municipio']; //ARISMENDI
+	$txt_comision_ciudad				=	$datos['txt_comision_ciudad']; //ARIS
+	$txt_comision_tipo_personal			=	$datos['txt_comision_tipo_personal']; //ADMIN
+	$txt_comision_cargo_funcional		=	$datos['txt_comision_cargo_funcional']; //CARGO
+	$txt_comision_departamento_laboral	=	$datos['txt_comision_departamento_laboral']; //DPTO
+	$txt_comison_jefe					=	$datos['txt_comison_jefe']; //JEFE
+	$txt_comision_celular_jefe			=	$datos['txt_comision_celular_jefe']; //0424-0001122
+	$txt_comision_telefono_jefe			=	$datos['txt_comision_telefono_jefe']; //0293-1122334
+	//         
 
 	// $tipo_personal = "ADMINISTRATIVO";
 	$txt_tipo_personal 					=	$datos['txt_tipo_personal_comision_servicio']; // => COORDINADOR DE PROGRAMACION
@@ -1452,22 +1447,26 @@ function agregar_personal_comision_servicio($datos) {
 	$txt_coordinacion_laboral 			=	$datos['txt_coordinacion_laboral_comision_servicio']; // => INFORMATICA
 	$txt_turno_trabajo 					=	$datos['txt_turno_trabajo_comision_servicio']; // => COMPLETO
 	$txt_horario_laboral 				=	$datos['txt_horario_laboral_comision_servicio']; // => 08:00 AM - 03:00PM
-	$txt_horas_doc_funcionario 			=	$datos['txt_horas_doc_funcionario']; // => HORAS DOCENTES
+	// $txt_horas_doc_funcionario 			=	$datos['txt_horas_doc_funcionario']; // => HORAS DOCENTES
 	$txt_horas_adm_obr_funcionario 		=	$datos['txt_horas_adm_obr_funcionario']; // => HORAS ADMINISTRATIVAS
 
 	$txt_fecha_ingreso 					=	$datos['txt_fecha_ingreso'];
 	$txt_tiempo_servicio 				=	$datos['txt_tiempo_servicio'];
 	// 
 	// 
-	
-	if ($txt_tipo_personal == "ADMINISTRATIVO") {
-		$txt_horas_adm_funcionario = $txt_horas_adm_obr_funcionario;	
-		$txt_horas_obr_funcionario = 0;
-	}
-	if ($txt_tipo_personal == "OBRERO") {
-		$txt_horas_adm_funcionario = 0;	
-		$txt_horas_obr_funcionario = $txt_horas_adm_obr_funcionario;
-	}
+	$txt_horas_doc_funcionario = 0;
+	$txt_horas_obr_funcionario = 0;
+	$txt_horas_adm_funcionario = 0;
+
+	$txt_tipo_personal = "COMISION SERVICIO";
+	// if ($txt_tipo_personal == "ADMINISTRATIVO") {
+	// 	$txt_horas_adm_funcionario = $txt_horas_adm_obr_funcionario;	
+	// 	$txt_horas_obr_funcionario = 0;
+	// }
+	// if ($txt_tipo_personal == "OBRERO") {
+	// 	$txt_horas_adm_funcionario = 0;	
+	// 	$txt_horas_obr_funcionario = $txt_horas_adm_obr_funcionario;
+	// }
 // 
 	$accion =	$datos['accion']; // => agregar_personal
 	$token1 =	$datos['token1']; // => :D!EB28ef00;8eef¿eEd
@@ -1564,49 +1563,68 @@ function agregar_personal_comision_servicio($datos) {
             	-- matricula_atendida_total_especial, 
             	-- matricula_atendida_total
             	'$fecha_registro');";
-// 
-// 	$sql =	"UPDATE censo2017.plantelesbase
-// 	   		SET 	total_etapa_maternal		='$txt_total_etapa_maternal', 
-// 	       			total_etapa_preescolar		='$txt_total_etapa_preescolar', 
-// 	       			total_primaria				='$txt_total_primaria', 
-// 	       			total_media_general			='$txt_total_media_general', 
-// 	       			total_media_tecnica			='$txt_total_media_tecnica', 
-// 	       			total_adulto				='$txt_total_adulto', 
-// 	       			total_especial				='$txt_total_especial', 
-// 	       			total						='$txt_total',
-// 	       			fecha_registro_matricula	='$fecha_registro'
-// 	 		WHERE id_plantelesbase = $txt_id_plantelesbase;";
-		// ver_arreglo(test_input($sql));
+
+		ver_arreglo(test_input($sql));
 		// die(); 				     
 		$dato=consultar($sql,$Postgres);
 		$NumeroDeFilasAfectadas = $Postgres->NumeroDeFilasAfectadas();
 		if ($NumeroDeFilasAfectadas>0) {
-			// echo json_encode($dato);
+// 			// echo json_encode($dato);
+// 			$cadena = "insert@";
+			$sql_comi = "INSERT INTO censo2017.comisionservicio(
+				            id_plantelesbase, 
+				           -- id_registropersonal, 
+				            cedula,
+				            comision_institucion, 
+				            comision_municipio, 
+				            comision_ciudad, 
+				            comision_tipo_personal, 
+				            comision_cargo_funcional, 
+				            comision_departamento_laboral, 
+				            comison_jefe, 
+				            comision_celular_jefe, 
+				            comision_telefono_jefe, 
+				            fecha_registro)
+				    VALUES (
+				    		$txt_id_plantelesbase, 
+				            -- id_registropersonal,
+				            '$txt_cedula_personal', 
+				            '$txt_comision_institucion', 
+				            '$txt_comision_municipio', 
+				            '$txt_comision_ciudad', 
+				            '$txt_comision_tipo_personal', 
+				            '$txt_comision_cargo_funcional', 
+				            '$txt_comision_departamento_laboral', 
+				            '$txt_comison_jefe', 
+				            '$txt_comision_celular_jefe', 
+				            '$txt_comision_telefono_jefe', 
+				            '$fecha_registro');";
+			$dato_comi=consultar($sql_comi,$Postgres);
+
 			$cadena = "insert@";
 
-			
-			$sql_UPDATE =	"UPDATE censo2017.plantelesbase
-		   		SET 	fecha_registro_personal	='$fecha_registro'
-		 		WHERE id_plantelesbase = $txt_id_plantelesbase;";
-			// ver_arreglo($sql_UPDATE);
-			// die(); 				     
-			$dato_UPDATE=consultar($sql_UPDATE,$Postgres);
-			$NumeroDeFilas_UPDATE = $Postgres->NumeroDeFilas();
-			if ($NumeroDeFilas_UPDATE>0) {
-				// echo json_encode($dato);
-				$cadena = "insert@";
-			}else{
-				$cadena = "false@";
-			}
-			// print_r($cadena);
+// 			$sql_UPDATE =	"UPDATE censo2017.plantelesbase
+// 		   		SET 	fecha_registro_personal	='$fecha_registro'
+// 		 		WHERE id_plantelesbase = $txt_id_plantelesbase;";
+// 			// ver_arreglo($sql_UPDATE);
+// 			// die(); 				     
+// 			$dato_UPDATE=consultar($sql_UPDATE,$Postgres);
+// 			$NumeroDeFilas_UPDATE = $Postgres->NumeroDeFilas();
+// 			if ($NumeroDeFilas_UPDATE>0) {
+// 				// echo json_encode($dato);
+// 				$cadena = "insert@";
+// 			}else{
+// 				$cadena = "false@";
+// 			}
+// 			print_r($cadena);
 			
 
 
 		}else{
 			$cadena = "false@";
 		}
-		actualizar_contador_personal($txt_id_plantelesbase);
-		print_r($cadena);
+// 		actualizar_contador_personal($txt_id_plantelesbase);
+ 		print_r($cadena);
 }
 ?>
 <?php

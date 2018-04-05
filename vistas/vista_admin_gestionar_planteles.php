@@ -1092,7 +1092,7 @@ $nivel_usuario = $_POST['sesion_nivel_usuario'];
                                         <p class="toolbar2_comision" id="toolbar2_comision">
                                           <input class="form-control" id="txt_id_plantelesbase_per_comision_servicio" type="hidden" name="txt_id_plantelesbase_per_comision_servicio">
                                           <input class="form-control" id="txt_cod_plantel_per_comision_servicio" type="hidden"    name="txt_cod_plantel_per_comision_servicio">
-                                          <input class="form-control" id="txt_id_personal_per_comision_servicio" type="hidden"    name="txt_id_personal_per_comision_servicio">
+                                          <!-- <input class="form-control" id="txt_id_personal_per_comision_servicio" type="hidden"    name="txt_id_personal_per_comision_servicio"> -->
                                           <a class="create btn btn-default" id="btn_mostrar_agregar_personal_comision_servicio" href="javascript:">Nuevo Personal en Comisión de Servicio</a>
                                           <span class="alert" id="alert_pesronal"></span>
                                         </p>

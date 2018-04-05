@@ -4,7 +4,7 @@ console.log("javascript controller.admin.gestionar.planteles.personal.comision.s
 
  $alert = $('.alert').hide();
  // $alert_mensaje_personal = $('#alert_mensaje_personal').hide();
-
+// id_plantelesbase29 
 $('#cuadro_comision_de_servicio').find('input, textarea, button, select').attr('disabled','disabled');
 
 
@@ -172,7 +172,7 @@ $(function () {
 
 	    	API_URL =  "servicios/services.admin.planteles.php";
 		    // alert(parametros);
-		    console.log(parametros);
+		    // console.log(parametros);
 			$.ajax({
 				url: API_URL + ($modal_personal.data('id') || ''),
 				type: 'POST',

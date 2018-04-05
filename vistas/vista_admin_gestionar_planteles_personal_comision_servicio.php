@@ -1,3 +1,6 @@
+<?php  
+$id_plantelesbase_per = $_POST['id_plantelesbase_per']; 
+?> 
 <form class="form-horizontal" id="form_modal_personal_comision_servicio" role="form" data-toggle="validator" > 
 
     <div id ="cuadro_datos_personal">
@@ -20,9 +23,9 @@
             <div class="form-group">
               <label for="txt_cedula_personal_comision_servicio" class="col-sm-4 control-label">Cédula*</label>
               <div class="col-sm-8">
-                <input class="form-control" id="txt_id_plantelesbase_per_comision_servicio" type="hidden" name="txt_id_plantelesbase_per_comision_servicio">
-                <input class="form-control" id="txt_cod_plantel_per_comision_servicio" type="hidden"    name="txt_cod_plantel_per_comision_servicio">
-                <input class="form-control" id="txt_id_personal_per_comision_servicio" type="hidden"    name="txt_id_personal_per_comision_servicio">
+                <input class="form-control" id="txt_id_plantelesbase_per_comision_servicio" type="hidden" name="txt_id_plantelesbase_per_comision_servicio" value="<?php echo $id_plantelesbase_per; ?>">
+                <!-- <input class="form-control" id="txt_cod_plantel_per_comision_servicio" type="hidden"    name="txt_cod_plantel_per_comision_servicio"> -->
+                <!-- <input class="form-control" id="txt_id_personal_per_comision_servicio" type="hidden"    name="txt_id_personal_per_comision_servicio"> -->
                 <div class="input-group">
                   <input class="form-control" id="txt_cedula_personal_comision_servicio" type="text"    name="txt_cedula_personal_comision_servicio" placeholder="Buscar" required>
                   <span class="input-group-btn">
@@ -88,7 +91,7 @@
               <div class="col-sm-8">
                 <!-- <input type="text" class="form-control" id="txt_fechanac_funcionario" name="txt_fechanac_funcionario"  placeholder="Fecha de Nacimiento" readonly="readonly"> -->
                 <!-- <input type="date" class="form-control" id="txt_fechanac_funcionario" name="txt_fechanac_funcionario"  placeholder="01/01/1980" pattern="(0[1-9]|1[0-9]|2[0-9]|3[01])/(0[1-9]|1[012])/[0-9]{4}" data-pattern-error="Formato Inválido (DD/MM/AAAA)" required> -->
-                <input type="text" class="form-control" id="txt_fechanac_funcionario_comision_servicio" name="txt_fechanac_funcionario_comision_servicio"  placeholder="01/01/1980" required>
+                <input type="text" class="form-control" id="txt_fechanac_funcionario_comision_servicio" name="txt_fechanac_funcionario_comision_servicio"  placeholder="01/01/1980" pattern="(0[1-9]|1[0-9]|2[0-9]|3[01])/(0[1-9]|1[012])/[0-9]{4}"  required>
               </div>
             </div>
           </div>
@@ -108,7 +111,7 @@
             <div class="form-group">
               <label for="txt_telefono_funcionario_comision_servicio" class="col-sm-4 control-label">Teléfono Resid.*</label>
               <div class="col-sm-8">
-                <input type="text" class="form-control" id="txt_telefono_funcionario_comision_servicio" name="txt_telefono_funcionario_comision_servicio"  placeholder="029X-1234567" pattern="^[0][2][9][1-9][-][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$" data-pattern-error="Formato Inválido (029X-1234567)" required>
+                <input type="text" class="form-control" id="txt_telefono_funcionario_comision_servicio" name="txt_telefono_funcionario_comision_servicio"  placeholder="02XX-1234567" pattern="^[0][2][1-9][1-9][-][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$" data-pattern-error="Formato Inválido (029X-1234567)" required>
               </div>
             </div>
           </div>
@@ -325,7 +328,7 @@
             <div class="form-group">
               <label for="txt_comision_telefono_jefe" class="col-sm-4 control-label">Teléfono Contácto*</label>
               <div class="col-sm-8">
-                <input class="form-control" id="txt_comision_telefono_jefe" type="text"   name="txt_comision_telefono_jefe" placeholder="Ingrese Teléfono" title="Ingrese Teléfono" required>
+                <input class="form-control" id="txt_comision_telefono_jefe" type="text"   name="txt_comision_telefono_jefe" title="Ingrese Teléfono"  placeholder="02XX-1234567" pattern="^[0][2][1-9][1-9][-][0-9][0-9][0-9][0-9][0-9][0-9][0-9]$" required>
               </div>
             </div>
           </div>
