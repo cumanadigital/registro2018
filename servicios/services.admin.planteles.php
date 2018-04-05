@@ -1361,6 +1361,7 @@ function agregar_personal_comision_servicio($datos) {
 	//     [txt_id_plantelesbase_per_comision_servicio] => 
 	//     [txt_cod_plantel_per_comision_servicio] => 
 	//     [txt_id_personal_per_comision_servicio] => 
+	//     [txt_cedula_personal_comision_servicio] => 1234
 	//     [txt_apellido_funcionario_comision_servicio] => HERNANDEZ
 	//     [txt_nombre_funcionario_comision_servicio] => OSWALDO
 	//     [txt_sexo_funcionario] => MASCULINO
@@ -1406,7 +1407,7 @@ function agregar_personal_comision_servicio($datos) {
 	$txt_id_plantelesbase 				=	$datos['txt_id_plantelesbase_per_comision_servicio']; // => 43
 	$txt_cod_plantel_per 				=	$datos['txt_cod_plantel_per_comision_servicio']; // => OD04551902
 	$txt_id_personal_per 				=	$datos['txt_id_personal_per_comision_servicio']; // => 
-	$txt_cedula_personal 				=	$datos['txt_cedula_personal']; // => => 11829328
+	$txt_cedula_personal 				=	$datos['txt_cedula_personal_comision_servicio']; // => => 11829328
 
 	// ver_arreglo(test_input($txt_cedula_personal));
 
@@ -1431,17 +1432,17 @@ function agregar_personal_comision_servicio($datos) {
 	// ver_arreglo(count($txt_discapacidad));
 	// ver_arreglo(implode(", ", $txt_discapacidad));
 	$txt_discapacidad_otra 				=   $datos['txt_discapacidad_otra_comision_servicio']; 
-	// 
+	// // 
 	
-	    [txt_comision_institución] => iutirla
-	    [txt_comision_municipio] => ANDRES ELOY BLANCO
-	    [txt_comision_ciudad] => andres
-	    [txt_comision_tipo_personal] => admin
-	    [txt_comision_cargo_funcional] => cargo
-	    [txt_comision_departamento_laboral] => dpto
-	    [txt_comison_jefe] => jefe
-	    [txt_comision_celular_jefe] => 0426-1112223
-	    [txt_comision_telefono_jefe] => 0293-1234567
+	//     [txt_comision_institución] => iutirla
+	//     [txt_comision_municipio] => ANDRES ELOY BLANCO
+	//     [txt_comision_ciudad] => andres
+	//     [txt_comision_tipo_personal] => admin
+	//     [txt_comision_cargo_funcional] => cargo
+	//     [txt_comision_departamento_laboral] => dpto
+	//     [txt_comison_jefe] => jefe
+	//     [txt_comision_celular_jefe] => 0426-1112223
+	//     [txt_comision_telefono_jefe] => 0293-1234567
 	    
 
 	// $tipo_personal = "ADMINISTRATIVO";

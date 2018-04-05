@@ -19,7 +19,9 @@ $('#btn_volver_listado_comision_servicio').attr('disabled',false);
 
 $('#btn_enviar_personal_comision_servicio').attr('disabled',true);
 
-
+// txt_id_plantelesbase_per_comision_servicio
+// txt_cod_plantel_per_comision_servicio
+// txt_id_personal_per_comision_servicio
 
 $("#txt_cedula_personal_comision_servicio").attr('readonly',false);
 $("#txt_cedula_personal_comision_servicio").attr('disabled',false);
@@ -112,7 +114,9 @@ $(function () {
 
 	              	if (response.trim() == 'NO REGISTRADO' ) { 
 	              		$('#cuadro_comision_de_servicio').find('input, textarea, button, select').attr('disabled',false);
-	              		$("#txt_cedula_personal_comision_servicio").attr('disabled',true);
+	              		// $("#txt_cedula_personal_comision_servicio").attr('disabled',true);
+	              		$("#txt_cedula_personal_comision_servicio").attr('readonly',true);
+
 	              		
 	              		$('#btn_buscar_personal_comision_servicio').attr('disabled',true);
 	    				$('#btn_limpiar_personal_comision_servicio').attr('disabled',false);
@@ -139,12 +143,14 @@ $(function () {
 	      alert("Debe ingresar los datos");
 	    }
 	}); // fin boton Buscar personal
-
-	//    __   __  ___  __           ___                   __      __   ___  __   __   __
-	//   |__) /  \  |  /  \ |\ |    |__  |\ | \  / |  /\  |__)    |__) |__  |__) /__` /  \ |\ |  /\  |
-	//   |__) \__/  |  \__/ | \|    |___ | \|  \/  | /~~\ |  \    |    |___ |  \ .__/ \__/ | \| /~~\ |___
-	//
-	//
+	//  __  ___          ___                   __      __   ___  __   __   __
+	// |__)  |  |\ |    |__  |\ | \  / |  /\  |__)    |__) |__  |__) /__` /  \ |\ |  /\  |
+	// |__)  |  | \|    |___ | \|  \/  | /~~\ |  \    |    |___ |  \ .__/ \__/ | \| /~~\ |___
+	// 
+	//  __   __           __     __           __   ___  __          __     __
+	// /  ` /  \  |\/| | /__` | /  \ |\ |    /__` |__  |__) \  / | /  ` | /  \
+	// \__, \__/  |  | | .__/ | \__/ | \|    .__/ |___ |  \  \/  | \__, | \__/
+	// 
 	// $('#btn_enviar_personal_comision_servicio').click(function (e) {
 	$("#btn_enviar_personal_comision_servicio").unbind('click').bind('click', function(e){
 	    // // activar_datos_personales();
@@ -252,7 +258,8 @@ function limpiar_datos_personal_comision_servicio(){
 
 	$('#cuadro_comision_de_servicio').find('input, textarea, button, select').attr('disabled','disabled');
 
-	$("#txt_cedula_personal_comision_servicio").attr('disabled',false);
+	// $("#txt_cedula_personal_comision_servicio").attr('disabled',false);
+	$("#txt_cedula_personal_comision_servicio").attr('readonly',false);
 	$('#btn_buscar_personal_comision_servicio').attr('disabled',false);
     $('#btn_limpiar_personal_comision_servicio').attr('disabled',true);
 
