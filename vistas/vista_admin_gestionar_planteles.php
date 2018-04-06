@@ -679,6 +679,7 @@ $nivel_usuario = $_POST['sesion_nivel_usuario'];
                               >
                                 <thead>
                                   <tr>
+                                   <th data-field="image" data-formatter="imageFormatter">Foto</th>
                                    <th data-field="reg_cedula" data-filter-control="select" data-sortable="false" data-halign="center" data-align="center"    >Cédula</th>
                                    <th data-field="nombre_completo" data-filter-control="select" data-sortable="false" data-halign="center" data-formatter="actionFormatterNombre" >Nombre y Apellido</th>                   
                                    <th data-field="nom_personal" data-filter-control="select" data-sortable="false" data-halign="center" data-align="center" data-formatter="actionFormatterPersonal" >Nómina</th>
@@ -1127,8 +1128,9 @@ $nivel_usuario = $_POST['sesion_nivel_usuario'];
                                          <th data-field="reg_tipo_personal_funcional" data-filter-control="select" data-sortable="false" data-halign="center" data-align="center" data-formatter="actionFormatterPersonalFuncional" >Personal</th>
                                          <th data-field="reg_cargo_funcional" data-filter-control="select" data-sortable="false" data-halign="center" data-align="center"        >Cargo Funcional</th>
                                          <th data-field="reg_dependencia_funcional" data-filter-control="select" data-sortable="false" data-halign="center" data-align="center">Coordinación Laboral</th>
-                                         <th data-field="reg_horas_doc" data-filter-control="select" data-sortable="false" data-halign="center" data-align="center" data-formatter="actionFormatterHoras" >Horas</th>
+                                         <!-- <th data-field="reg_horas_doc" data-filter-control="select" data-sortable="false" data-halign="center" data-align="center" data-formatter="actionFormatterHoras" >Horas</th> -->
                                          <!-- <th data-field="reg_horas_adm" data-filter-control="select" data-sortable="false" data-halign="center" data-align="center"  >Horas Adm/Obr</th> -->
+                                         <th data-field="reg_dependencia_comision" data-filter-control="select" data-sortable="false" data-halign="center" data-align="center">Institución</th>
                                          <th data-field="action" data-align="center" data-formatter="actionFormatter2" data-events="actionEvents2"                        >Acción</th>
                                        </tr>
                                       </thead>

@@ -1172,7 +1172,7 @@ $(function () {
     }
 
     function actionFormatterPersonal (value,row) {
-      //console.log(row);
+      console.log(row.nom_personal);
       // Object { nom_id_nomina: "41946", nom_cedula: "11829328", nom_nomina: "FIJO", nom_nombres_apellidos: "HERNANDEZ C OSWALDO E", nom_fecha_ingreso: "04/01/2011", nom_cod_cargo: "100000", nom_cargo: "BACHILLER I", nom_cod_dependencia: "006102200", nom_dependencia: "OFIC DE SUPERV ZONA NO 12", nom_personal: "A", 35 más… }
 
       if (row.nom_personal == "ADMINISTRATIVO" ) {
@@ -1183,6 +1183,9 @@ $(function () {
       }
       if (row.nom_personal == "OBRERO" ) {
           personal='<span class="pull-center badge bg-yellow">Obr</span>';
+      }
+      if (row.nom_personal == "COMISION SERVICIO" ) {
+          personal='<span class="pull-center badge bg-red">COM</span>';
       }
       return personal;
     }
@@ -1242,6 +1245,17 @@ $(function () {
         }
         return icon;
     }
+
+    function imageFormatter(value,row) {
+      // console.info(row)
+      var nombre = row.reg_nombre_completo + " " + row.reg_apellido_completo;
+      var ruta_foto = "../media/fotos/" + row.nom_cedula + ".jpg"
+      var fotod = "<div class='pull-left image'>";;
+          fotod+= "<img src='" + ruta_foto + "' alt='User Image' class='mg-circle' height='60px';>";
+          fotod+= "</div>";
+      return fotod
+    }
+
     
     // update and delete 
     //   #     ##    #####  ###     ##    #  #   ####   #  #   ####   #  #   #####   ##

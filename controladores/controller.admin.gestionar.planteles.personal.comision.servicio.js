@@ -35,13 +35,15 @@ console.info(id_plantelesbase_per_comision_servicio);
 // $('#btn_editar_personal_comision_servicio')
 // $('#btn_editar_personal_comision_servicio')
 
+var table_personal_asignado_comision_servicio = $('#table_personal_asignado_comision_servicio')
 
 $(function () {
-
-	
-	//  __  ___                __             ___  __              __  ___       __   __       __   __           __     __            __   ___  __          __     __
-	// |__)  |  |\ |     \  / /  \ |    \  / |__  |__)     |    | /__`  |   /\  |  \ /  \     /  ` /  \  |\/| | /__` | /  \ |\ |     /__` |__  |__) \  / | /  ` | /  \
-	// |__)  |  | \| ___  \/  \__/ |___  \/  |___ |  \ ___ |___ | .__/  |  /~~\ |__/ \__/ ___ \__, \__/  |  | | .__/ | \__/ | \| ___ .__/ |___ |  \  \/  | \__, | \__/
+	//  __  ___               __             ___  __             __  ___       __   __
+	// |__)  |  |\ |    \  / /  \ |    \  / |__  |__)    |    | /__`  |   /\  |  \ /  \
+	// |__)  |  | \|     \/  \__/ |___  \/  |___ |  \    |___ | .__/  |  /~~\ |__/ \__/
+	//  __   __           __     __            __   ___  __          __     __
+	// /  ` /  \  |\/| | /__` | /  \ |\ |     /__` |__  |__) \  / | /  ` | /  \
+	// \__, \__/  |  | | .__/ | \__/ | \| ___ .__/ |___ |  \  \/  | \__, | \__/
 	// 
 	$('#btn_volver_listado_comision_servicio').click(function () {
 	 	console.info('btn_volver_listado_comision_servicio');
@@ -100,7 +102,7 @@ $(function () {
 	                // no existe en nomina
 	                var msg1 = "CEDULA REGISTRADA EN NOMINA MPPE \nNo puede ser registrado como Comisión de Sevicio \nDebe ser agregado por el módulo de Registrar Personal";
 	                showAlert( 'CEDULA REGISTRADA EN NOMINA MPPE', 'danger');
-	                alert(msg1);
+	                // alert(msg1);
 
 	                // showAlert('Registro con éxito!', 'success');
 	                $('#btn_enviar_personal_comision_servicio').attr('disabled',true);

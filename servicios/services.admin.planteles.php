@@ -815,7 +815,7 @@
 				FROM censo2017.registropersonal AS REG 
 				WHERE REG.id_plantelesbase = $id_plantelesbase
 				ORDER BY  REG.id_registropersonal DESC";
-		ver_arreglo($sql);		
+		// ver_arreglo($sql);		
 		$dato_registro=consultar($sql,$Postgres);
 		// ver_arreglo($dato);
 		$NumeroDeFilas = $Postgres->NumeroDeFilas();
@@ -1048,33 +1048,56 @@
 		if ($NumeroDeFilas>0) {
 			foreach ($dato_registro as $key => $value) {
 				$cedula = $value['reg_cedula'];
-				$sql_nomina =  "SELECT	
-								NOM.id_nomina AS NOM_id_nomina, 
-								NOM.cedula AS NOM_cedula, 
-								NOM.nomina AS NOM_nomina,
-								NOM.nombres_apellidos AS NOM_nombres_apellidos, 
-								NOM.fecha_ingreso AS NOM_fecha_ingreso, 
-								NOM.cod_cargo AS NOM_cod_cargo, 
-								NOM.cargo AS NOM_cargo, 
-								NOM.cod_dependencia AS NOM_cod_dependencia, 
-								NOM.dependencia AS NOM_dependencia, 
-								NOM.personal AS NOM_personal, 
-								NOM.horas_adm AS NOM_horas_adm, 
-								NOM.horas_doc AS NOM_horas_doc, 
-								-- NOM.cuenta_bancaria AS NOM_cuenta_bancaria, 
-								NOM.fecha_ultimo_acceso AS NOM_fecha_ultimo_acceso
-							FROM censo2017.nominaactual AS NOM
-							WHERE NOM.cedula = '$cedula' ";		
-				$dato_nomina=consultar($sql_nomina,$Postgres);
-				// ver_arreglo($value);
-				// ver_arreglo($dato_nomina[0]);
-				$dato_registro[$key] = array_merge($dato_nomina[0],$dato_registro[$key]);
-				// $NumeroDeFilas_nomina = $Postgres->NumeroDeFilas();
-				// if ($NumeroDeFilas_nomina>0) {
-				//   	$dato[$key]; = array_merge($dato_nomina[0],$dato[$key]);
-				// ver_arreglo($dato_registro[$key]);
-				// echo json_encode($dato_registro[$key]);
-				//  }
+				$tipo_personal = $value['reg_tipo_personal'];
+				if ($tipo_personal != 'COMISION SERVICIO'){
+					$sql_nomina =  "SELECT	
+									NOM.id_nomina AS NOM_id_nomina, 
+									NOM.cedula AS NOM_cedula, 
+									NOM.nomina AS NOM_nomina,
+									NOM.nombres_apellidos AS NOM_nombres_apellidos, 
+									NOM.fecha_ingreso AS NOM_fecha_ingreso, 
+									NOM.cod_cargo AS NOM_cod_cargo, 
+									NOM.cargo AS NOM_cargo, 
+									NOM.cod_dependencia AS NOM_cod_dependencia, 
+									NOM.dependencia AS NOM_dependencia, 
+									NOM.personal AS NOM_personal, 
+									NOM.horas_adm AS NOM_horas_adm, 
+									NOM.horas_doc AS NOM_horas_doc, 
+									-- NOM.cuenta_bancaria AS NOM_cuenta_bancaria, 
+									NOM.fecha_ultimo_acceso AS NOM_fecha_ultimo_acceso
+								FROM censo2017.nominaactual AS NOM
+								WHERE NOM.cedula = '$cedula' ";		
+					$dato_nomina=consultar($sql_nomina,$Postgres);
+					// ver_arreglo($dato_nomina);
+					$dato_registro[$key] = array_merge($dato_nomina[0],$dato_registro[$key]);
+				}
+				if ($tipo_personal == 'COMISION SERVICIO'){
+					$sql_nomina =   "SELECT 
+										id_comision 		     AS nom_id_nomina, 
+										cedula 				     AS nom_cedula,
+										'COMISION SERVICIO'      AS nom_nomina,
+										'FUNCIONARIO' 		     AS nom_nombres_apellidos,  
+										'01/01/1980' 		     AS nom_fecha_ingreso,
+										'CODIGO'                 AS nom_cod_cargo,
+										comision_cargo_funcional AS nom_cargo,
+										'CODIGO'                 AS nom_cod_dependencia,
+										comision_departamento_laboral AS nom_dependencia, 
+										'COMISION SERVICIO'      AS nom_personal,
+										'0'                      AS nom_horas_adm,
+										'0'                      AS nom_horas_doc, 
+										fecha_registro           AS nom_fecha_ultimo_acceso,
+										comision_tipo_personal,
+										comision_institucion,
+										comision_municipio, 
+										comision_ciudad, 
+										comison_jefe,
+										comision_celular_jefe, 
+										comision_telefono_jefe 
+	  			                    FROM censo2017.comisionservicio
+	  			                    WHERE cedula = '$cedula' ;";		
+					$dato_nomina=consultar($sql_nomina,$Postgres);
+					$dato_registro[$key] = array_merge($dato_nomina[0],$dato_registro[$key]);
+				}
 			}
 			// ver_arreglo($dato_registro);
 			// actualizar_contador_personal($id_plantelesbase);
