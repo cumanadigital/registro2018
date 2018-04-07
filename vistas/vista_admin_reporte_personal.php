@@ -48,7 +48,7 @@ require_once('../apiv3.0/funciones/funciones3.0.php');
                     <tr>
                      <th data-field="pb_municipio" data-filter-control="select" data-sortable="true" data-halign="center" data-align="center"    >Municipio</th>
                      <th data-field="pb_nombre" data-filter-control="select" data-sortable="true" data-halign="center" data-align="center"    >Dependencia</th>
-                     <th data-field="image" data-formatter="imageFormatter">Foto</th>
+                     <th data-field="image" data-halign="center" data-align="center"  data-formatter="imageFormatter">Foto</th>
                      <th data-field="reg_cedula" data-filter-control="select" data-sortable="true" data-halign="center" data-align="center"    >Cédula</th>
                      <th data-field="reg_nombre_completo" data-filter-control="select" data-sortable="true" data-halign="center" >Nombre</th>                   
                      <th data-field="reg_apellido_completo" data-filter-control="select" data-sortable="true" data-halign="center"  >Apellido</th>                   

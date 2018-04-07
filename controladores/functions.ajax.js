@@ -754,6 +754,13 @@ function Consulta_Ajax_JSON(accion,servicio,parametros) {
 			}
 		});    
 	}
+	// 
+	function existeUrl(url) {
+		var http = new XMLHttpRequest();
+		http.open('HEAD', url, false);
+		http.send();
+		return http.status!=404;
+	}
 // * * * * * * Chuletarios * * * * * * * * *
 // * * * * * * Chuletarios * * * * * * * * *
 // * * * * * * Chuletarios * * * * * * * * *

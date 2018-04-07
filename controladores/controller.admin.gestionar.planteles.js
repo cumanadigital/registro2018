@@ -1249,7 +1249,12 @@ $(function () {
     function imageFormatter(value,row) {
       // console.info(row)
       var nombre = row.reg_nombre_completo + " " + row.reg_apellido_completo;
-      var ruta_foto = "../media/fotos/" + row.nom_cedula + ".jpg"
+      var ruta_foto = "../media/fotos/" + row.nom_cedula + ".jpg";
+      if (existeUrl(ruta_foto)){
+
+      }else{
+        ruta_foto = "media/carnet/noimage3.png";
+      }
       var fotod = "<div class='pull-left image'>";;
           fotod+= "<img src='" + ruta_foto + "' alt='User Image' class='mg-circle' height='60px';>";
           fotod+= "</div>";

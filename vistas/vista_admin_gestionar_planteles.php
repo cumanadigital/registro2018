@@ -679,7 +679,7 @@ $nivel_usuario = $_POST['sesion_nivel_usuario'];
                               >
                                 <thead>
                                   <tr>
-                                   <th data-field="image" data-formatter="imageFormatter">Foto</th>
+                                   <th data-field="image" data-halign="center" data-align="center" data-formatter="imageFormatter">Foto</th>
                                    <th data-field="reg_cedula" data-filter-control="select" data-sortable="false" data-halign="center" data-align="center"    >Cédula</th>
                                    <th data-field="nombre_completo" data-filter-control="select" data-sortable="false" data-halign="center" data-formatter="actionFormatterNombre" >Nombre y Apellido</th>                   
                                    <th data-field="nom_personal" data-filter-control="select" data-sortable="false" data-halign="center" data-align="center" data-formatter="actionFormatterPersonal" >Nómina</th>
