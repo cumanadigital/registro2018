@@ -759,7 +759,9 @@
 		// Array
 		// (
 		//     [accion] => consultar_personal_asignado
-		//     [id_plantelesbase] => 43
+		//     [id_plantelesbase] => 1138
+		//     [txt_tipo_dependencia] => ZONA EDUCATIVA
+		//     [txt_municipio] => 
 		// )
 		$Postgres=new Postgres(DB_SERVER,DB_NAME,DB_USER,DB_PASSWORD);
 		$id_plantelesbase = $datos['id_plantelesbase'];
@@ -813,14 +815,15 @@
 						REG.matricula_atendida_total_especial, 
 						REG.matricula_atendida_total
 				FROM censo2017.registropersonal AS REG 
-				WHERE REG.id_plantelesbase = $id_plantelesbase
-				ORDER BY  REG.id_registropersonal DESC";
+				WHERE (REG.id_plantelesbase = $id_plantelesbase AND  reg.tipo_personal <> 'COMISION SERVICIO')
+				ORDER BY  REG.id_registropersonal ";
 		// ver_arreglo($sql);		
 		$dato_registro=consultar($sql,$Postgres);
-		// ver_arreglo($dato);
+		// ver_arreglo($dato_registro);
 		$NumeroDeFilas = $Postgres->NumeroDeFilas();
 		if ($NumeroDeFilas>0) {
 			foreach ($dato_registro as $key => $value) {
+				// ver_arreglo($value);
 				$cedula = $value['reg_cedula'];
 				$sql_nomina =  "SELECT	
 								NOM.id_nomina AS NOM_id_nomina, 
