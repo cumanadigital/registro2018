@@ -98,162 +98,23 @@
 		$Postgres=new Postgres(DB_SERVER,DB_NAME,DB_USER,DB_PASSWORD);
 		$cedula 			= test_input($datos['cedula']);
 		$municipio 			= $datos['municipio'];
-		$txt_municipio		= $datos['txt_municipio'];
+		$txt_municipio_filtro		= $datos['txt_municipio_filtro'];
 		$nivel_usuario 		= test_input($datos['nivel_usuario']);
-		$txt_tipo_dependencia = $datos['txt_tipo_dependencia'];
+		$txt_tipo_dependencia_filtro = $datos['txt_tipo_dependencia_filtro'];
 		actualizar_contador_personal_completo($cedula);
-		
-// 		$sql="";
-// 		$sql.="SELECT 
-// 				-- NOM.cedula as login_cedula,
-// 				-- RIGHT(TRIM(NOM.cod_dependencia),6) as login_coddep,
-// 				-- RIGHT(TRIM(NOM.cuenta_bancaria),6) as login_ctabanco,
-// 				NOM.id_nomina,
-// 				NOM.cedula, 
-// 				TRIM(NOM.nombres_apellidos) AS nombres_apellidos, 
-// 				TRIM(NOM.cod_cargo) AS cod_cargo,
-// 				TRIM(NOM.cargo) AS cargo,
-// 				 -- 
-// 				NOM.cod_dependencia, 
-// 				NOM.cuenta_bancaria, 
-// 				'---' AS SEP1,
-// 				PB.id_plantelesbase, 
-// 				TRIM(PB.cod_plantel) AS cod_plantel, 
-// 				TRIM(PB.cod_estadistico) AS cod_estadistico,				
-// 				TRIM(PB.cod_nomina) AS cod_nomina, 
-// 				-- 
-// 				TRIM(PB.estado) AS estado ,
-// 				TRIM(PB.municipio) AS municipio, 
-// 				TRIM(PB.parroquia) as parroquia,
-// 				-- 
-// 				UPPER(TRIM(PB.nombre)) AS nombre, 
-// 				TRIM(PB.denominacion) AS denominacion,
-// 				-- 
-// 				UPPER(TRIM(PB.zona_educativa)) AS zona_educativa ,
-// 				UPPER(TRIM(PB.tipo_dependencia)) AS tipo_dependencia ,
-// 				UPPER(TRIM(PB.estatus)) AS estatus ,
-// 				TRIM(PB.fundacion) AS fundacion ,
-// 				-- 
-// 				UPPER(TRIM(PB.direccion)) AS direccion ,
-// 				UPPER(TRIM(PB.correo)) AS correo ,
-// 				TRIM(PB.telefono_fijo) AS telefono_fijo ,
-// 				TRIM(PB.telefono_otro) AS telefono_otro ,
-// 				UPPER(TRIM(PB.zona_ubicacion)) AS zona_ubicacion ,
-// 				UPPER(TRIM(PB.clase_plantel)) AS clase_plantel ,
-// 				UPPER(TRIM(PB.categoria)) AS categoria ,
-// 				UPPER(TRIM(PB.condicion_estudio)) AS condicion_estudio ,
-// 				UPPER(TRIM(PB.tipo_matricula)) AS tipo_matricula ,
-// 				UPPER(TRIM(PB.turno)) AS turno ,
-// 				UPPER(TRIM(PB.modalidad)) AS modalidad ,
-// 				-- 
-// 				UPPER(TRIM(PB.dir_nombre)) AS dir_nombre,
-//   				UPPER(TRIM(PB.dir_apellido)) AS dir_apellido,
-// 				UPPER(TRIM(PB.dir_direccion)) AS dir_direccion,
-// 				UPPER(TRIM(PB.dir_fechanac)) AS dir_fechanac,
-// 				-- 
-// 				TRIM(PB.dir_telefono) as dir_telefono,
-// 				TRIM(PB.dir_celular) as dir_celular,
-// 				TRIM(PB.dir_email) as dir_email,
-// 				TRIM(PB.dir_twitter) as dir_twitter,
-// -- 
-// 				TRIM(PB.total_etapa_maternal) as total_etapa_maternal,
-// 				TRIM(PB.total_etapa_preescolar) as total_etapa_preescolar,
-// 				TRIM(PB.total_primaria) as total_primaria,
-// 				TRIM(PB.total_media_general) as total_media_general,
-// 				TRIM(PB.total_media_tecnica) as total_media_tecnica,
-// 				TRIM(PB.total_adulto) as total_adulto,
-// 				TRIM(PB.total_especial) as total_especial,
-// 				TRIM(PB.total) as total,
-// -- 
-// 				TRIM(PB.total_docente) as total_docente,
-// 				TRIM(PB.total_administrativo) as total_administrativo,
-// 				TRIM(PB.total_obrero) as total_obrero,
-// -- 
-// 				fecha_registro_matricula,
-// 				fecha_registro_datos,
-// 				fecha_registro_personal,
-// 				fecha_registro_director,
-// 				nivel_estatus,
-// -- 
-// 				'---' as cierre 
-// 				FROM censo2017.plantelesbase AS PB 
-// 				INNER JOIN censo2017.nominaactual AS NOM ON (PB.dir_cedula = NOM.cedula) ";
-// 		//
-// 		if ($nivel_usuario == 'DIRECTOR') { // BUSCA SOLO POR CEDULA PLANTELES-DIRECTOR
-// 			$sql.="	WHERE NOM.cedula ='$cedula' ";
-// 		}
-// 		//
-// 		if ($nivel_usuario == 'ADMIN') { // BUSCA TODOS LOS PLANTELES
-// 			$sql.="	WHERE ( PB.tipo_dependencia ='PLANTA' OR  PB.tipo_dependencia ='ENTE ADSCRITO' ) ";	
-// 		}
-// 		//
-// 		if ($nivel_usuario == 'ROOT') {
-// 			//
-// 			if ($txt_tipo_dependencia == 'PLANTELES') {
-// 				$sql.=" WHERE  ( PB.tipo_dependencia !='PLANTA' AND  PB.tipo_dependencia !='ENTE ADSCRITO' ) ";
-// 				if ($txt_municipio!=null ) {	
-// 					$sql.=" and PB.municipio = '$txt_municipio' ";
-// 				}
-// 			}
-// 			//
-// 			if ($txt_tipo_dependencia == 'ZONA EDUCATIVA') {
-// 				$sql.=" WHERE  ( PB.tipo_dependencia ='PLANTA' OR  PB.tipo_dependencia ='ENTE ADSCRITO' ) ";
-// 			}
-// 			//
-// 			if ($txt_tipo_dependencia == 'CIRCUITOS EDUCATIVOS') {
-// 				$sql.=" WHERE  ( PB.tipo_dependencia ='CIRCUITOS EDUCATIVOS' ) ";
-// 				if ($txt_municipio!=null ) {	
-// 					$sql.=" and PB.municipio = '$txt_municipio' ";
-// 				}
-// 			}
-// 		}
-// 		$sql.="		ORDER BY 
-// 					PB.municipio, NOM.cedula, PB.id_plantelesbase ";
-// 		$dato=consultar($sql,$Postgres);
-//  		// ver_arreglo($dato);
-// // 		Array
-// // (
-// //     [0]S => Array
-// //         (
-// //             [id_nomina] => 215
-// //             [cedula] => 10217598
-// //             [nombres_apellidos] => ZENAYDA P RODRIGUEZ G
-// //             [cod_cargo] => 1124DI
-// //             [cargo] => DOC. IV /AULA
-// //             [cod_dependencia] => 006970354
-// //             [cuenta_bancaria] => 01020513110000278586
-// //             [sep1] => ---
-// //             [id_plantelesbase] => 43
-// //             [cod_plantel] => OD04551902
-// //             [cod_estadistico] => 190045
-// //             [nombre] => E B RIO COLORADO
-// //             [municipio] => ANDRES MATA
-// //             [parroquia] => SAN JOSE DE AEROCUAR
-// //             [cierre] => ---
-// //         )
-// 		$NumeroDeFilas = $Postgres->NumeroDeFilas();
-// 		if ($NumeroDeFilas>0) {
-// 			echo json_encode($dato);
-
-// 		}else{
-// 			echo 'false';
-// 		}
-
+	if ($nivel_usuario == 'DIRECTOR') { // BUSCA SOLO POR CEDULA PLANTELES-DIRECTOR
 
 		$sql="";
 		$sql.="SELECT 
-				-- NOM.cedula as login_cedula,
-				-- RIGHT(TRIM(NOM.cod_dependencia),6) as login_coddep,
-				-- RIGHT(TRIM(NOM.cuenta_bancaria),6) as login_ctabanco,
-				-- NOM.id_nomina,
-				--NOM.cedula, 
-				-- TRIM(NOM.nombres_apellidos) AS nombres_apellidos, 
-				-- TRIM(NOM.cod_cargo) AS cod_cargo,
-				-- TRIM(NOM.cargo) AS cargo,
+				NOM.id_nomina,
+				NOM.cedula, 
+				TRIM(NOM.nombres_apellidos) AS nombres_apellidos, 
+				TRIM(NOM.cod_cargo) AS cod_cargo,
+				TRIM(NOM.cargo) AS cargo,
 				 -- 
-				-- NOM.cod_dependencia, 
-				--NOM.cuenta_bancaria, 
-				-- '---' AS SEP1,
+				NOM.cod_dependencia, 
+				NOM.cuenta_bancaria, 
+				'---' AS SEP1,
 				PB.id_plantelesbase, 
 				TRIM(PB.cod_plantel) AS cod_plantel, 
 				TRIM(PB.cod_estadistico) AS cod_estadistico,				
@@ -283,8 +144,6 @@
 				UPPER(TRIM(PB.turno)) AS turno ,
 				UPPER(TRIM(PB.modalidad)) AS modalidad ,
 				-- 
-				
-				TRIM(PB.dir_cedula) AS dir_cedula,
 				UPPER(TRIM(PB.dir_nombre)) AS dir_nombre,
   				UPPER(TRIM(PB.dir_apellido)) AS dir_apellido,
 				UPPER(TRIM(PB.dir_direccion)) AS dir_direccion,
@@ -312,79 +171,212 @@
 				fecha_registro_datos,
 				fecha_registro_personal,
 				fecha_registro_director,
-				nivel_estatus, \n
+				nivel_estatus,
 -- 
 				'---' as cierre 
-				FROM censo2017.plantelesbase AS PB  \n";
-		$sql.="	 -- INNER JOIN censo2017.nominaactual AS NOM ON (PB.dir_cedula = NOM.cedula) \n ";
+				FROM censo2017.plantelesbase AS PB 
+				INNER JOIN censo2017.nominaactual AS NOM ON (PB.dir_cedula = NOM.cedula) ";
 		//
 		if ($nivel_usuario == 'DIRECTOR') { // BUSCA SOLO POR CEDULA PLANTELES-DIRECTOR
-			$sql.="	WHERE PB.dir_celular ='$cedula' ";
+			$sql.="	WHERE NOM.cedula ='$cedula' ";
 		}
 		//
-		if ($nivel_usuario == 'ADMIN' || $nivel_usuario == 'USUARIO' ) { // BUSCA TODOS LOS PLANTELES
+		if ($nivel_usuario == 'ADMIN') { // BUSCA TODOS LOS PLANTELES
 			$sql.="	WHERE ( PB.tipo_dependencia ='PLANTA' OR  PB.tipo_dependencia ='ENTE ADSCRITO' ) ";	
 		}
 		//
 		if ($nivel_usuario == 'ROOT') {
 			//
-			if ($txt_tipo_dependencia == 'PLANTELES') {
+			if ($txt_tipo_dependencia_filtro == 'PLANTELES') {
 				$sql.=" WHERE  ( PB.tipo_dependencia !='PLANTA' AND  PB.tipo_dependencia !='ENTE ADSCRITO' ) ";
-				if ($txt_municipio!=null ) {	
-					$sql.=" and PB.municipio = '$txt_municipio' ";
+				if ($txt_txt_tipo_dependencia_filtro_filtro!=null ) {	
+					$sql.=" and PB.municipio = '$txt_municipio_filtro' ";
 				}
 			}
 			//
-			if ($txt_tipo_dependencia == 'ZONA EDUCATIVA') {
+			if ($txt_tipo_dependencia_filtro == 'ZONA EDUCATIVA') {
 				$sql.=" WHERE  ( PB.tipo_dependencia ='PLANTA' OR  PB.tipo_dependencia ='ENTE ADSCRITO' ) ";
 			}
 			//
-			if ($txt_tipo_dependencia == 'CIRCUITOS EDUCATIVOS') {
+			if ($txt_tipo_dependencia_filtro == 'CIRCUITOS EDUCATIVOS') {
 				$sql.=" WHERE  ( PB.tipo_dependencia ='CIRCUITOS EDUCATIVOS' ) ";
-				if ($txt_municipio!=null ) {	
-					$sql.=" and PB.municipio = '$txt_municipio' ";
+				if ($txt_municipio_filtro!=null ) {	
+					$sql.=" and PB.municipio = '$txt_municipio_filtro' ";
 				}
 			}
 		}
 		$sql.="		ORDER BY 
-					PB.municipio, PB.cod_plantel, PB.dir_celular, PB.id_plantelesbase ";
-		//
-		$dato_plantel=consultar($sql,$Postgres);
+					PB.municipio, NOM.cedula, PB.id_plantelesbase ";
+		$dato=consultar($sql,$Postgres);
+ 		// ver_arreglo($dato);
+// 		Array
+// (
+//     [0]S => Array
+//         (
+//             [id_nomina] => 215
+//             [cedula] => 10217598
+//             [nombres_apellidos] => ZENAYDA P RODRIGUEZ G
+//             [cod_cargo] => 1124DI
+//             [cargo] => DOC. IV /AULA
+//             [cod_dependencia] => 006970354
+//             [cuenta_bancaria] => 01020513110000278586
+//             [sep1] => ---
+//             [id_plantelesbase] => 43
+//             [cod_plantel] => OD04551902
+//             [cod_estadistico] => 190045
+//             [nombre] => E B RIO COLORADO
+//             [municipio] => ANDRES MATA
+//             [parroquia] => SAN JOSE DE AEROCUAR
+//             [cierre] => ---
+//         )
 		$NumeroDeFilas = $Postgres->NumeroDeFilas();
 		if ($NumeroDeFilas>0) {
-			foreach ($dato_plantel as $key => $value) {
-				$dir_ced = $value['dir_cedula'];
-				// echo $key ."  ----> " . $dir_ced . " ---> ";
-				$sql_nom= "SELECT id_nomina,cedula,nombres_apellidos,cod_cargo,cargo,personal  FROM censo2017.nominaactual WHERE cedula = '$dir_ced' LIMIT 1 ";
-				// ver_arreglo($sql_nom);
-				$dato_nom=consultar($sql_nom,$Postgres);
-				$NumeroDeFilas_nom = $Postgres->NumeroDeFilas();  
-				if ($NumeroDeFilas_nom>0) {
-					// echo "si";
-					// $dato_salida[0] = array_merge($dato_nomina[0],$dato_registro[$key]);
-					$dato_salida[$key] = array_merge($value,$dato_nom[0]);
-				}else{
-					// echo "no";
-		            $dato_nom[0]['id_nomina'] = null ; //=> 14358
-		            $dato_nom[0]['cedula'] = null ; // => 12664967
-		            $dato_nom[0]['nombres_apellidos'] = null ; // => SALAZAR ELIZABETH        
-		            $dato_nom[0]['cod_cargo'] = null ; // => 1123DI
-		            $dato_nom[0]['cargo'] = null ; // => DOC. III /AULA           
-		            $dato_nom[0]['personal'] = null ; // => DOCENTE
-					$dato_salida[$key] = array_merge($value,$dato_nom[0]);
-				}
-				// ver_arreglo($value);
-				// ver_arreglo($dato_nom[0]);
-				// ver_arreglo("ARREGLO MERGE ---------------------------------------------------------------------------");
-				// ver_arreglo($dato_salida[$key]);
-				// echo json_encode($dato_salida[$key]) . "<br><br>";
+			echo json_encode($dato);
 
-			}
-			// ver_arreglo($dato_salida);		
-			echo json_encode($dato_salida);
-			// echo json_encode($dato);
 		}else{
 			echo 'false';
+		}
+	}
+		if ($nivel_usuario != 'DIRECTOR') { // BUSCA SOLO POR CEDULA PLANTELES-DIRECTOR
+
+			$sql="";
+			$sql.="SELECT 
+					PB.id_plantelesbase, 
+					TRIM(PB.cod_plantel) AS cod_plantel, 
+					TRIM(PB.cod_estadistico) AS cod_estadistico,				
+					TRIM(PB.cod_nomina) AS cod_nomina, 
+					-- 
+					TRIM(PB.estado) AS estado ,
+					TRIM(PB.municipio) AS municipio, 
+					TRIM(PB.parroquia) as parroquia,
+					-- 
+					UPPER(TRIM(PB.nombre)) AS nombre, 
+					TRIM(PB.denominacion) AS denominacion,
+					-- 
+					UPPER(TRIM(PB.zona_educativa)) AS zona_educativa ,
+					UPPER(TRIM(PB.tipo_dependencia)) AS tipo_dependencia ,
+					UPPER(TRIM(PB.estatus)) AS estatus ,
+					TRIM(PB.fundacion) AS fundacion ,
+					-- 
+					UPPER(TRIM(PB.direccion)) AS direccion ,
+					UPPER(TRIM(PB.correo)) AS correo ,
+					TRIM(PB.telefono_fijo) AS telefono_fijo ,
+					TRIM(PB.telefono_otro) AS telefono_otro ,
+					UPPER(TRIM(PB.zona_ubicacion)) AS zona_ubicacion ,
+					UPPER(TRIM(PB.clase_plantel)) AS clase_plantel ,
+					UPPER(TRIM(PB.categoria)) AS categoria ,
+					UPPER(TRIM(PB.condicion_estudio)) AS condicion_estudio ,
+					UPPER(TRIM(PB.tipo_matricula)) AS tipo_matricula ,
+					UPPER(TRIM(PB.turno)) AS turno ,
+					UPPER(TRIM(PB.modalidad)) AS modalidad ,
+					-- 
+					
+					TRIM(PB.dir_cedula) AS dir_cedula,
+					UPPER(TRIM(PB.dir_nombre)) AS dir_nombre,
+	  				UPPER(TRIM(PB.dir_apellido)) AS dir_apellido,
+					UPPER(TRIM(PB.dir_direccion)) AS dir_direccion,
+					UPPER(TRIM(PB.dir_fechanac)) AS dir_fechanac,
+					-- 
+					TRIM(PB.dir_telefono) as dir_telefono,
+					TRIM(PB.dir_celular) as dir_celular,
+					TRIM(PB.dir_email) as dir_email,
+					TRIM(PB.dir_twitter) as dir_twitter,
+	-- 
+					TRIM(PB.total_etapa_maternal) as total_etapa_maternal,
+					TRIM(PB.total_etapa_preescolar) as total_etapa_preescolar,
+					TRIM(PB.total_primaria) as total_primaria,
+					TRIM(PB.total_media_general) as total_media_general,
+					TRIM(PB.total_media_tecnica) as total_media_tecnica,
+					TRIM(PB.total_adulto) as total_adulto,
+					TRIM(PB.total_especial) as total_especial,
+					TRIM(PB.total) as total,
+	-- 
+					TRIM(PB.total_docente) as total_docente,
+					TRIM(PB.total_administrativo) as total_administrativo,
+					TRIM(PB.total_obrero) as total_obrero,
+	-- 
+					fecha_registro_matricula,
+					fecha_registro_datos,
+					fecha_registro_personal,
+					fecha_registro_director,
+					nivel_estatus, \n
+				-- 
+					'---' as cierre 
+					FROM censo2017.plantelesbase AS PB  \n";
+			// $sql.="	 -- INNER JOIN censo2017.nominaactual AS NOM ON (PB.dir_cedula = NOM.cedula) \n ";
+			//
+			if ($nivel_usuario == 'DIRECTOR') { // BUSCA SOLO POR CEDULA PLANTELES-DIRECTOR
+				$sql.="	WHERE PB.dir_celular ='$cedula' \n";
+			}
+			//
+			if ($nivel_usuario == 'ADMIN' || $nivel_usuario == 'USUARIO' ) { // BUSCA TODOS LOS PLANTELES
+				$sql.="	WHERE ( PB.tipo_dependencia ='PLANTA' OR  PB.tipo_dependencia ='ENTE ADSCRITO' ) \n";	
+			}
+			//
+			if ($nivel_usuario == 'ROOT') {
+				//
+				if ($txt_tipo_dependencia_filtro == 'PLANTELES') {
+					$sql.=" WHERE  ( PB.tipo_dependencia !='PLANTA' AND  PB.tipo_dependencia !='ENTE ADSCRITO' ) \n";
+					if ($txt_municipio_filtro!=null ) {	
+						$sql.=" and PB.municipio = '$txt_municipio_filtro' ";
+					}
+				}
+				//
+				if ($txt_tipo_dependencia_filtro == 'ZONA EDUCATIVA') {
+					$sql.=" WHERE  ( PB.tipo_dependencia ='PLANTA' OR  PB.tipo_dependencia ='ENTE ADSCRITO' ) \n";
+				}
+				//
+				if ($txt_tipo_dependencia_filtro == 'CIRCUITOS EDUCATIVOS') {
+					$sql.=" WHERE  ( PB.tipo_dependencia ='CIRCUITOS EDUCATIVOS' ) \n";
+					if ($txt_municipio_filtro!=null ) {	
+						$sql.=" and PB.municipio = '$txt_municipio_filtro' ";
+					}
+				}
+			}
+			$sql.="		ORDER BY \n
+						PB.municipio, PB.cod_plantel, PB.dir_celular, PB.id_plantelesbase ";
+			//
+			// ver_arreglo($sql);
+			$dato_plantel=consultar($sql,$Postgres);
+			// ver_arreglo($dato_plantel);
+			$NumeroDeFilas = $Postgres->NumeroDeFilas();
+			if ($NumeroDeFilas>0) {
+				foreach ($dato_plantel as $key => $value) {
+					$dir_ced = $value['dir_cedula'];
+					// echo $key ."  ----> " . $dir_ced . " ---> ";
+					$sql_nom= "SELECT id_nomina,cedula,nombres_apellidos,cod_cargo,cargo,personal  FROM censo2017.nominaactual WHERE cedula = '$dir_ced' LIMIT 1 ";
+					// ver_arreglo($sql_nom);
+					$dato_nom=consultar($sql_nom,$Postgres);
+					$NumeroDeFilas_nom = $Postgres->NumeroDeFilas();  
+					if ($NumeroDeFilas_nom>0) {
+						// echo "si";
+						// $dato_salida[0] = array_merge($dato_nomina[0],$dato_registro[$key]);
+						$dato_salida[$key] = array_merge($value,$dato_nom[0]);
+					}else{
+						// echo "no";
+			            $dato_nom[0]['id_nomina'] = null ; //=> 14358
+			            $dato_nom[0]['cedula'] = null ; // => 12664967
+			            $dato_nom[0]['nombres_apellidos'] = null ; // => SALAZAR ELIZABETH        
+			            $dato_nom[0]['cod_cargo'] = null ; // => 1123DI
+			            $dato_nom[0]['cargo'] = null ; // => DOC. III /AULA           
+			            $dato_nom[0]['personal'] = null ; // => DOCENTE
+						$dato_salida[$key] = array_merge($value,$dato_nom[0]);
+					}
+					// ver_arreglo($value);
+					// ver_arreglo($dato_nom[0]);
+					// ver_arreglo("ARREGLO MERGE ---------------------------------------------------------------------------");
+					// ver_arreglo($dato_salida[$key]);
+					// echo json_encode($dato_salida[$key]) . "<br><br>";
+
+				}
+
+
+				// ver_arreglo($dato_salida);		
+				echo json_encode($dato_salida);
+				// echo json_encode($dato);
+			}else{
+				echo 'false';
+			}
 		}
 
 	}
@@ -2005,8 +1997,8 @@ function contador_planteles_municipio() {
 		// 
 		//
 		// $cedula 			= test_input($datos['cedula']);
-		$municipio 			= $datos['txt_municipio'];
-		$dependencia 		= $datos['txt_dependencia'];
+		$municipio 			= $datos['txt_municipio_filtro'];
+		$dependencia 		= $datos['txt_tipo_dependencia_filtro'];
 		// ver_arreglo($municipio);
 		// ver_arreglo($dependencia);
 		$sql = "";

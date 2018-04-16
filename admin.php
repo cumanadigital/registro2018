@@ -234,7 +234,7 @@ if ( isset($_SESSION['sesion_username']) && isset($_SESSION['sesion_userid']) &&
                               </div>
 
                               <div class="form-group has-feedback">
-                                  <input id="pass_admin" name="pass_admin" type="text" class="form-control" value="<?php echo $pass_admin; ?>" placeholder="Contraseña" title="Ingrese su contraseña" required  autocomplete="off" >
+                                  <input id="pass_admin" name="pass_admin" type="password" class="form-control" value="<?php echo $pass_admin; ?>" placeholder="Contraseña" title="Ingrese su contraseña" required  autocomplete="off" >
                                   <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                               </div>
                               <div class="row">

@@ -241,7 +241,7 @@ if ( isset($_SESSION['sesion_username']) && isset($_SESSION['sesion_userid']) &&
                                   <span class="glyphicon glyphicon-user form-control-feedback"></span>
                               </div>
                               <div class="form-group has-feedback">
-                                  <input id="login_nomina" name="login_nomina" type="text" class="form-control" value="<?php echo $cuenta; ?>" placeholder="Cuenta Bancaria (123456)" title="Ingrese los últimos 6 digitos de su Cuenta Bancaria" pattern="[0-9]+" required autocomplete="off">
+                                  <input id="login_nomina" name="login_nomina" type="password" class="form-control" value="<?php echo $cuenta; ?>" placeholder="Cuenta Bancaria (123456)" title="Ingrese los últimos 6 digitos de su Cuenta Bancaria" pattern="[0-9]+" required autocomplete="off">
                                   <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                               </div>
                               <div class="row">

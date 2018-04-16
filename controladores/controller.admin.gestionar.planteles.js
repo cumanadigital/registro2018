@@ -17,15 +17,21 @@
     var sesion_cedula = parametroArray['sesion_cedula'];
     var sesion_nivel_usuario  = parametroArray['sesion_nivel_usuario'];
     var sesion_municipio = parametroArray['sesion_municipio'];
-    // console.info(parametroArray);
+    console.info(parametroArray);
     var API_URL_planteles =  "servicios/services.admin.planteles.php?accion=consultar_registros" + "&cedula=" + sesion_cedula + "&municipio=" + sesion_municipio + "&nivel_usuario=" + sesion_nivel_usuario ;
     // var API_URL_planteles =  "servicios/services.admin.planteles.php?accion=consultar_registros&parametro_user="+parametros_user; 
     var API_URL =  "servicios/services.admin.planteles.php";
     
-    var $table = $('#table')
-    // var $table = $('#table').bootstrapTable({url: API_URL_planteles});
-    // $table.bootstrapTable('destroy');
-    $table.hide();
+    var $table = $('#table');
+    if (sesion_nivel_usuario == 'DIRECTOR' || sesion_nivel_usuario == 'ADMIN'  ) {
+      $table.bootstrapTable({url: API_URL_planteles});
+      // $table.bootstrapTable('destroy');
+      $table.show();
+    }else{
+      $table.hide();
+    }
+
+
     
     var cuadro_listado_personal_comision_servicio = $('#cuadro_listado_personal_comision_servicio')
     cuadro_listado_personal_comision_servicio.hide();
@@ -559,10 +565,10 @@ $(function () {
         // 
         $btn_filtrar.click(function () {
             console.info('$btn_filtrar');
-            var txt_tipo_dependencia = $('#txt_tipo_dependencia').val();
-            var txt_municipio = $("#txt_municipio").val();
-            if ( txt_tipo_dependencia == 'PLANTELES' || txt_tipo_dependencia == 'CIRCUITOS EDUCATIVOS' ) {
-              if  (txt_municipio != ''){
+            var txt_tipo_dependencia_filtro = $('#txt_tipo_dependencia_filtro').val();
+            var txt_municipio_filtro = $("#txt_municipio_filtro").val();
+            if ( txt_tipo_dependencia_filtro == 'PLANTELES' || txt_tipo_dependencia_filtro == 'CIRCUITOS EDUCATIVOS' ) {
+              if  (txt_municipio_filtro != ''){
                 $table.fadeIn();
                 $table.bootstrapTable('destroy');
                 $table.bootstrapTable({url: API_URL_planteles});
@@ -571,28 +577,28 @@ $(function () {
                 alert('DEBE SELECCIONAR MUNICIPIO');
               }
             }
-            if ( txt_tipo_dependencia == 'ZONA EDUCATIVA'  ) {
+            if ( txt_tipo_dependencia_filtro == 'ZONA EDUCATIVA'  ) {
               $table.fadeIn();
               $table.bootstrapTable('destroy');
               $table.bootstrapTable({url: API_URL_planteles});
             } 
         });
 
-        $('#txt_tipo_dependencia').on('change',function(){
+        $('#txt_tipo_dependencia_filtro').on('change',function(){
           console.info($(this).val());
           var tipo_dependencia = $(this).val();
           if (tipo_dependencia  =='ZONA EDUCATIVA') {
-            $("#txt_municipio").val('');
-            $("#txt_municipio").attr('disabled',true);
+            $("#txt_municipio_filtro").val('');
+            $("#txt_municipio_filtro").attr('disabled',true);
           } else{
-            $("#txt_municipio").val('');
-            $("#txt_municipio").attr('disabled',false);
+            $("#txt_municipio_filtro").val('');
+            $("#txt_municipio_filtro").attr('disabled',false);
           }
           $table.fadeOut();
           $table.bootstrapTable('destroy');
         });
 
-        $('#txt_municipio').change(function(){
+        $('#txt_municipio_filtro').change(function(){
           console.info($(this).val());
         });
       
@@ -1041,7 +1047,7 @@ $(function () {
       icono1+='<a class="consultar_personal" href="javascript:" title="Ver Registro"><i class="glyphicon glyphicon-view glyphicon-eye-open"></i></a>  '
       // icono1+='<a class="modificar_personal" href="javascript:" title="Modificar Registro"><i class="glyphicon glyphicon-warning glyphicon-edit"></i></a>  '
       if (sesion_nivel_usuario == 'ROOT' ) {
-        icono1+='<a class="eliminar_personal" href="javascript:" title="Eliminar Registro"   ><i class="glyphicon glyphicon-red glyphicon-remove-circle"></i></a>';
+        // icono1+='<a class="eliminar_personal" href="javascript:" title="Eliminar Registro"   ><i class="glyphicon glyphicon-red glyphicon-remove-circle"></i></a>';
       }
       return icono1;
     }
