@@ -10,14 +10,15 @@
 
     
     include('class.uploader.php');
-    
+    $ruta_foto="../../../../media/fotos/";
     $uploader = new Uploader();
     $data = $uploader->upload($_FILES['files'], array(
         'limit' => 1, //Maximum Limit of files. {null, Number}
         'maxSize' => 1, //Maximum Size of files {null, Number(in MB's)}
         'extensions' => array('jpg'), //Whitelist for file extension. {null, Array(ex: array('jpg', 'png'))}
         'required' => true, //Minimum one file is required for upload {Boolean}
-        'uploadDir' => '../../../media/carnet/', //Upload directory {String}
+        // 'uploadDir' => '../../../media/fotos/', //Upload directory {String}
+        'uploadDir' => $ruta_foto, //Upload directory {String}
         // 'title' => array('name'), //New file name {null, String, Array} *please read documentation in README.md
         'title' => $cedula, //New file name {null, String, Array} *please read documentation in README.md
         'removeFiles' => false, //Enable file exclusion {Boolean(extra for jQuery.filer), String($_POST field name containing json data with file names)}
@@ -57,7 +58,7 @@
     
     function onFilesRemoveCallback($removed_files){
         foreach($removed_files as $key=>$value){
-            $file = '../../../media/carnet/' . $value;
+            $file = $ruta_foto . $value;
             if(file_exists($file)){
                 unlink($file);
             }

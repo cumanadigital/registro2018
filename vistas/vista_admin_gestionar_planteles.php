@@ -23,7 +23,6 @@ $nivel_usuario = $_POST['sesion_nivel_usuario'];
       <!--CONTENIDO AQUI-->
       <!--CONTENIDO AQUI-->
       <!--CONTENIDO AQUI-->
-  
           <div class="row"> 
             <div class="col-sm12 col-md-12">
               <div id="toolbar1" class="toolbar1">
@@ -31,12 +30,12 @@ $nivel_usuario = $_POST['sesion_nivel_usuario'];
                 <div class="form-inline" role="form">
                   <div class="form-group ">
                     <!-- <span>Municipio: </span> -->
-                    <select class="form-control" id="txt_tipo_dependencia" name="txt_tipo_dependencia" withd="6">
+                    <select class="form-control" id="txt_tipo_dependencia_filtro" name="txt_tipo_dependencia_filtro" withd="6">
                       <option value='PLANTELES' >PLANTELES</option>
                       <option value='ZONA EDUCATIVA' >ZONA EDUCATIVA</option>
                       <option value='CIRCUITOS EDUCATIVOS' >CIRCUITOS EDUCATIVOS</option>
                     </select>
-                    <select class="form-control" id="txt_municipio" name="txt_municipio" withd="6">
+                    <select class="form-control" id="txt_municipio_filtro" name="txt_municipio_filtro" withd="6">
                       <option value=''>Seleccione Municipio</option> 
                       <option value='ANDRES ELOY BLANCO' >ANDRES ELOY BLANCO</option>
                       <option value='ANDRES MATA' >ANDRES MATA</option>
@@ -64,7 +63,7 @@ $nivel_usuario = $_POST['sesion_nivel_usuario'];
                 <div class="form-inline" role="form">
                   <div class="form-group ">
                     <!-- <span>Municipio: </span> -->
-                    <select class="form-control" id="txt_tipo_dependencia" name="txt_tipo_dependencia" withd="6">
+                    <select class="form-control" id="txt_tipo_dependencia_filtro" name="txt_tipo_dependencia_filtro" withd="6">
                       <!-- <option value='PLANTELES' >PLANTELES</option> -->
                       <option value='ZONA EDUCATIVA' >ZONA EDUCATIVA</option>
                       <!-- <option value='CIRCUITOS EDUCATIVOS' >CIRCUITOS EDUCATIVOS</option> -->
@@ -92,11 +91,10 @@ $nivel_usuario = $_POST['sesion_nivel_usuario'];
                   <span class="alert"></span>
                   </div>
                 <?php } ?>
-
                 </div>
             </div>
           </div>
-          
+          <?php //print_r($nivel_usuario); ?>
           <div class="row">
             <div class="col-sm12 col-md-12">
               <!-- 

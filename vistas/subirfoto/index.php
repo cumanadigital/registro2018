@@ -8,7 +8,7 @@ $cedula = $_REQUEST['cedula'];
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>SUBIR FOTO</title>
+	<title>SUBIR FOTO <?php print_r($cedula); ?></title>
     
 	<!--Stylesheets-->
 	<link href="css/jquery.filer.css" type="text/css" rel="stylesheet" />
@@ -63,6 +63,7 @@ $cedula = $_REQUEST['cedula'];
     <div id="header">
         <!-- <h1>Foto de usuario</h1> -->
         <p>Módulo para cargar foto del perfl de Usuario</p>
+        <?php print_r($cedula); ?>
     </div>
     
     <hr />

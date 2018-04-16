@@ -64,9 +64,9 @@ $municipiousu = $_SESSION['sesion_municipio'];
 <li class="treeview">
     <a href="javascript:void(0);"><i class="fa fa-file"></i> <span>Personal</span><i class="fa fa-angle-left pull-right"></i></a>
     <ul class="treeview-menu">
-        <li id="menu_admin_gestionar_dependencias"><a href="javascript:void(0);"></i><i class="fa  fa-file-o"></i> <span>Gestionar</span></a></li>
+        <!-- <li id="menu_admin_gestionar_dependencias"><a href="javascript:void(0);"></i><i class="fa  fa-file-o"></i> <span>Gestionar</span></a></li> -->
         <li id="menu_admin_asignar_autoridades"><a href="javascript:void(0);"></i><i class="fa  fa-file-o"></i> <span>Asignar Autoridades</span></a></li>
-        <li id="menu_admin_movimiento_personal"><a href="javascript:void(0);"></i><i class="fa  fa-file-o"></i> <span>Movimientos Personal</span></a></li>
+        <!-- <li id="menu_admin_movimiento_personal"><a href="javascript:void(0);"></i><i class="fa  fa-file-o"></i> <span>Movimientos Personal</span></a></li> -->
         <li id="menu_admin_foto_personal"><a href="vistas/demo/camara_demo.php" target="_blank"></i><i class="fa  fa-file-o"></i> <span>Captura Foto</span></a></li>
     </ul>
 </li>

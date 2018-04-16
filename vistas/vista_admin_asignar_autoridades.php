@@ -29,7 +29,7 @@ require_once('../apiv3.0/funciones/funciones3.0.php');
                   <div class="form-inline" role="form">
                       <div class="form-group ">
                           <!-- <span>Municipio: </span> -->
-                          <select class="form-control" id="txt_municipio" name="txt_municipio" withd="10">
+                          <select class="form-control" id="txt_municipio_filtro" name="txt_municipio_filtro" withd="10">
                               <option value=''>Seleccione Municipio</option>  
                               <option value='ANDRES ELOY BLANCO' >ANDRES ELOY BLANCO</option>
                               <option value='ANDRES MATA' >ANDRES MATA</option>
@@ -50,7 +50,7 @@ require_once('../apiv3.0/funciones/funciones3.0.php');
                       </div>
                       <div class="form-group">
                           <!-- <span>Dependencia: </span> -->
-                          <select class="form-control" id="txt_dependencia" name="txt_dependencia">
+                          <select class="form-control" id="txt_tipo_dependencia_filtro" name="txt_tipo_dependencia_filtro">
                                   <option value=''>Seleccione Dependencia</option>
                                   <option value='NACIONAL' >NACIONAL</option>
                                   <option value='ESTADAL' >ESTADAL</option>
