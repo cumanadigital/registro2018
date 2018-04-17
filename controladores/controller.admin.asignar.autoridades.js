@@ -23,9 +23,18 @@
 
     var API_URL_personal =  "servicios/services.admin.planteles.php?accion=consultar_planteles_municipio";
     // $('#table_personal_asignado').bootstrapTable('destroy' ); 
-    $('#table_planteles').bootstrapTable({url: API_URL_personal});
-
+    // 
+    // var $table = $('#table_planteles');
     var $table_planteles = $('#table_planteles');
+    if (sesion_nivel_usuario == 'DIRECTOR' || sesion_nivel_usuario == 'ADMIN'  ) {
+      $table_planteles.bootstrapTable({url: API_URL_personal});
+      // $table.bootstrapTable('destroy');
+      $table_planteles.show();
+    }else{
+      $table_planteles.hide();
+    }
+    
+
     var $btn_filtrar = $('#btn_filtrar');
     
     var usernombre = $('#name_user').html();
@@ -53,8 +62,13 @@
     $(function () {
         $btn_filtrar.click(function () {
             console.info('$btn_filtrar');
+            // $table_planteles.bootstrapTable('destroy');
+            $table_planteles.fadeIn();
             $table_planteles.bootstrapTable('destroy');
             $table_planteles.bootstrapTable({url: API_URL_personal});
+
+            // $table_planteles.show();
+            // $table_planteles.bootstrapTable({url: API_URL_personal});
             // $table_planteles.bootstrapTable('refresh');
         });
     });
@@ -383,26 +397,28 @@
       dir_email = $modal_director.find('input[name="txt_dir_email"]').val();
       // dir_twitter = $modal_director.find('input[name="txt_dir_twitter"]').val();
       
-      $('#form_modal_director').validator('validate');
+      // $('#form_modal_director').validator('validate');
 
       if (dir_apellido!= '' && dir_nombre!='' ) {
-      // if (dir_apellido!= '' && dir_nombre!='' &&  direccion!= '' && fecha_nac!= '' && dir_telefono!= '' && dir_celular!= '' && dir_email!= '') {
-        parametros = $("#form_modal_director").serialize() + '&accion='+ accion;
-        API_URL =  "servicios/services.admin.planteles.php";
-        $.ajax({
-            url: API_URL + ($modal_director.data('id') || ''),
-            type: 'POST',
-            data: parametros + "&token1="+rand_code(),
-            success: function (response) {
-                $modal_director.modal('hide');
-                showAlert('Registro con éxito!', 'success');
-                $table_planteles.bootstrapTable('refresh');
-            },
-            error: function () {
-                $modal_director.modal('hide');
-                showAlert(($modal_director.data('id') ? 'Update' : 'Create') + ' item error!', 'danger');
-            }
-        });   
+        if (confirm('Esta seguro que desea Asignar Directivo? \n' + dir_cedula + "\n" + dir_nombre + " " + dir_apellido + "\n" + "")) {
+        // if (dir_apellido!= '' && dir_nombre!='' &&  direccion!= '' && fecha_nac!= '' && dir_telefono!= '' && dir_celular!= '' && dir_email!= '') {
+          parametros = $("#form_modal_director").serialize() + '&accion='+ accion;
+          API_URL =  "servicios/services.admin.planteles.php";
+          $.ajax({
+              url: API_URL + ($modal_director.data('id') || ''),
+              type: 'POST',
+              data: parametros + "&token1="+rand_code(),
+              success: function (response) {
+                  $modal_director.modal('hide');
+                  showAlert('Registro con éxito!', 'success');
+                  $table_planteles.bootstrapTable('refresh');
+              },
+              error: function () {
+                  $modal_director.modal('hide');
+                  showAlert(($modal_director.data('id') ? 'Update' : 'Create') + ' item error!', 'danger');
+              }
+          });   
+        }  
       }else{
         alert("Debe ingresar los datos obligatorios");
       }
