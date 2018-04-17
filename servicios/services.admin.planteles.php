@@ -77,7 +77,9 @@
 		case 'consultar_personal_asignado':
 			consultar_personal_asignado($datos);
 		break;
-		
+		case 'consultar_cargos_asignados':
+			consultar_cargos_asignados($datos);
+		break;
 		case 'consultar_personal_asignado_comision_servicio':
 			consultar_personal_asignado_comision_servicio($datos);
 		break;
@@ -847,6 +849,193 @@
 			}
 			// ver_arreglo($dato_registro);
 			actualizar_contador_personal($id_plantelesbase);
+			echo json_encode($dato_registro);
+		}else{
+			print_r('false');
+		}
+	}
+?>
+<?php
+	function consultar_cargos_asignados($datos) {
+		// ver_arreglo($datos);
+		// Array
+		// (
+		//     [cedula] => 11829328
+		//     [accion] => consultar_cargos_asignados
+		//     [sesion_userid] => 11829328
+		//     [sesion_username] => 11829328
+		//     [sesion_nivel_usuario] => ROOT
+		//     [sesion_id_persona] => 1892
+		//     [sesion_id_dependencia] => 006102200
+		//     [sesion_ingreso] => 2018-4-16 21:33:42
+		//     [sesion_estatus] => 1
+		//     [sesion_idpersona] => 1892
+		//     [sesion_usernombre] => HERNANDEZ C OSWALDO E    
+		//     [session_username1] => HERNANDEZ
+		//     [session_username2] => HERNANDEZ
+		//     [sesion_cedula] => 11829328
+		//     [sesion_userfoto] => 11829328
+		//     [sesion_iddepartamento] => 006102200
+		//     [sesion_departamento] => OFIC DE SUPERV ZONA NO 12
+		//     [sesion_cargo] => BACHILLER I              
+		//     [sesion_municipio] => ALL
+		//     [sesion_ultimiacceso] => 2018-4-16 21:33:42
+		//     [cierre] => final
+		//     [token1] => e¿;6ef¡874AFCFf3?0ce
+		// )
+
+
+// 		//  __        __                  __  ___       __   __      __   ___
+// 		// |__)  /\  |__)  /\     |    | /__`  |   /\  |  \ /  \    |  \ |__
+// 		// |    /~~\ |  \ /~~\    |___ | .__/  |  /~~\ |__/ \__/    |__/ |___
+// 		// 
+// 		//        __                  ___      ___  __      __   ___     __   ___  __   __   __
+// 		//  |\/| /  \ \  / |  |\/| | |__  |\ |  |  /  \    |  \ |__     |__) |__  |__) /__` /  \ |\ |  /\  |
+// 		//  |  | \__/  \/  |  |  | | |___ | \|  |  \__/    |__/ |___    |    |___ |  \ .__/ \__/ | \| /~~\ |___
+// 		//  
+		$Postgres=new Postgres(DB_SERVER,DB_NAME,DB_USER,DB_PASSWORD);
+		$cedula = $datos['cedula'];
+		$sql=  "SELECT	
+						REG.id_plantelesbase as REG_id_plantelesbase,
+						PB.municipio AS pb_municipio,
+						PB.nombre AS pb_nombre,
+
+						REG.id_registropersonal AS REG_id_registropersonal, 
+						REG.cedula AS REG_cedula, 
+						UPPER(TRIM(REG.nombre_completo)) AS REG_nombre_completo, 
+						UPPER(TRIM(REG.apellido_completo)) AS REG_apellido_completo, 
+						REG.fecha_nac AS REG_fecha_nac, 
+						UPPER(TRIM(REG.sexo)) AS REG_sexo, 
+						UPPER(TRIM(REG.estado_civil)) AS REG_estado_civil, 
+						REG.telefono_celular AS REG_telefono_celular, 
+						REG.telefono_residencia AS REG_telefono_residencia, 
+						UPPER(TRIM(REG.direccion_habitacion)) AS REG_direccion_habitacion, 
+						UPPER(TRIM(REG.red_twitter)) AS REG_red_twitter, 
+						UPPER(TRIM(REG.red_email)) AS REG_red_email, 
+						REG.tipo_personal AS REG_tipo_personal,
+						REG.tipo_personal_funcional AS REG_tipo_personal_funcional,
+						--
+						REG.grado_instruccion AS reg_grado_instruccion, 
+	            		UPPER(TRIM(REG.titulo_obtenido)) AS reg_titulo_obtenido, 
+            			UPPER(TRIM(REG.institucion_educativa)) AS reg_institucion_educativa, 
+
+            			REG.discapacidad AS reg_discapacidad,
+	            		TRIM(REG.discapacidad_otra) AS reg_discapacidad_otra,
+						--
+						COALESCE(REG.horas_doc, '0') AS REG_horas_doc,
+						COALESCE(REG.horas_adm, '0') AS REG_horas_adm,
+						COALESCE(REG.horas_obr, '0') AS REG_horas_obr,
+						COALESCE(REG.horas_adm, REG.horas_obr) AS reg_horas_doc_obr,
+						--COALESCE (COALESCE(REG.horas_adm, REG.horas_obr), '0' ) AS reg_horas_doc_obr,
+						-- CAST(REG.horas_adm AS numeric)  + CAST(REG.horas_obr AS numeric) AS reg_horas_doc_obr,
+				--
+						UPPER(TRIM(REG.horarios_funcional)) AS REG_horarios_funcional, 
+						UPPER(TRIM(REG.cargo_funcional)) AS REG_cargo_funcional, 
+						UPPER(TRIM(REG.dependencia_funcional)) AS reg_dependencia_funcional,
+--
+						UPPER(TRIM(REG.turno_trabajo)) AS REG_turno_trabajo,
+--
+						REG.niveles_funcional AS REG_niveles_funcional, 
+						REG.matricula_atendida AS REG_matricula_atendida, 
+						REG.fecha_ingreso AS REG_fecha_ingreso, 
+						REG.tiempo_servicio_plantel AS REG_tiempo_servicio_plantel, 
+						REG.matricula_atendida_total_maternal, 
+						REG.matricula_atendida_total_preescolar, 
+						REG.matricula_atendida_total_primaria, 
+						REG.matricula_atendida_total_media_general, 
+						REG.matricula_atendida_total_media_tecnica, 
+						REG.matricula_atendida_total_adulto, 
+						REG.matricula_atendida_total_especial, 
+						REG.matricula_atendida_total
+				FROM censo2017.registropersonal AS REG
+				INNER JOIN censo2017.plantelesbase AS PB ON (PB.id_plantelesbase = REG.id_plantelesbase)
+
+				WHERE ( REG.cedula = '$cedula'  )
+				ORDER BY  REG.id_registropersonal ";
+		// ver_arreglo($sql);		
+		$dato_registro=consultar($sql,$Postgres);
+		// ver_arreglo($dato_registro);
+		// Array
+		// (
+		//     [0] => Array
+		//         (
+		//             [reg_id_plantelesbase] => 1168
+		//             [reg_id_registropersonal] => 512
+		//             [reg_cedula] => 11829328
+		//             [reg_nombre_completo] => OSWALDO ENRIQUES
+		//             [reg_apellido_completo] => HERNANDEZ CAMPOS
+		//             [reg_fecha_nac] => 08/06/1974
+		//             [reg_sexo] => MASCULINO
+		//             [reg_estado_civil] => SOLTERO
+		//             [reg_telefono_celular] => 0416-5936395
+		//             [reg_telefono_residencia] => 0293-4335041
+		//             [reg_direccion_habitacion] => CALLE RENDON CASA NUM 5
+		//             [reg_red_twitter] => CUMANADIGITAL
+		//             [reg_red_email] => OSWALDOEHC@GMAIL.COM
+		//             [reg_tipo_personal] => ADMINISTRATIVO
+		//             [reg_tipo_personal_funcional] => ADMINISTRATIVO
+		//             [reg_grado_instruccion] => TECNICO SUPERIOR
+		//             [reg_titulo_obtenido] => TSU INFORMATICA
+		//             [reg_institucion_educativa] => IUTIRLA
+		//             [reg_discapacidad] => NINGUNA
+		//             [reg_discapacidad_otra] => 
+		//             [reg_horas_doc] => 0
+		//             [reg_horas_adm] => 37,5
+		//             [reg_horas_obr] => 0
+		//             [reg_horas_doc_obr] => 37,5
+		//             [reg_horarios_funcional] => 08-03
+		//             [reg_cargo_funcional] => COORDINADOR
+		//             [reg_dependencia_funcional] => PROGRAMACION
+		//             [reg_turno_trabajo] => COMPLETO
+		//             [reg_niveles_funcional] => 
+		//             [reg_matricula_atendida] => 
+		//             [reg_fecha_ingreso] => 01/04/2011
+		//             [reg_tiempo_servicio_plantel] => 01/11/2011
+		//             [matricula_atendida_total_maternal] => 
+		//             [matricula_atendida_total_preescolar] => 
+		//             [matricula_atendida_total_primaria] => 
+		//             [matricula_atendida_total_media_general] => 
+		//             [matricula_atendida_total_media_tecnica] => 
+		//             [matricula_atendida_total_adulto] => 
+		//             [matricula_atendida_total_especial] => 
+		//             [matricula_atendida_total] => 
+		//         )
+		// )
+		$NumeroDeFilas = $Postgres->NumeroDeFilas();
+		if ($NumeroDeFilas>0) {
+			foreach ($dato_registro as $key => $value) {
+				// ver_arreglo($value);
+				// $cedula = $value['reg_cedula'];
+// 				$sql_nomina =  "SELECT	
+// 								NOM.id_nomina AS NOM_id_nomina, 
+// 								NOM.cedula AS NOM_cedula, 
+// 								NOM.nomina AS NOM_nomina,
+// 								NOM.nombres_apellidos AS NOM_nombres_apellidos, 
+// 								NOM.fecha_ingreso AS NOM_fecha_ingreso, 
+// 								NOM.cod_cargo AS NOM_cod_cargo, 
+// 								NOM.cargo AS NOM_cargo, 
+// 								NOM.cod_dependencia AS NOM_cod_dependencia, 
+// 								NOM.dependencia AS NOM_dependencia, 
+// 								NOM.personal AS NOM_personal, 
+// 								NOM.horas_adm AS NOM_horas_adm, 
+// 								NOM.horas_doc AS NOM_horas_doc, 
+// 								-- NOM.cuenta_bancaria AS NOM_cuenta_bancaria, 
+// 								NOM.fecha_ultimo_acceso AS NOM_fecha_ultimo_acceso
+// 							FROM censo2017.nominaactual AS NOM
+// 							WHERE NOM.cedula = '$cedula' ";		
+// 				$dato_nomina=consultar($sql_nomina,$Postgres);
+// 				// ver_arreglo($value);
+// 				// ver_arreglo($dato_nomina[0]);
+// 				$dato_registro[$key] = array_merge($dato_nomina[0],$dato_registro[$key]);
+// 				// $NumeroDeFilas_nomina = $Postgres->NumeroDeFilas();
+// 				// if ($NumeroDeFilas_nomina>0) {
+// 				//   	$dato[$key]; = array_merge($dato_nomina[0],$dato[$key]);
+// 				// ver_arreglo($dato_registro[$key]);
+// 				// echo json_encode($dato_registro[$key]);
+// 				//  }
+			}
+// 			// ver_arreglo($dato_registro);
+// 			actualizar_contador_personal($id_plantelesbase);
 			echo json_encode($dato_registro);
 		}else{
 			print_r('false');
@@ -2120,7 +2309,27 @@ function contador_planteles_municipio() {
 			echo 'false';
 		}
 	}
-?><?php
+?>
+<?php
+	function consultar_dependencias_zona($datos) {
+		$Postgres=new Postgres(DB_SERVER,DB_NAME,DB_USER,DB_PASSWORD);
+		$municipio 			= $datos['txt_municipio_filtro'];
+		$dependencia 		= $datos['txt_tipo_dependencia_filtro'];
+		// ver_arreglo($municipio);
+		// ver_arreglo($dependencia);
+		$sql = "";
+		$sql.="SELECT id_plantelesbase, denominacion, cod_plantel, cod_estadistico,nombre
+					  FROM censo2017.plantelesbase
+					  where (cod_estadistico like 'ZE-INTERNA2' or cod_estadistico like 'ZE-INTERNA3')
+					order by id_plantelesbase, denominacion, cod_plantel";
+		// ver_arreglo($sql);
+		$dato=consultar($sql,$Postgres);
+			// ver_arreglo($dato);
+		$NumeroDeFilas = $Postgres->NumeroDeFilas();
+		echo json_encode($dato);
+	}
+?>
+<?php
 function activar_plantel($datos) {
 	// INICIA LA CONEXION CON EL SERVIDOR 
 	$Postgres=new Postgres(DB_SERVER,DB_NAME,DB_USER,DB_PASSWORD);
