@@ -652,12 +652,14 @@ $nivel_usuario = $_POST['sesion_nivel_usuario'];
                             <div class="col-sm-12">
                               
                               <div class="row"> 
+                                <?php if ($nivel_usuario == 'ROOT' ) { ?>
                                 <div class="col-sm12 col-md-12">
                                   <p class="toolbar2" id="toolbar2">
                                     <a class="create btn btn-default" id="btn_mostrar_agregar_personal" href="javascript:">Agregar Personal</a>
                                     <span class="alert" id="alert_pesronal"></span>
                                   </p>
                                 </div>
+                                <?php } ?>
                               </div>
                               <!-- 
                               ___       __        ___      __   ___  __   __   __                           __     __             __   __

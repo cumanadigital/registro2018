@@ -84,7 +84,7 @@ $municipiousu = $_SESSION['sesion_municipio'];
 </li>
 <?php }?>
 
-<?php if ($nivelusuario=='ROOT' || $nivelusuario=='ADMIN' ) {?>     <!--0:Admin,-->
+<?php if ($nivelusuario=='ROOT' ) {?>     <!--0:Admin,-->
 <!--USUARIOS DE INFORMATICA-->
 <li class="treeview">
     <a href="javascript:void(0);"><i class="fa fa-file"></i> <span>Administrar</span><i class="fa fa-angle-left pull-right"></i></a>
