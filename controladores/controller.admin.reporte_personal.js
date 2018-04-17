@@ -111,19 +111,19 @@
       // console.info(row)
       var nombre = row.reg_nombre_completo + " " + row.reg_apellido_completo;
       var ruta_foto = "../media/fotos/" + row.nom_cedula + ".jpg";
-      if (existeUrl(ruta_foto)){
+      // if (existeUrl(ruta_foto)){
       var fotod = "<div class='pull-left image'>";;
           fotod+= "<img src='" + ruta_foto + "' alt='User Image' class='mg-circle' height='60px';>";
           fotod+= "</div>";
 
-      }else{
-        ruta_foto = "media/carnet/noimage3.png";
-        ruta_foto = "media/carnet/noimage.png";
-        var fotod = "<div class='pull-left image'>";;
-        fotod+= "<img src='" + ruta_foto + "' alt='User Image' class='mg-circle' height='42px';>";
-        fotod+= "</div>";
+      // }else{
+      //   ruta_foto = "media/carnet/noimage3.png";
+      //   ruta_foto = "media/carnet/noimage.png";
+      //   var fotod = "<div class='pull-left image'>";;
+      //   fotod+= "<img src='" + ruta_foto + "' alt='User Image' class='mg-circle' height='42px';>";
+      //   fotod+= "</div>";
 
-      }
+      // }
       return fotod
     }
 

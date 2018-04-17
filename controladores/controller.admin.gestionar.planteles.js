@@ -1002,11 +1002,11 @@ $(function () {
           icon+='    Seleccione <span class="caret"></span>';
           icon+='  </button>';
           icon+='  <ul class="dropdown-menu pull-right" role="menu">';
-          icon+='    <li><a class="update_director" href="javascript:" title="Actualizar Datos del Director(a)"><i class="glyphicon glyphicon-blue glyphicon-user"></i>Actualizar Directivo</a></li>';
-          icon+='    <li><a class="update_planteles" href="javascript:" title="Actualizar Datos del Plantel"><i class="glyphicon glyphicon-warning glyphicon glyphicon-home"></i>Actualizar Plantel</a></li>';
-          icon+='    <li><a class="update_matricula" href="javascript:" title="Registrar Matricula Estudiantil"><i class="glyphicon glyphicon-red glyphicon-education "></i>Registrar Matricula</a></li>';
+          // icon+='    <li><a class="update_director" href="javascript:" title="Actualizar Datos del Director(a)"><i class="glyphicon glyphicon-blue glyphicon-user"></i>Actualizar Directivo</a></li>';
+          // icon+='    <li><a class="update_planteles" href="javascript:" title="Actualizar Datos del Plantel"><i class="glyphicon glyphicon-warning glyphicon glyphicon-home"></i>Actualizar Plantel</a></li>';
+          // icon+='    <li><a class="update_matricula" href="javascript:" title="Registrar Matricula Estudiantil"><i class="glyphicon glyphicon-red glyphicon-education "></i>Registrar Matricula</a></li>';
           icon+='    <li><a class="insert_personal" href="javascript:" title="Registrar Personal"><i class="glyphicon-blue2 fa fa-users "></i>Registrar Personal</a></li>';
-          icon+='    <li><a class="comision_servicio" href="javascript:" title="Comisión de Servicio"><i class="glyphicon-red fa fa-male "></i>Comisión de Servicio</a></li>';           
+          // icon+='    <li><a class="comision_servicio" href="javascript:" title="Comisión de Servicio"><i class="glyphicon-red fa fa-male "></i>Comisión de Servicio</a></li>';           
           icon+='  </ul>';
           icon+='</div>';
         }
@@ -1256,11 +1256,11 @@ $(function () {
       // console.info(row)
       var nombre = row.reg_nombre_completo + " " + row.reg_apellido_completo;
       var ruta_foto = "../media/fotos/" + row.nom_cedula + ".jpg";
-      if (existeUrl(ruta_foto)){
+      // if (existeUrl(ruta_foto)){
 
-      }else{
-        ruta_foto = "media/carnet/noimage3.png";
-      }
+      // }else{
+      //   ruta_foto = "media/carnet/noimage3.png";
+      // }
       var fotod = "<div class='pull-left image'>";;
           fotod+= "<img src='" + ruta_foto + "' alt='User Image' class='mg-circle' height='60px';>";
           fotod+= "</div>";
