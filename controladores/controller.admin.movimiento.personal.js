@@ -1,4 +1,4 @@
-    console.log("javascript - root registrar planteles");
+    console.log("javascript - root movimiento de personal");
     // 
     var permite_eliminar = false;    
     var username = $('#user_name').attr('oculto');
@@ -58,9 +58,35 @@
  
     $(function () {
 
-        $('#txt_dependencia').select2();
+        // $('#txt_dependencia').select2();
 
-        $("#txt_dependencia2").select2();
+        $("#txt_dependencia2").select2({
+          placeholder: 'Seleccione una Opción',
+          ajax: {
+            url: 'servicios/services.admin.planteles.php',
+            dataType: 'json',
+            delay: 250,
+            language: "es",
+            cache: true,
+            data: function(params) {
+                return {
+                    accion: 'consultar_dependencias_zona',
+                    m: 1,
+                    q: params.term, // search term
+                };
+            },
+            processResults: function(data) {
+                return {
+                    results: data
+                };
+            },
+            cache: true
+
+
+            // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
+          }
+        });
+
 
 
         //    __   __  ___  __           __        __   __        __      __   ___  __   __   __
@@ -141,10 +167,6 @@
                           $("#txt_apellido_funcionario").val(data_func[0]['reg_apellido_completo']);
                           $("#txt_nombre_funcionario").val(data_func[0]['reg_nombre_completo']);
 
-                          // reg_nombre_completo
-                          // reg_apellido_completo
-                          // txt_fecha_ingreso
-
                           $("#txt_apellido_funcionario").focus();
                           // desactivar_datos_personales();
                         }
@@ -208,7 +230,10 @@
     
 
     function actionFormatter_MOVPER2(value,row) {
-      var icon = '<a class="movimiento_personal" href="javascript:" title="Reasignar Personal"   ><i class="glyphicon glyphicon-blue2  glyphicon-random"></i></a>';
+      var icon="";
+      icon+='<a class="movimiento_personal" href="javascript:" title="Reasignar Personal"   ><i class="glyphicon glyphicon-blue2  glyphicon-random"></i></a>  ';
+      // icon+='<a class="liberar_personal" href="javascript:" title="Liberar Personal"   ><i class="glyphicon glyphicon-red glyphicon-ban-circle"></i></a>  ';
+
       // var icon="";
       //     icon+='<div class="btn-group">';
       //     icon+='  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">';

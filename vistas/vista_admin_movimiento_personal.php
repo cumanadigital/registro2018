@@ -7,8 +7,8 @@ require_once('../apiv3.0/funciones/funciones3.0.php');
 <!-- <script type="text/javascript" src="apiv3.0/plugins/HTML5-Webcam-Plugin-with-jQuery-photobooth/photobooth_min.js"></script> -->
 
 <!-- Select2 -->
-<link rel="stylesheet" href="apiv3.0/plugins/select2/select2.min.css">
-
+<!-- <link rel="stylesheet" href="apiv3.0/plugins/select2/select2.min.css">
+<link rel="stylesheet" href="apiv3.0/plugins/select2/select2-bootstrap.css"> -->
 
 <div class="row">
   <div class="col-sm-12 col-md-12">
@@ -27,7 +27,6 @@ require_once('../apiv3.0/funciones/funciones3.0.php');
       <!--CONTENIDO AQUI-->
       <!--CONTENIDO AQUI-->
 
-
           <!-- 
           ######  ####### ######   #####  ####### #     #    #    #
           #     # #       #     # #     # #     # ##    #   # #   #
@@ -37,7 +36,6 @@ require_once('../apiv3.0/funciones/funciones3.0.php');
           #       #       #    #  #     # #     # #    ## #     # #
           #       ####### #     #  #####  ####### #     # #     # #######
           -->
-          
           
           <form class="form-horizontal" id="form_modal_personal" role="form" data-toggle="validator">
             <div id="modal_personal">
@@ -127,11 +125,10 @@ require_once('../apiv3.0/funciones/funciones3.0.php');
 
                   <div class="row">
 
-                    <div class="col-sm-4">
+                    <!-- <div class="col-sm-4">
                       <div class="form-group">
                         <label for="txt_dependencia" class="col-sm-4 control-label">Dependencia*</label>
                         <div class="col-sm-8">
-                          <!-- <input class="form-control" id="txt_tipo_personal" type="hidden" name="txt_tipo_personal"> -->
                           <select class="form-control" id="txt_dependencia" name="txt_dependencia[]" style="width: 100%;" required>
                             <option value=''>Selecciones</option>  
                             <option value='DEPARTAMENTO 1' >DEPARTAMENTO 1</option>
@@ -140,22 +137,13 @@ require_once('../apiv3.0/funciones/funciones3.0.php');
                           </select>
                         </div>
                       </div>
-                    </div>
+                    </div> -->
 
                     <div class="col-sm-4">
                       <div class="form-group">
-                        <label for="txt_dependencia2" class="col-sm-4 control-label" >Dependencia*</label>
+                        <label for="txt_dependencia2" class="col-sm-4 control-label" >Dependencia Destino*</label>
                         <div class="col-sm-8">
-                          <!-- <input class="form-control" id="txt_tipo_personal" type="hidden" name="txt_tipo_personal"> -->
-                          <select class="form-control select2" id="txt_dependencia2" name="txt_dependencia2[]" multiple="multiple" style="width: 100%;">
-                            <option selected="selected">Alabama</option>
-                            <option>Alaska</option>
-                            <option>California</option>
-                            <option>Delaware</option>
-                            <option>Tennessee</option>
-                            <option>Texas</option>
-                            <option>Washington</option>
-                          </select>
+                          <select class="form-control select2" id="txt_dependencia2" name="txt_dependencia2" style="width: 100%;"></select>
                         </div>
                       </div>
                     </div>
@@ -305,4 +293,4 @@ require_once('../apiv3.0/funciones/funciones3.0.php');
 <script src="apiv3.0/plugins/bootstrap-table/locale/bootstrap-table-es-SP.js"></script>
 
 <!-- Select2 -->
-<script src="apiv3.0/plugins/select2/select2.full.min.js"></script>
+<!-- <script src="apiv3.0/plugins/select2/select2.full.min.js"></script> -->

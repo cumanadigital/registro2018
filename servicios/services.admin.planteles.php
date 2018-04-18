@@ -83,12 +83,14 @@
 		case 'consultar_personal_asignado_comision_servicio':
 			consultar_personal_asignado_comision_servicio($datos);
 		break;
-
 		case 'consultar_personal_general':
 			consultar_personal_general($datos);
 		break;
 		case 'consultar_planteles_municipio':
 			consultar_planteles_municipio($datos);
+		break;
+		case 'consultar_dependencias_zona':
+			consultar_dependencias_zona($datos);
 		break;
 		case 'activar_plantel':
 			activar_plantel($datos);
@@ -2313,15 +2315,26 @@ function contador_planteles_municipio() {
 <?php
 	function consultar_dependencias_zona($datos) {
 		$Postgres=new Postgres(DB_SERVER,DB_NAME,DB_USER,DB_PASSWORD);
-		$municipio 			= $datos['txt_municipio_filtro'];
-		$dependencia 		= $datos['txt_tipo_dependencia_filtro'];
+		// $municipio 			= $datos['txt_municipio_filtro'];
+		// $dependencia 		= $datos['txt_tipo_dependencia_filtro'];
 		// ver_arreglo($municipio);
 		// ver_arreglo($dependencia);
+		$parametro = strtoupper($datos['q']);
 		$sql = "";
-		$sql.="SELECT id_plantelesbase, denominacion, cod_plantel, cod_estadistico,nombre
-					  FROM censo2017.plantelesbase
-					  where (cod_estadistico like 'ZE-INTERNA2' or cod_estadistico like 'ZE-INTERNA3')
-					order by id_plantelesbase, denominacion, cod_plantel";
+		if ($parametro==''){
+			$sql.="SELECT id_plantelesbase as id, nombre as text
+						FROM censo2017.plantelesbase
+						  where (cod_estadistico like 'ZE-INTERNA2' or cod_estadistico like 'ZE-INTERNA3')
+						order by id_plantelesbase";
+			
+		}else{
+			$sql.="SELECT id_plantelesbase as id, nombre as text
+						FROM censo2017.plantelesbase
+						  where (cod_estadistico like 'ZE-INTERNA2' or cod_estadistico like 'ZE-INTERNA3') 
+						  and UPPER(nombre) like '%$parametro%'
+						order by id_plantelesbase";
+		}
+
 		// ver_arreglo($sql);
 		$dato=consultar($sql,$Postgres);
 			// ver_arreglo($dato);
