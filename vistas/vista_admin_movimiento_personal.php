@@ -6,6 +6,9 @@ require_once('../apiv3.0/funciones/funciones3.0.php');
 <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script> -->
 <!-- <script type="text/javascript" src="apiv3.0/plugins/HTML5-Webcam-Plugin-with-jQuery-photobooth/photobooth_min.js"></script> -->
 
+<!-- Select2 -->
+<link rel="stylesheet" href="apiv3.0/plugins/select2/select2.min.css">
+
 
 <div class="row">
   <div class="col-sm-12 col-md-12">
@@ -122,45 +125,40 @@ require_once('../apiv3.0/funciones/funciones3.0.php');
                     <h4><span id='resumen_laboral'>Datos Laborales (Lugar de trabajo)</span></h4>
                   </div>
 
-                  
-
                   <div class="row">
 
-                    <div class="col-sm-8">
+                    <div class="col-sm-4">
                       <div class="form-group">
-                        <label for="txt_tipo_personal_funcional" class="col-sm-4 control-label">Dependencia Destino*</label>
+                        <label for="txt_dependencia" class="col-sm-4 control-label">Dependencia*</label>
                         <div class="col-sm-8">
-                          <input class="form-control" id="txt_tipo_personal" type="hidden" name="txt_tipo_personal">
-                          <select class="form-control" id="txt_tipo_personal_funcional" name="txt_tipo_personal_funcional" required>
-                            <option value=''>Seleccione</option>  
-                            <option value='ADMINISTRATIVO' >ADMINISTRATIVO</option>
-                            <option value='DOCENTE' >DOCENTE</option>
-                            <option value='OBRERO' >OBRERO</option>
-                            <option value='SUPERVISOR' >SUPERVISOR</option>
-                            <option value='VIGILANCIA' >VIGILANCIA</option>
+                          <!-- <input class="form-control" id="txt_tipo_personal" type="hidden" name="txt_tipo_personal"> -->
+                          <select class="form-control" id="txt_dependencia" name="txt_dependencia[]" style="width: 100%;" required>
+                            <option value=''>Selecciones</option>  
+                            <option value='DEPARTAMENTO 1' >DEPARTAMENTO 1</option>
+                            <option value='DEPARTAMENTO 2' >DEPARTAMENTO 2</option>
+                            <option value='DEPARTAMENTO 3' >DEPARTAMENTO 3</option>
                           </select>
                         </div>
                       </div>
                     </div>
-                    
-                    <!-- <div class="col-sm-4">
-                      <div class="form-group">
-                        <label for="txt_cargo_funcion" class="col-sm-4 control-label">Cargo Funcional*</label>
-                        <div class="col-sm-8">
-                          <input type="text" class="form-control" id="txt_cargo_funcion" name="txt_cargo_funcion"  placeholder="Cargo Funcional Desempeñado" pattern="[A-Za-z 0-9]+" required>
-                        </div>
-                      </div>
-                    </div> -->
 
-                    
-                    <!-- <div class="col-sm-4">
+                    <div class="col-sm-4">
                       <div class="form-group">
-                        <label for="txt_coordinacion_laboral" class="col-sm-4 control-label">Coordinación Laboral*</label>
+                        <label for="txt_dependencia2" class="col-sm-4 control-label" >Dependencia*</label>
                         <div class="col-sm-8">
-                          <input type="text" class="form-control" id="txt_coordinacion_laboral" name="txt_coordinacion_laboral"  placeholder="Coordinación donde Laboral" pattern="[A-Za-z ]+" required>
+                          <!-- <input class="form-control" id="txt_tipo_personal" type="hidden" name="txt_tipo_personal"> -->
+                          <select class="form-control select2" id="txt_dependencia2" name="txt_dependencia2[]" multiple="multiple" style="width: 100%;">
+                            <option selected="selected">Alabama</option>
+                            <option>Alaska</option>
+                            <option>California</option>
+                            <option>Delaware</option>
+                            <option>Tennessee</option>
+                            <option>Texas</option>
+                            <option>Washington</option>
+                          </select>
                         </div>
                       </div>
-                    </div> -->
+                    </div>
                   </div>  <!-- -/ fin row -->
 
 
@@ -305,3 +303,6 @@ require_once('../apiv3.0/funciones/funciones3.0.php');
 <!--...javascript AQUI-->
 <script src="apiv3.0/plugins/bootstrap-table/bootstrap-table.js"></script>
 <script src="apiv3.0/plugins/bootstrap-table/locale/bootstrap-table-es-SP.js"></script>
+
+<!-- Select2 -->
+<script src="apiv3.0/plugins/select2/select2.full.min.js"></script>
