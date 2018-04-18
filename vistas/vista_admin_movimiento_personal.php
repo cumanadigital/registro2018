@@ -94,7 +94,6 @@ require_once('../apiv3.0/funciones/funciones3.0.php');
               <div class="row">
                 <div class="col-sm12 col-md-12">
                   <table id="table_cargos_asignados"
-                      data-page-size="10"
                       data-query-params="queryParams"
                       data-toolbar=".toolbar_MOVPER2"
                       style="display: none;"
@@ -122,6 +121,48 @@ require_once('../apiv3.0/funciones/funciones3.0.php');
                   <div class="callout callout-info callout-min">
                     <h4><span id='resumen_laboral'>Datos Laborales (Lugar de trabajo)</span></h4>
                   </div>
+
+                  
+
+                  <div class="row">
+
+                    <div class="col-sm-8">
+                      <div class="form-group">
+                        <label for="txt_tipo_personal_funcional" class="col-sm-4 control-label">Dependencia Destino*</label>
+                        <div class="col-sm-8">
+                          <input class="form-control" id="txt_tipo_personal" type="hidden" name="txt_tipo_personal">
+                          <select class="form-control" id="txt_tipo_personal_funcional" name="txt_tipo_personal_funcional" required>
+                            <option value=''>Seleccione</option>  
+                            <option value='ADMINISTRATIVO' >ADMINISTRATIVO</option>
+                            <option value='DOCENTE' >DOCENTE</option>
+                            <option value='OBRERO' >OBRERO</option>
+                            <option value='SUPERVISOR' >SUPERVISOR</option>
+                            <option value='VIGILANCIA' >VIGILANCIA</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <!-- <div class="col-sm-4">
+                      <div class="form-group">
+                        <label for="txt_cargo_funcion" class="col-sm-4 control-label">Cargo Funcional*</label>
+                        <div class="col-sm-8">
+                          <input type="text" class="form-control" id="txt_cargo_funcion" name="txt_cargo_funcion"  placeholder="Cargo Funcional Desempeñado" pattern="[A-Za-z 0-9]+" required>
+                        </div>
+                      </div>
+                    </div> -->
+
+                    
+                    <!-- <div class="col-sm-4">
+                      <div class="form-group">
+                        <label for="txt_coordinacion_laboral" class="col-sm-4 control-label">Coordinación Laboral*</label>
+                        <div class="col-sm-8">
+                          <input type="text" class="form-control" id="txt_coordinacion_laboral" name="txt_coordinacion_laboral"  placeholder="Coordinación donde Laboral" pattern="[A-Za-z ]+" required>
+                        </div>
+                      </div>
+                    </div> -->
+                  </div>  <!-- -/ fin row -->
+
 
                   <div class="row">
 

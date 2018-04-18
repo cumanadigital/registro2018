@@ -205,15 +205,15 @@
     function actionFormatter_MOVPER2(value,row) {
       var icon = '<a class="movimiento_personal" href="javascript:" title="Movimiento de Pesonal"   ><i class="glyphicon glyphicon-blue2  glyphicon-random"></i></a>';
       
-      var icon="";
-          icon+='<div class="btn-group">';
-          icon+='  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">';
-          icon+='    Seleccione <span class="caret"></span>';
-          icon+='  </button>';
-          icon+='  <ul class="dropdown-menu pull-right" role="menu">';
-          icon+='    <li><a class="movimiento_personal" href="javascript:" title="Movimiento Interno de Personal"><i class="glyphicon glyphicon-orange glyphicon-random"></i>Movimiento Interno de Personal</a></li>';
-          icon+='  </ul>';
-          icon+='</div>';
+      // var icon="";
+      //     icon+='<div class="btn-group">';
+      //     icon+='  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">';
+      //     icon+='    Seleccione <span class="caret"></span>';
+      //     icon+='  </button>';
+      //     icon+='  <ul class="dropdown-menu pull-right" role="menu">';
+      //     icon+='    <li><a class="movimiento_personal" href="javascript:" title="Movimiento Interno de Personal"><i class="glyphicon glyphicon-orange glyphicon-random"></i>Movimiento Interno de Personal</a></li>';
+      //     icon+='  </ul>';
+      //     icon+='</div>';
           
       return icon;
     }
