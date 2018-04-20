@@ -54,12 +54,9 @@
     table_cargos_asignados.hide();
     // $('#cuadro_listado_personal').show();
 
-
- 
     $(function () {
 
         // $('#txt_dependencia').select2();
-
         $("#txt_dependencia2").select2({
           placeholder: 'Seleccione una Opción',
           ajax: {
@@ -79,10 +76,7 @@
                 return {
                     results: data
                 };
-            },
-            cache: true
-
-
+            }
             // Additional AJAX parameters go here; see the end of this chapter for the full code of this example
           }
         });
