@@ -64,7 +64,6 @@
             dataType: 'json',
             delay: 250,
             language: "es",
-            cache: true,
             data: function(params) {
                 return {
                     accion: 'consultar_dependencias_zona',
