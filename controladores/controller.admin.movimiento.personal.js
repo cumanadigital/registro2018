@@ -98,6 +98,8 @@
             // console.log(id_plantelesbase_per);
             if (cedula!='') {
               parametros =  'cedula=' + cedula + '&accion='+accion + '&'+sesionencode;
+              // descativamos la cedula
+			  $("#txt_cedula_personal").attr('readonly',true);
               $('#btn_buscar_personal').attr('disabled',true);
               // console.log(parametros);
               // API_URL =  "servicios/services.funcionarios.php";
@@ -120,56 +122,31 @@
                         $("#txt_cedula_personal").focus();
                       }else{  
                         var data_func =  JSON.parse(response);
+                        // console.info(response);
                         console.info(data_func);
-
                         
-                        var API_URL_personal =  "servicios/services.admin.planteles.php?accion=consultar_cargos_asignados&cedula=" + cedula;
-                        $('#table_cargos_asignados').bootstrapTable('destroy' ); 
-                        $('#table_cargos_asignados').bootstrapTable({url: API_URL_personal});
-                        table_cargos_asignados.show();
+						var reg_id_registropersonal = data_func[0]['reg_id_registropersonal'];
+						// console.info("reg_id_registropersonal:-> " +  reg_id_registropersonal);
 
+                        if (reg_id_registropersonal != null) {
+							console.info("SI EXISTE + registro de personal");                          
+							
+							$('#btn_enviar_personal').attr('disabled',true);
+							$('#btn_enviar_personal').fadeOut();
+							// $('#btn_volver_listado').show();
+							// alert("ya tiene algun registro") 
+							$("#txt_apellido_funcionario").val(data_func[0]['reg_apellido_completo']);
+							$("#txt_nombre_funcionario").val(data_func[0]['reg_nombre_completo']);
 
-                        $('#cuadro_datos_laborales').fadeIn();
-                        var reg_id_registropersonal = data_func[0]['reg_id_registropersonal'];
-                        // console.info("reg_id_registropersonal:-> " +  reg_id_registropersonal);
-
-                        if (reg_id_registropersonal == null) {
-                          console.info("EXISTE PERO no tiene cargo funcional");
-                          // $("#txt_apellido_funcionario").val(data_func[0]['nom_nombres_apellidos']);
-                          // ventana_personal.find('input[name="txt_nombre_funcionario"]').val('');
-                          
-                          $('#btn_enviar_personal').attr('disabled',false);
-                          $('#btn_enviar_personal').fadeIn();
-                          activar_datos_personales();
-                          $('#btn_enviar_personal').attr('disabled',false);
-                          $('#btn_enviar_personal').fadeIn();
-                          // 
-                          activar_datos_laborales();
-                          // $("#txt_tipo_personal_funcional").focus();
-                          // 
-                          $("#txt_apellido_funcionario").val(data_func[0]['nom_nombres_apellidos']);
-                          ventana_personal.find('input[name="txt_fecha_ingreso"]').val(data_func[0]['reg_fecha_ingreso']);
-                          $("#txt_nombre_funcionario").val('');
-                          $("#txt_apellido_funcionario").focus();
+							var API_URL_personal_asignado =  "servicios/services.admin.planteles.php?accion=consultar_cargos_asignados&cedula=" + cedula;
+							$('#table_cargos_asignados').bootstrapTable('destroy' ); 
+							$('#table_cargos_asignados').bootstrapTable({url: API_URL_personal_asignado});
+							table_cargos_asignados.show();
+							$('#cuadro_datos_laborales').fadeIn();							
                         }else{
-                          console.info("SI EXISTE + registro de personal");                          
-                          $('#btn_enviar_personal').attr('disabled',true);
-                          $('#btn_enviar_personal').fadeOut();
-                          // $('#btn_volver_listado').show();
-                          // alert("ya tiene algun registro") 
-                          $("#txt_apellido_funcionario").val(data_func[0]['reg_apellido_completo']);
-                          $("#txt_nombre_funcionario").val(data_func[0]['reg_nombre_completo']);
-
-                          $("#txt_apellido_funcionario").focus();
-                          // desactivar_datos_personales();
+                          console.info("EXISTE PERO no tiene cargo funcional");
                         }
-                          
-                        // descativamos la cedula
-                        $("#txt_cedula_personal").attr('readonly',true);
-
                       }
-                       
-                      
                   },
                   error: function () {
                       $modal_plantel.modal('hide');
@@ -192,8 +169,119 @@
         });
 
         
+
+		// update and delete 
+		//   #     ##    #####  ###     ##    #  #   ####   #  #   ####   #  #   #####   ##
+		//  # #   #  #     #     #     #  #   ## #   #      #  #   #      ## #     #    #  #
+		// #   #  #        #     #     #  #   # ##   ###    #  #   ###    # ##     #     #
+		// #####  #        #     #     #  #   #  #   #      ####   #      #  #     #      #
+		// #   #  #  #     #     #     #  #   #  #   #       ##    #      #  #     #    #  #
+		// #   #   ##      #    ###     ##    #  #   ####    ##    ####   #  #     #     ##
+		// 
+		window.actionEventsMOVPER2 = {
+			'click .movimiento_personal': function (e, value, row2) {
+				// accion='modificar_registro'
+				console.log($(this).attr('title'));
+				// console.info(value);
+				console.info(row2);
+				cuadro_datos_laborales_MOVPER2.hide();
+				// ventana_footer.hide();
+
+				
+// cierre: "--"
+// ​pb_municipio: "SUCRE"
+// ​pb_nombre: "OFICINA DE INFORMÁTICA"
+// ​reg_apellido_completo: "HERNANDEZ CAMPOS"
+// ​reg_cargo_funcional: "COORDINADOR"
+// ​reg_cedula: "11829328"
+// ​reg_dependencia_funcional: "PROGRAMACION"
+// ​reg_fecha_ingreso: "01/04/2011"
+// ​reg_horarios_funcional: "08-03"
+// ​reg_horas_adm_obr: "37,5"
+// ​reg_horas_doc11: "0"
+// ​reg_id_plantelesbase: "1168"
+// ​reg_id_registropersonal: "512"
+// ​reg_nombre_completo: "OSWALDO ENRIQUES"
+// ​reg_tiempo_servicio_plantel: "01/11/2011"
+// ​reg_tipo_personal: "ADMINISTRATIVO"
+// ​reg_tipo_personal_funcional: "ADMINISTRATIVO"
+// reg_turno_trabajo: "COMPLETO"
+
+				var id = row2.reg_id_plantelesbase;
+				
+				console.info(row2.reg_id_registropersonal);
+				// console.info(row2.reg_id_plantelesbase);
+				// console.info(row2.pb_municipio);
+				// console.info(row2.pb_nombre);
+				// console.info(row2.reg_tipo_personal);
+				// console.info(row2.reg_tipo_personal_funcional);
+				// console.info(row2.reg_cargo_funcional);
+
+				// console.info(row2.reg_dependencia_funcional);
+				// console.info(row2.reg_turno_trabajo);
+
+				// console.info(row2.reg_horas_adm_obr);				
+				// console.info(row2.reg_horas_doc11);
+
+				// console.info(row2.reg_fecha_ingreso);
+				// console.info(row2.reg_tiempo_servicio_plantel);
+				// // reg_tiempo_servicio_plantel
+
+				
+
+				$("#txt_tipo_personal_funcional").val(row2.reg_tipo_personal_funcional);
+				$("#txt_cargo_funcion").val(row2.reg_cargo_funcional);
+				$("#txt_coordinacion_laboral").val(row2.reg_dependencia_funcional);
+				
+				$("#txt_turno_trabajo").val(row2.reg_turno_trabajo);
+				$("#txt_horario_laboral").val(row2.reg_horarios_funcional);
+
+				$("#txt_fecha_ingreso").val(row2.reg_fecha_ingreso);
+				
+				$("#txt_horas_doc_funcionario").val(row2.reg_horas_doc11);
+				$("#txt_horas_adm_obr_funcionario").val(row2.reg_horas_adm_obr);
+
+				$("#txt_tiempo_servicio").val(row2.reg_tiempo_servicio_plantel);
+
+
+				cuadro_datos_laborales_MOVPER2.fadeIn();
+				ventana_footer.fadeIn();
+
+
+
+				// $table.bootstrapTable('getData');
+				// $('#table_cargos_asignados').bootstrapTable('getData');
+				var datos_table = $('#table_cargos_asignados').bootstrapTable('getData');
+				console.info(datos_table);
+
+				// console.info(JSON.stringify($('#table_cargos_asignados').bootstrapTable('getData')));
+
+				// console.info('getRowByUniqueId: ' + JSON.stringify($('#table_cargos_asignados').bootstrapTable('getRowByUniqueId', id)));
+				// console.info(JSON.stringify($('#table_cargos_asignados').bootstrapTable('getRowByUniqueId',523)));
+
+				// var ids = $.map($table.bootstrapTable('getSelections'), function (row) {
+				//                 return row.id;
+				//             });
+				//             $table.bootstrapTable('remove', {
+				//                 field: 'id',
+				//                 values: ids
+				//             });
+
+
+			}
+
+		};
+
+
     });
 
+
+
+	//  ___            __     __        ___  __      ___     ___  ___  __             __              ___            __  ___    __           __   ___       __
+    // |__  |  | |\ | /  ` | /  \ |\ | |__  /__`    |__  \_/  |  |__  |__) |\ |  /\  /__`     /\     |__  |  | |\ | /  `  |  | /  \ |\ |    |__) |__   /\  |  \ \ /
+    // |    \__/ | \| \__, | \__/ | \| |___ .__/    |___ / \  |  |___ |  \ | \| /~~\ .__/    /~~\    |    \__/ | \| \__,  |  | \__/ | \|    |  \ |___ /~~\ |__/  |
+
+ 
 
     function limpiar_datos_personal(){
           // LIMPIAR CAMPOS DE FORMULARIO PERSONAL 
@@ -220,8 +308,12 @@
           ventana_footer.hide();
 
     };
-    
-
+	//
+	//       __  ___    __          ___  __   __             ___ ___  ___  __
+	//  /\  /  `  |  | /  \ |\ |   |__  /  \ |__)  |\/|  /\   |   |  |__  |__)
+	// /~~\ \__,  |  | \__/ | \|   |    \__/ |  \  |  | /~~\  |   |  |___ |  \
+	// 
+	// 
     function actionFormatter_MOVPER2(value,row) {
       var icon="";
       icon+='<a class="movimiento_personal" href="javascript:" title="Reasignar Personal"   ><i class="glyphicon glyphicon-blue2  glyphicon-random"></i></a>  ';
@@ -263,19 +355,8 @@
     }
 
 
-  
-    window.actionEvents_MOVPER2 = {
-        'click .movimiento_personal': function (e, value, row) {
-            // accion='modificar_registro'
-            console.log(row);
-            console.log($(this).attr('title'));
-
-            cuadro_datos_laborales_MOVPER2.fadeIn();
-            ventana_footer.fadeIn();
-
-        }
-
-    };
+      
+    
 
 
     function showAlert(title, type) {

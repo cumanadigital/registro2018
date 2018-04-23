@@ -51,8 +51,8 @@ require_once('../apiv3.0/funciones/funciones3.0.php');
                         <div class="input-group">
                           <input class="form-control" id="txt_cedula_personal" type="text"    name="txt_cedula_personal" placeholder="Buscar" required>
                           <span class="input-group-btn">
-                            <button type="button" name="btn_buscar_personal" id="btn_buscar_personal" class="btn btn-flat"><i class="fa fa-search"></i></button>
-                            <button type="button" name="btn_limpiar_personal" id="btn_limpiar_personal" class="btn btn-flat"><i class="fa  fa-trash"></i></button>
+                            <button type="button" name="btn_buscar_personal" id="btn_buscar_personal" class="btn btn-flat glyphicon-blue"><i class="fa fa-search"></i></button>
+                            <button type="button" name="btn_limpiar_personal" id="btn_limpiar_personal" class="btn btn-flat glyphicon-red"><i class="fa  fa-trash"></i></button>
                           </span>
                         </div>
                       </div>
@@ -101,12 +101,13 @@ require_once('../apiv3.0/funciones/funciones3.0.php');
                 >
                   <thead>
                     <tr>
-                     <th data-field="pb_municipio" data-filter-control="select" data-sortable="true" data-halign="center" data-align="center"    >Municipio</th>
-                     <th data-field="pb_nombre" data-filter-control="select" data-sortable="true" data-halign="center" data-align="center"    >Dependencia</th>
-                     <th data-field="reg_tipo_personal_funcional" data-filter-control="select" data-sortable="false" data-halign="center" data-align="center" data-formatter="actionFormatterPersonalFuncional" >Personal</th>
-                     <th data-field="reg_cargo_funcional" data-filter-control="select" data-sortable="false" data-halign="center" data-align="center"        >Cargo Funcional</th>
-                     <th data-field="reg_dependencia_funcional" data-filter-control="select" data-sortable="false" data-halign="center" data-align="center">Coordinación Laboral</th>
-                     <th data-field="action" data-align="center" data-formatter="actionFormatter_MOVPER2" data-events="actionEvents_MOVPER2"                        >Acción</th>
+                     <th data-field="reg_id_registropersonal" data-halign="center" data-align="center" >Id</th>
+                     <th data-field="pb_municipio" data-halign="center" data-align="center"    >Municipio</th>
+                     <th data-field="pb_nombre" data-halign="center" data-align="center"    >Dependencia</th>
+                     <th data-field="reg_tipo_personal_funcional" data-halign="center" data-align="center" data-formatter="actionFormatterPersonalFuncional" >Personal</th>
+                     <th data-field="reg_cargo_funcional" data-halign="center" data-align="center"        >Cargo Funcional</th>
+                     <th data-field="reg_dependencia_funcional" data-halign="center" data-align="center">Coordinación Laboral</th>
+                     <th data-field="action" data-align="center" data-formatter="actionFormatter_MOVPER2" data-events="actionEventsMOVPER2"                        >Acción</th>
                    </tr>
                   </thead>
                 </table>
@@ -119,9 +120,9 @@ require_once('../apiv3.0/funciones/funciones3.0.php');
               <div id ="cuadro_datos_laborales_MOVPER2" style="display: none;">
 
                   <br>
-                  <div class="callout callout-info callout-min">
+                  <!-- <div class="callout callout-info callout-min">
                     <h4><span id='resumen_laboral'>Datos Laborales (Lugar de trabajo)</span></h4>
-                  </div>
+                  </div> -->
 
                   <div class="row">
 
@@ -156,7 +157,7 @@ require_once('../apiv3.0/funciones/funciones3.0.php');
                       <div class="form-group">
                         <label for="txt_tipo_personal_funcional" class="col-sm-4 control-label">Tipo de Funciones*</label>
                         <div class="col-sm-8">
-                          <input class="form-control" id="txt_tipo_personal" type="hidden" name="txt_tipo_personal">
+                          <!-- <input class="form-control" id="txt_tipo_personal" type="hidden" name="txt_tipo_personal"> -->
                           <select class="form-control" id="txt_tipo_personal_funcional" name="txt_tipo_personal_funcional" required>
                             <option value=''>Funciones Laborales</option>  
                             <option value='ADMINISTRATIVO' >ADMINISTRATIVO</option>
