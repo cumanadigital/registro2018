@@ -906,49 +906,23 @@
 						REG.cedula AS REG_cedula, 
 						UPPER(TRIM(REG.nombre_completo)) AS REG_nombre_completo, 
 						UPPER(TRIM(REG.apellido_completo)) AS REG_apellido_completo, 
-						REG.fecha_nac AS REG_fecha_nac, 
-						UPPER(TRIM(REG.sexo)) AS REG_sexo, 
-						UPPER(TRIM(REG.estado_civil)) AS REG_estado_civil, 
-						REG.telefono_celular AS REG_telefono_celular, 
-						REG.telefono_residencia AS REG_telefono_residencia, 
-						UPPER(TRIM(REG.direccion_habitacion)) AS REG_direccion_habitacion, 
-						UPPER(TRIM(REG.red_twitter)) AS REG_red_twitter, 
-						UPPER(TRIM(REG.red_email)) AS REG_red_email, 
+
 						REG.tipo_personal AS REG_tipo_personal,
 						REG.tipo_personal_funcional AS REG_tipo_personal_funcional,
 						--
-						REG.grado_instruccion AS reg_grado_instruccion, 
-	            		UPPER(TRIM(REG.titulo_obtenido)) AS reg_titulo_obtenido, 
-            			UPPER(TRIM(REG.institucion_educativa)) AS reg_institucion_educativa, 
-
-            			REG.discapacidad AS reg_discapacidad,
-	            		TRIM(REG.discapacidad_otra) AS reg_discapacidad_otra,
-						--
-						COALESCE(REG.horas_doc, '0') AS REG_horas_doc,
-						COALESCE(REG.horas_adm, '0') AS REG_horas_adm,
-						COALESCE(REG.horas_obr, '0') AS REG_horas_obr,
-						COALESCE(REG.horas_adm, REG.horas_obr) AS reg_horas_doc_obr,
-						--COALESCE (COALESCE(REG.horas_adm, REG.horas_obr), '0' ) AS reg_horas_doc_obr,
-						-- CAST(REG.horas_adm AS numeric)  + CAST(REG.horas_obr AS numeric) AS reg_horas_doc_obr,
-				--
+				 		REG.horas_doc  AS reg_horas_doc11,
+				 		COALESCE(REG.horas_adm, REG.horas_obr) AS reg_horas_adm_obr,
+				 		
 						UPPER(TRIM(REG.horarios_funcional)) AS REG_horarios_funcional, 
+						
 						UPPER(TRIM(REG.cargo_funcional)) AS REG_cargo_funcional, 
 						UPPER(TRIM(REG.dependencia_funcional)) AS reg_dependencia_funcional,
---
 						UPPER(TRIM(REG.turno_trabajo)) AS REG_turno_trabajo,
---
-						REG.niveles_funcional AS REG_niveles_funcional, 
-						REG.matricula_atendida AS REG_matricula_atendida, 
+
 						REG.fecha_ingreso AS REG_fecha_ingreso, 
-						REG.tiempo_servicio_plantel AS REG_tiempo_servicio_plantel, 
-						REG.matricula_atendida_total_maternal, 
-						REG.matricula_atendida_total_preescolar, 
-						REG.matricula_atendida_total_primaria, 
-						REG.matricula_atendida_total_media_general, 
-						REG.matricula_atendida_total_media_tecnica, 
-						REG.matricula_atendida_total_adulto, 
-						REG.matricula_atendida_total_especial, 
-						REG.matricula_atendida_total
+						REG.tiempo_servicio_plantel AS REG_tiempo_servicio_plantel,
+
+						'--' AS cierre
 				FROM censo2017.registropersonal AS REG
 				INNER JOIN censo2017.plantelesbase AS PB ON (PB.id_plantelesbase = REG.id_plantelesbase)
 
@@ -1005,6 +979,7 @@
 		// )
 		$NumeroDeFilas = $Postgres->NumeroDeFilas();
 		if ($NumeroDeFilas>0) {
+			
 			foreach ($dato_registro as $key => $value) {
 				// ver_arreglo($value);
 				// $cedula = $value['reg_cedula'];
@@ -1038,7 +1013,9 @@
 			}
 // 			// ver_arreglo($dato_registro);
 // 			actualizar_contador_personal($id_plantelesbase);
+			// 
 			echo json_encode($dato_registro);
+		// 
 		}else{
 			print_r('false');
 		}
