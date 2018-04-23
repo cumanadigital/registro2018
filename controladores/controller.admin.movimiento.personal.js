@@ -178,36 +178,38 @@
 		// 
 		window.actionEventsMOVPER2 = {
 			'click .movimiento_personal': function (e, value, row2) {
-				// accion='modificar_registro'
+				accion='movimiento_personal';
 				console.log($(this).attr('title'));
+        console.info(accion);
 				// console.info(value);
-				console.info(row2);
+				// console.info(row2);
 				cuadro_datos_laborales_MOVPER2.hide();
 				// ventana_footer.hide();
 
 				
-// cierre: "--"
-// ​pb_municipio: "SUCRE"
-// ​pb_nombre: "OFICINA DE INFORMÁTICA"
-// ​reg_apellido_completo: "HERNANDEZ CAMPOS"
-// ​reg_cargo_funcional: "COORDINADOR"
-// ​reg_cedula: "11829328"
-// ​reg_dependencia_funcional: "PROGRAMACION"
-// ​reg_fecha_ingreso: "01/04/2011"
-// ​reg_horarios_funcional: "08-03"
-// ​reg_horas_adm_obr: "37,5"
-// ​reg_horas_doc11: "0"
-// ​reg_id_plantelesbase: "1168"
-// ​reg_id_registropersonal: "512"
-// ​reg_nombre_completo: "OSWALDO ENRIQUES"
-// ​reg_tiempo_servicio_plantel: "01/11/2011"
-// ​reg_tipo_personal: "ADMINISTRATIVO"
-// ​reg_tipo_personal_funcional: "ADMINISTRATIVO"
-// reg_turno_trabajo: "COMPLETO"
+        // cierre: "--"
+        // ​pb_municipio: "SUCRE"
+        // ​pb_nombre: "OFICINA DE INFORMÁTICA"
+        // ​reg_apellido_completo: "HERNANDEZ CAMPOS"
+        // ​reg_cargo_funcional: "COORDINADOR"
+        // ​reg_cedula: "11829328"
+        // ​reg_dependencia_funcional: "PROGRAMACION"
+        // ​reg_fecha_ingreso: "01/04/2011"
+        // ​reg_horarios_funcional: "08-03"
+        // ​reg_horas_adm_obr: "37,5"
+        // ​reg_horas_doc11: "0"
+        // ​reg_id_plantelesbase: "1168"
+        // ​reg_id_registropersonal: "512"
+        // ​reg_nombre_completo: "OSWALDO ENRIQUES"
+        // ​reg_tiempo_servicio_plantel: "01/11/2011"
+        // ​reg_tipo_personal: "ADMINISTRATIVO"
+        // ​reg_tipo_personal_funcional: "ADMINISTRATIVO"
+        // reg_turno_trabajo: "COMPLETO"
 
-				var id = row2.reg_id_plantelesbase;
+				var id_actual = row2.reg_id_registropersonal;
+        console.info(id_actual)
 				
-				console.info(row2.reg_id_registropersonal);
+				// console.info(row2.reg_id_registropersonal);
 				// console.info(row2.reg_id_plantelesbase);
 				// console.info(row2.pb_municipio);
 				// console.info(row2.pb_nombre);
@@ -241,30 +243,28 @@
 
 				$("#txt_tiempo_servicio").val(row2.reg_tiempo_servicio_plantel);
 
-
 				cuadro_datos_laborales_MOVPER2.fadeIn();
 				ventana_footer.fadeIn();
-
-
 
 				// $table.bootstrapTable('getData');
 				// $('#table_cargos_asignados').bootstrapTable('getData');
 				var datos_table = $('#table_cargos_asignados').bootstrapTable('getData');
-				console.info(datos_table);
+				// console.info(datos_table);
 
-				// console.info(JSON.stringify($('#table_cargos_asignados').bootstrapTable('getData')));
+        var id_resume = [] ;
+        for (var i in datos_table ) {
+          // console.info(i);
+          if (datos_table[i].reg_id_registropersonal != id_actual ) {
+            id_resume.push( datos_table[i].reg_id_registropersonal);  
+          }
+        }
+        console.info(id_resume);
 
-				// console.info('getRowByUniqueId: ' + JSON.stringify($('#table_cargos_asignados').bootstrapTable('getRowByUniqueId', id)));
-				// console.info(JSON.stringify($('#table_cargos_asignados').bootstrapTable('getRowByUniqueId',523)));
-
-				// var ids = $.map($table.bootstrapTable('getSelections'), function (row) {
-				//                 return row.id;
-				//             });
-				//             $table.bootstrapTable('remove', {
-				//                 field: 'id',
-				//                 values: ids
-				//             });
-
+          $('#table_cargos_asignados').bootstrapTable('remove', {
+              field: 'reg_id_registropersonal',
+              values: id_resume
+          });
+          $(".movimiento_personal").hide();
 
 			}
 
@@ -275,7 +275,7 @@
 
 
 
-	//  ___            __     __        ___  __      ___     ___  ___  __             __              ___            __  ___    __           __   ___       __
+	  //  ___            __     __        ___  __      ___     ___  ___  __             __              ___            __  ___    __           __   ___       __
     // |__  |  | |\ | /  ` | /  \ |\ | |__  /__`    |__  \_/  |  |__  |__) |\ |  /\  /__`     /\     |__  |  | |\ | /  `  |  | /  \ |\ |    |__) |__   /\  |  \ \ /
     // |    \__/ | \| \__, | \__/ | \| |___ .__/    |___ / \  |  |___ |  \ | \| /~~\ .__/    /~~\    |    \__/ | \| \__,  |  | \__/ | \|    |  \ |___ /~~\ |__/  |
 
