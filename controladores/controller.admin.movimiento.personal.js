@@ -38,8 +38,6 @@
 
     $alert_mensaje_personal = $('#alert_mensaje_personal').hide();
 
-    
-
     // $alert = $('#alert_pesronal').hide();
     
     var accion="";
